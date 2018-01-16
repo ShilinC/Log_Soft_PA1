@@ -40,7 +40,7 @@ La Jolla, CA \\
 \maketitle
 
 \section{Logistic Regression via Gradient Descent}
-\textbf{Derive the gradient for Logistic Regression:} \\
+\textbf{Derive the gradient for logistic regression:} \\
 The cross-entropy cost function can be expressed as
 
 \begin{equation}
@@ -70,6 +70,37 @@ where $z ^{n}= \sum_{j=0}^{m}w_{j}x_{j}^{n}$. According to the chain rule in cal
 \begin{equation}
 	-\frac{\partial E^{n}(w)}{\partial w_{j}} = -\frac{\partial E^{n}(w)}{\partial y^{n}}\frac{\partial y^{n}}{\partial z^{n}}\frac{\partial z^{n}}{\partial w_{j}} = (\frac{t^{n}}{y^{n}}-\frac{1-t^{n}}{1-y^{n}})\cdot y^{n}(1-y^{n})\cdot x_{j}^{n} = (t^{n}-y^{n})x_{j}^{n}
 \end{equation}
+
+\textbf{Derive the gradient for regularized logistic regression:} \\
+
+To prevent potential overfitting, regularization is used in logistic regression. The cross-entropy cost function with regularization term can be computed as
+
+\begin{equation}
+	E(w) = - \sum_{n=1}^{N}[t^{n}\ln(y^{n})+(1-t^{n})\ln(1-y^{n})] + \lambda * C(w)
+\end{equation}
+
+where $C(w)$ represents the complexity of the model. $L1$ and $L2$ regularizations are two most common functions people use
+
+\begin{equation}
+	C(w) = ||w||^{2} = \sum_{i, j}w_{i, j}^{2}(L2)
+\end{equation}
+
+\begin{equation}
+	C(w) = |w| = \sum_{i, j}|w_{i, j}|(L1)
+\end{equation}
+
+Thus the gradient of cost function on example $n$ is 
+
+\[
+    -\frac{\partial E^{n}(w)}{\partial w_{j}} = 
+\begin{cases}
+    (t^{n}-y^{n})x_{j}^{n} - 2\lambda w_{j},& \text{if } L2\\
+    (t^{n}-y^{n})x_{j}^{n} - \lambda sign(w_{j}), & \text{if } L1
+\end{cases}
+\]
+
+Note that we can always add a factor of $1/N$ to scale the cost and gradient to somehow speed up the learning, and this will not change the optimization results (learned parameters).
+
 
 \section{Softmax Regression via Gradient Descent}
 \subsection{Problem definition}

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  15 JAN 2018 15:49
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  15 JAN 2018 18:21
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -331,44 +331,48 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
  (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
 File: se-ascii-print.def 2011/12/02 v1.10 stringenc: Printable ASCII characters
-) [1
+)
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
 
-]
+ []
+
+[1
+
+] [2]
 File: ../softmax/figs/accuracy.png Graphic file (type QTm)
  <use  "../softmax/figs/accuracy.png" >
 File: ../softmax/figs/loss.png Graphic file (type QTm)
  <use  "../softmax/figs/loss.png" >
 
-LaTeX Warning: Reference `figure: 1' on page 2 undefined on input line 144.
+LaTeX Warning: Reference `figure: 1' on page 3 undefined on input line 175.
 
 
-LaTeX Warning: Reference `figure: 2' on page 2 undefined on input line 147.
+LaTeX Warning: Reference `figure: 2' on page 3 undefined on input line 178.
 
 File: ../softmax/figs/image_of_weights_and_digits.png Graphic file (type QTm)
 <use  "../softmax/figs/image_of_weights_and_digits.png" >
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 169.
- [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 169.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 200.
+[3] [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 200.
  (./TSWLatexianTemp_document.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 169.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 169.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 200.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 200.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 169.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 200.
  ) 
 Here is how much of TeX's memory you used:
- 10421 strings out of 493706
- 148941 string characters out of 6145769
- 231522 words of memory out of 5000000
- 13700 multiletter control sequences out of 15000+600000
- 8806 words of font info for 26 fonts, out of 8000000 for 9000
+ 10423 strings out of 493706
+ 148967 string characters out of 6145769
+ 229522 words of memory out of 5000000
+ 13702 multiletter control sequences out of 15000+600000
+ 9820 words of font info for 28 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  44i,17n,47p,547b,379s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on TSWLatexianTemp_document.pdf (3 pages).
+Output written on TSWLatexianTemp_document.pdf (4 pages).
