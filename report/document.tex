@@ -150,10 +150,50 @@ Substitute Equation (5) and Equation (6) into Equation (4) we get,
 \end{split}
 \end{equation}
 
+\textbf{Derive the gradient for Softmax Regression with Regularizations:} \\
+
+With regularization, generally the loss function can be writen as,
+\begin{equation}
+J(w) = E(w) + \lambda C(w)
+\end{equation}
+If we use $L_1$ regularization in softmax regression,
+\begin{equation}
+	\lambda C(w) = \lambda C_{L_1}(w) =   \lambda \sum_{ij}|w_{i,j}|
+\end{equation}
+
+We can compute the derivate of $\frac{\partial C}{\partial w}$ as follows,
+\begin{equation}
+	\frac{\partial C_{L_1}(w)}{\partial w_{ij}} = sign(w_{i,j})
+\end{equation}
+Where $sign(x) = 1$ if $x > 0$, $sign(x) = 0$ if $x = 0$ and $sign(x) = -1$ if $x < 0$.
+
+If we use $L_2$ regularization in softmax regression,
+
+\begin{equation}
+\lambda C(w) = \lambda C_{L_2}(w) =   \lambda \sum_{ij}w_{i,j}^2
+\end{equation}
+
+We can compute the derivate of $\frac{\partial C}{\partial w}$ as follows,
+
+\begin{equation}
+\frac{\partial C_{L_2}(w)}{\partial w_{ij}} = 2w_{i,j}
+\end{equation}
+
+In summary, 
+  \[
+-\frac{\partial J^n(w)}{\partial w_{j,k}} =\left\{
+\begin{array}{ll}
+(t_k - y_k)x_j^n - \lambda sign(w_{j,k}),\qquad \text{if use $L_1$ regularization} \\
+(t_k - y_k)x_j^n - 2\lambda w_{j,k}, \qquad \text{if use $L_2$ regularization}
+\end{array}
+\right.
+\]
+\\
 
 \textbf{Preprossing}: First, we extract the first 20,000 training images and the last 2,000 test images. Then normailize the images to make sure the pixel values are in the range of [0,1]. Convert the labels to one-hot vectors. Divide the training images into two parts, the first 10\% are used for as a hold-out set and the rest 90\% are used for training.
 \\
-\textbf{Experiments settings:}We use an initial learning rate $\eta({0})$ = 0.004 and use equation $\eta({t}) = \eta{(0)}/(1+t/T)$ to anneal the learning rate by reducing it over time. $t$ is used to index the epoch number and $T$ is a metaparameter which is set to be 2. In the
+
+\textbf{Experiments settings:} We use standard normal distributions to initilize the weights. We use an initial learning rate $\eta({0})$ = 0.004 and use equation $\eta({t}) = \eta{(0)}/(1+t/T)$ to anneal the learning rate by reducing it over time. $t$ is used to index the epoch number and $T$ is a metaparameter which is set to be 2. In the
 experiements, we find that above learning settings work best.   \\
 To determine the best type of regurization and the best $\lambda$, we try $L_2$ regularization and $L_1$ regularization seperately. For the $L_2$ regularizartion, we search the best $\lambda$ in the set $\{0.01, 0.001, 0.0001\}$. If the accuracy on the hold-out set decreases for 3 epochs, we stop the algorithm and use the weights with the highest accuracy on the hold-out set as the final answer. For the $L_1$ regularization, we follow the same steps. We run the 1000 epochs for each setting. \textbf{}Then we compare the results got from these two regularization methods and use the best one as the final result.
  
@@ -162,7 +202,7 @@ To determine the best type of regurization and the best $\lambda$, we try $L_2$ 
 
 To further examine the performance of the algorithm, we try other $\lambda$s. We choose $\lambda$ in the set $\{0.05,0.005,0.0005\}$ and use $L_2$ regularization. The highest accuracy on the validation set is $0.8965\%$ with $\lambda = 0.0005$. And the test accuracy is $0.933\%$ which is slightly higher than when $\lambda = 0.01$. So in following experiments, we fix $\lambda$ to be 0.0005.
 
-\begin{figure}%
+\begin{figure}[t]%
 	\centering
 	\subfloat[The percent correct over the number of training iterations for the training, hold-out and test set.]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/accuracy.png} }
 		\label{fig: 1}
@@ -174,26 +214,26 @@ To further examine the performance of the algorithm, we try other $\lambda$s. We
 	\caption{The performance of the algorithm over the number of training iterations. }%
 \end{figure}
 
-
+\begin{figure}[t]
+	\centering	
+	\includegraphics[width=2.7in,height=1.2in]{../softmax/figs/image_of_weights_and_digits.png} 
+	\caption{Images of the weights and the average examples.}
+	\label{fig: 3}
+\end{figure}
 
 (b) In this experiement, we use $L_2$ regularization with $\lambda = 0.005$. The figure is shown in Fig \ref{fig: 1}.
 
 
-(c) In this experiement, we use $L_2$ regularization with $\lambda = 0.005$. The figure is shown in Fig \ref{fig: 2}.
+(c) In this experiement, we use $L_2$ regularization with $\lambda = 0.005$. The figure is shown in Fig \ref{fig: 2}. Note that we use the sum of loss of individual data rather than the average one.
 
-(d) We plot the results in Fig \ref{figure: 3}. We can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixesls with the weights. And the inner product is maximized when the angle between the weight and the image is zero. So we see that the image of the weight and the corresponding image of the average digit is similar.
+(d) We plot the results in Fig \ref{fig: 3}. 
 
-\begin{figure}[h]
-	\centering	
-	\includegraphics[width=2.8in,height=3.2in]{../softmax/figs/image_of_weights_and_digits.png} 
-	\caption{}
-	\label{figure: 3}
-\end{figure}
+
 
 \subsection{Discussion}
+From \ref{fig: 1} and \ref{fig: 2} we can see that the loss function went up before going down. And the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates in the first few epoches maybe a little large but after "annealing", the learning rates are suitable enough to make the algorithm converge. Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
 
-
-
+From \ref{fig: 3} we can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixels with the weights. And the inner product is maximized when the angle between the weight and the image is zero. So we see that the image of the weight and the corresponding image of the average digit is similar.
 
 \subsubsection*{Acknowledgments}
 
