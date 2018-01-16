@@ -40,6 +40,11 @@ La Jolla, CA \\
 \maketitle
 
 \section{Logistic Regression via Gradient Descent}
+
+\subsection{Problem Definition}
+In this work, we realize the handwritten digit classification using MNIST database. Our goal is to accurately and robustly recognize what number is present in a new image. In this section we will first use logistic regression to classify only two digit classes (binary classification), later in the next section we will use softmax regression to generalize logistic regression into $N$ classes.
+
+\subsection{Mathematical Derivation}
 \textbf{Derive the gradient for logistic regression:} \\
 The cross-entropy cost function can be expressed as
 
@@ -71,6 +76,72 @@ where $z ^{n}= \sum_{j=0}^{m}w_{j}x_{j}^{n}$. According to the chain rule in cal
 	-\frac{\partial E^{n}(w)}{\partial w_{j}} = -\frac{\partial E^{n}(w)}{\partial y^{n}}\frac{\partial y^{n}}{\partial z^{n}}\frac{\partial z^{n}}{\partial w_{j}} = (\frac{t^{n}}{y^{n}}-\frac{1-t^{n}}{1-y^{n}})\cdot y^{n}(1-y^{n})\cdot x_{j}^{n} = (t^{n}-y^{n})x_{j}^{n}
 \end{equation}
 
+\subsection{Data Reading, Parsing and Feature Extraction} \\
+In this work we use the famous MNIST hand written digits database created by Yann LeCun. Each image in the database contains $28 \times 28$ pixels and each pixel has a grayscale intensity, so that the input feature $x \in R^{784}$ after we unroll the 2D image into an 1D vector. To include the bias term, after reading the data, we append a '1' to the beginning of each $x$ vector so the final $x \in R^{785}$. We will use the first 20,000 training images and the last 2,000 test images. Note that for logistic regression to do binary classification, we can only use the images of two specific digit classes, so that the actual training images and test images are smaller than 20,000 and 2,000 respectively. To speed up learning, we need to apply feature normalization. For images, the most common way is to normalize the pixel values by the maximum pixel value 255. After normalization, all the values in $x$ is now ranging from 0 to 1.
+
+The following code shows how we can choose the example images corresponding to two specific digit classes. For the rest of the report, we choose two binary classification problems: 2 vs. 3 and 2 vs. 8.
+
+\textit{TODO: Attach code here.}
+
+\subsection{Experimental Results}
+\textbf{Batch gradient descent}\\
+We first apply batch gradient descent rule on logistic regression since the training set is not that huge, thus batch gradient descent can work reasonably fast. 
+
+\begin{figure}%
+	\centering
+	\subfloat[cost function with iterations for batch GD on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P1_2.png}  }}%
+	\qquad
+	\subfloat[cost function with iterations for batch GD on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P1.png}  }}%
+	\caption{Cost function through batch GD training process}%
+	\label{fig:P1}%
+\end{figure}
+
+\begin{figure}%
+	\centering
+	\subfloat[cost function with iterations for mini-batch GD on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P2_2.png}  }}%
+	\qquad
+	\subfloat[cost function with iterations for mini-batch GD on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P2.png}  }}%
+	\caption{Cost function through mini-batch GD training process}%
+	\label{fig:P2}%
+\end{figure}
+
+After trying different values of learning rate, we found $0.005$ is a reasonably good learning rate for this problem. Fig. \ref{fig: P1}(a) plots the  loss function over training for the training set, the hold-out validation set and the test set. From the results we can see the model tries to minimize the cost and meanwhile maximize the likelihood to perform good prediction on the data.
+
+\textbf{Mini-Batch gradient descent}\\
+We can use mini-batch gradient descent to speed up learning process. Since the one-step optimization is done on a smaller mini-batch, the cost function will not monotonically decrease as batch gradient descent. Here we change the weights after a mini-batch of roughly $10\%$ of the entire training set. This set of mini-batch size can result in relatively smooth curve of the cost function. Fig. \ref{fig: P1}(b) plots the loss function over training for consecutive mini-batches. Since the validation set always has very similar errors as the test set, we can conclude the hold-out set work as a good stand-in for the test set and their underlying data distributions are same.
+
+\textbf{Accuracy of Prediction Using Logistic Regression Classifier}\\
+
+\begin{figure}%
+	\centering
+	\subfloat[accuracy with iterations on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P3_2.png}  }}%
+	\qquad
+	\subfloat[accuracy with iterations on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P3.png}  }}%
+	\caption{Accuracy through training process}%
+	\label{fig:P3}%
+\end{figure}
+
+\textbf{Weight Visualization}\\
+We can visualize the weights learned to see what logistic regression learns through the training process. 
+
+\begin{figure}%
+	\centering
+	\subfloat[weights learned on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P4_2.png}  }}%
+	\qquad
+	\subfloat[weights learned on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P4.png}  }}%
+	\caption{Weight visualization on binary classification using logistic regression}%
+	\label{fig:P4}%
+\end{figure}
+
+Computing the difference between these two different classifiers, we can get a new weight matrix visualized in Fig. \ref{fig: P5}. This result shows that the new weights can be used to accurately classify digit 3 and digit 8.
+
+\begin{figure}[t]
+ \centering
+ \includegraphics[width=0.4\linewidth]{images/P5.png}
+ \caption{Difference of the weights between the two classifiers (2 vs. 3 and 2 vs. 8)}
+ \label{fig:P5}
+\end{figure}
+
 \textbf{Derive the gradient for regularized logistic regression:} \\
 
 To prevent potential overfitting, regularization is used in logistic regression. The cross-entropy cost function with regularization term can be computed as
@@ -98,6 +169,8 @@ Thus the gradient of cost function on example $n$ is
     (t^{n}-y^{n})x_{j}^{n} - \lambda sign(w_{j}), & \text{if } L1
 \end{cases}
 \]
+
+where $sign(w_{j})$ is the signature function of $w_{j}$. 
 
 Note that we can always add a factor of $1/N$ to scale the cost and gradient to somehow speed up the learning, and this will not change the optimization results (learned parameters).
 
