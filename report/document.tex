@@ -61,7 +61,6 @@ Address \\
 In this problem, we need to classify MNIST datasets using softmax regression. In the experiments, we only use the first 20,000 training images and the last 2,000 test images.
 
 \subsection{Methods}
-We use softmax regresion for this problem. \\
 \textbf{Derive the gradient for Softmax Regression:} \\
 The cross-entropy cost function can be expressed as,
 
@@ -73,7 +72,7 @@ Where,
 \begin{equation}
 	y_k^n = \frac{\exp{(a_k^n)}}{ \sum_{k'}\exp{(a_{k'}^n})}
 \end{equation}
-And,
+And, 
 \begin{equation}
 	a_k^n = w_k^Tx^n
 \end{equation}
@@ -108,28 +107,33 @@ Substitute Equation (5) and Equation (6) into Equation (4) we get,
 
 \textbf{Preprossing}: First, we extract the first 20,000 training images and the last 2,000 test images. Then normailize the images to make sure the pixel values are in the range of [0,1]. Convert the labels to one-hot vectors. Divide the training images into two parts, the first 10\% are used for as a hold-out set and the rest 90\% are used for training.
 \\
-\textbf{Experiments settings:} To determine the best type of regurization and the best $\lambda$, we try $L_2$ regularization and $L_1$ regularization seperately.\\
- For the $L_2$ regularizartion, we search the best $\lambda$ in the set $\{0.01, 0.001, 0.0001\}$. If the accuracy on the hold-out set decreases for 3 epochs, we stop the algorithm and use the weights with the minimum error (highest accuracy) on the hold-out set as the final answer. For the $L_1$ regularization, we follow the same steps. Then we compare the results get from these two regularization methods and use it as the best final result.
+\textbf{Experiments settings:}We use an initial learning rate $\eta({0})$ = 0.004 and use equation $\eta({t}) = \eta{(0)}/(1+t/T)$ to anneal the learning rate by reducing it over time. $t$ is used to index the epoch number and $T$ is a metaparameter which is set to be 2. In the
+experiements, we find that above learning settings work best.   \\
+To determine the best type of regurization and the best $\lambda$, we try $L_2$ regularization and $L_1$ regularization seperately. For the $L_2$ regularizartion, we search the best $\lambda$ in the set $\{0.01, 0.001, 0.0001\}$. If the accuracy on the hold-out set decreases for 3 epochs, we stop the algorithm and use the weights with the highest accuracy on the hold-out set as the final answer. For the $L_1$ regularization, we follow the same steps. We run the 1000 epochs for each setting. \textbf{}Then we compare the results got from these two regularization methods and use the best one as the final result.
  
 \subsection{Results}
-(a) In the experiments, we find that using $L_2$ regularization with $\lambda = 0.01$ obtain the best result on the validation set. With an accuracy of 0.9045\% on the validation set. With such settings, the accuracy on the test set is 0.927\%.
+(a) In the experiments, we find that using $L_2$ regularization with $\lambda = 0.01$ obtain the best result on the validation set with an accuracy of 0.9045\% on the validation set. The accuracy is 0.927\% on the test set under such settings. \\
 
+To further examine the performance of the algorithm, we try other $\lambda$s. We choose $\lambda$ in the set $\{0.05,0.005,0.0005\}$ and use $L_2$ regularization. The highest accuracy on the validation set is $0.8965\%$ with $\lambda = 0.0005$. And the test accuracy is $0.933\%$ which is slightly higher than when $\lambda = 0.01$. So in following experiments, we fix $\lambda$ to be 0.0005.
 
 \begin{figure}%
 	\centering
-	\subfloat[label 1]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/accuracy.png}  }}%
+	\subfloat[The percent correct over the number of training iterations for the training, hold-out and test set.]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/accuracy.png} }
+		\label{fig: 1}
+	}%
 	\qquad
-	\subfloat[label 2]{{	\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/loss.png}  }}%
-	\caption{2 Figures side by side}%
-	\label{fig:example}%
+	\subfloat[The value of the loss function over the number of training iterations for the training, hold-out, and test set.]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/loss.png}  }
+			\label{fig: 2}%
+		}%
+	\caption{The performance of the algorithm over the number of training iterations. }%
 \end{figure}
 
 
 
-(b) In this experiement, we use  $L_2$ regularization with $\lambda = 0.01$. The figure is shown in Fig \ref{figure: 1}. 
+(b) In this experiement, we use $L_2$ regularization with $\lambda = 0.005$. The figure is shown in Fig \ref{fig: 1}.
 
 
-(c) In this experiement, we use  $L_2$ regularization with $\lambda = 0.01$. The figure is shown in Fig \ref{figure: 2}.
+(c) In this experiement, we use $L_2$ regularization with $\lambda = 0.005$. The figure is shown in Fig \ref{fig: 2}.
 
 (d) We plot the results in Fig \ref{figure: 3}. We can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixesls with the weights. And the inner product is maximized when the angle between the weight and the image is zero. So we see that the image of the weight and the corresponding image of the average digit is similar.
 
