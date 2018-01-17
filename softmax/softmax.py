@@ -8,7 +8,6 @@ import sys
 sys.path.append('../python-mnist/')
 from mnist import MNIST
 
-
 def find_best_parameters(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds, weights, inital_step_size, T, epoch, classes, dimensions):
 
     best_validation_weights_L2 = np.random.randn(dimensions, classes).astype(np.float32) 
@@ -131,7 +130,6 @@ def plot_graph(training_images, test_images, validation_images, training_labels,
         pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
         delta = one_hot_training_labels - pred_y 
         grads = -np.dot(training_images.T, delta) + lambd*weights
-
         weights = weights - (inital_step_size/(1+i/T)) * grads
 
         # Calculate training loss and accuracy
@@ -144,7 +142,7 @@ def plot_graph(training_images, test_images, validation_images, training_labels,
         training_accuracy_.append(training_accuracy)
         pred_y[pred_y == 0.0] = 1e-15
         log_pred_y = np.log(pred_y)
-        training_loss = -np.sum(one_hot_training_labels * log_pred_y)  +  lambd*LA.norm(weights)
+        training_loss = -np.sum(one_hot_training_labels * log_pred_y)  + lambd*LA.norm(weights)
         training_losses.append(training_loss)
         
         # Calculate test loss and accuracy
@@ -154,6 +152,7 @@ def plot_graph(training_images, test_images, validation_images, training_labels,
         pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) # 18000, 10
         pred_class = np.argmax(pred_y, axis=1)
         test_accuracy = np.sum(pred_class == test_labels)/(pred_class.shape[0]+0.0)
+        print test_accuracy
         test_accuracy_.append(test_accuracy)
         pred_y[pred_y == 0.0] = 1e-15
         log_pred_y = np.log(pred_y)
@@ -179,9 +178,9 @@ def plot_graph(training_images, test_images, validation_images, training_labels,
     plt.plot(test_losses)
     plt.plot(validation_losses)
     fig1.suptitle('Loss VS Epoch', fontsize=15)
-    plt.legend(['training_losses', 'test_losses', 'validation_losses'], loc='upper right')
-    plt.xlabel('Epoch', fontsize=10)
-    plt.ylabel('Cross entropy loss', fontsize=10)
+    plt.legend(['training loss', 'test loss', 'validation loss'], loc='upper right')
+    plt.xlabel('Epoch', fontsize=15)
+    plt.ylabel('Total loss', fontsize=15)
     fig1.show()
 
     fig2 = plt.figure(2)
@@ -190,17 +189,16 @@ def plot_graph(training_images, test_images, validation_images, training_labels,
     plt.plot(validation_accuracy_)
     fig2.suptitle('Accuracy VS Epoch', fontsize=15)
     plt.legend(['training accuracy', 'test accuracy', 'validation accuracy'], loc='lower right')
-    plt.xlabel('Epoch', fontsize=10)
-    plt.ylabel('Accuracy', fontsize=10)
+    plt.xlabel('Epoch', fontsize=15)
+    plt.ylabel('Accuracy', fontsize=15)
     fig2.show()
 
     # Visualize weights and digits
     weights = weights[1:,:]
     training_images = training_images[:,1:]
 
-    fig3 = plt.figure(figsize = (6,6))
-    fig3.suptitle('Images of Weights and Average Examples', fontsize=15)
-    gs = gridspec.GridSpec(classes, 2)
+    fig3 = plt.figure(figsize = (6,2))
+    gs = gridspec.GridSpec(2, classes)
     gs.update(wspace=0, hspace=0)
 
     for index in range(weights.shape[1]):
@@ -210,10 +208,10 @@ def plot_graph(training_images, test_images, validation_images, training_labels,
             if training_labels[instance] == index:
                 ave_image += training_images[instance].reshape(1,784)
 
-        ax1 = plt.subplot(gs[index,0])
+        ax1 = plt.subplot(gs[0,index])
         plt.imshow(np.reshape(weight, (28,28)), cmap=plt.cm.gray, aspect='equal')
         plt.axis('off')
-        ax2 = plt.subplot(gs[index,1])
+        ax2 = plt.subplot(gs[1,index])
         plt.imshow(np.reshape(ave_image, (28,28)), cmap=plt.cm.gray, aspect='equal')
         plt.axis('off')
     plt.show()
@@ -245,7 +243,7 @@ if __name__ == '__main__':
     lambds_set_1 = [0.01, 0.001, 0.0001]
     lambds_set_2 = [0.05, 0.005, 0.0005]
     lambd = 0.0005
-    regularization_types = ["L2"]
+    regularization_types = ["L1", "L2"]
 
     classes = 10
     dimensions = 785
@@ -255,7 +253,6 @@ if __name__ == '__main__':
     one_hot_training_labels = np.eye(classes)[training_labels] 
     one_hot_validation_labels = np.eye(classes)[validation_labels]
     one_hot_test_labels = np.eye(classes)[test_labels]  
-
 
     #find_best_parameters(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
     plot_graph(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)
