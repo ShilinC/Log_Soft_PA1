@@ -9,41 +9,7 @@ sys.path.append('../python-mnist/')
 from mnist import MNIST
 
 
-data = MNIST('../python-mnist/data')
-training_images, training_labels = data.load_training()
-test_images, test_labels = data.load_testing()
-
-training_images_old = training_images[:20000]
-training_labels_old = training_labels[:20000]
-test_images = test_images[-2000:]
-test_labels = test_labels[-2000:]
-training_images_old = [[1] + image for image in training_images_old]
-test_images = [[1] + image for image in test_images]
-
-training_images = np.array(training_images_old[2000:]) / 255.0# (18000, 785)
-training_labels = np.array(training_labels_old[2000:]) 
-validation_images = np.array(training_images_old[:2000]) / 255.0
-validation_labels = np.array(training_labels_old[:2000])
-test_images = np.array(test_images) / 255.0
-test_labels = np.array(test_labels)
-
-epoch = 1000
-inital_step_size = 0.004
-T = 2.0
-
-lambds = [0.01, 0.001, 0.0001]
-regularization_types = ["L2","L1"]
-
-classes = 10
-dimensions = 785
-
-weights = np.random.randn(dimensions, classes).astype(np.float32)  #
-
-one_hot_training_labels = np.eye(classes)[training_labels] 
-one_hot_validation_labels = np.eye(classes)[validation_labels]
-one_hot_test_labels = np.eye(classes)[test_labels]  
-
-def find_best_parameters():
+def find_best_parameters(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds, weights, inital_step_size, T, epoch, classes, dimensions):
 
     best_validation_weights_L2 = np.random.randn(dimensions, classes).astype(np.float32) 
     best_validation_lamdb_L2 = 0
@@ -62,7 +28,7 @@ def find_best_parameters():
                 last_accuracy  = 0.0
                 cnt = 0
                 for i in range(epoch):
-
+                    print i
                     a = np.matmul(training_images, weights) # 18000, 10
                     a_max = np.max(a,1).reshape(a.shape[0],1)
                     sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) # 18000, 1
@@ -147,9 +113,8 @@ def find_best_parameters():
     print "test_accuracy " + str(test_accuracy) 
 
 
-def plot_graph():
+def plot_graph(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights):
 
-    lambd = 0.01 
     training_losses = []
     test_losses = []
     validation_losses = []
@@ -179,7 +144,7 @@ def plot_graph():
         training_accuracy_.append(training_accuracy)
         pred_y[pred_y == 0.0] = 1e-15
         log_pred_y = np.log(pred_y)
-        training_loss = -np.sum(one_hot_training_labels * log_pred_y) / training_images.shape[0] +  lambd*LA.norm(weights)
+        training_loss = -np.sum(one_hot_training_labels * log_pred_y)  +  lambd*LA.norm(weights)
         training_losses.append(training_loss)
         
         # Calculate test loss and accuracy
@@ -192,7 +157,7 @@ def plot_graph():
         test_accuracy_.append(test_accuracy)
         pred_y[pred_y == 0.0] = 1e-15
         log_pred_y = np.log(pred_y)
-        test_loss = -np.sum(one_hot_test_labels * log_pred_y) / test_images.shape[0] +  lambd*LA.norm(weights)
+        test_loss = -np.sum(one_hot_test_labels * log_pred_y)  +  lambd*LA.norm(weights)
         test_losses.append(test_loss)
         
         # Calculate validation loss and accuracy
@@ -205,30 +170,28 @@ def plot_graph():
         validation_accuracy_.append(validation_accuracy)
         pred_y[pred_y == 0.0] = 1e-15
         log_pred_y = np.log(pred_y)
-        validation_loss = -np.sum(one_hot_validation_labels * log_pred_y) / validation_images.shape[0] +  lambd*LA.norm(weights)
+        validation_loss = -np.sum(one_hot_validation_labels * log_pred_y)  +  lambd*LA.norm(weights)
         validation_losses.append(validation_loss) 
 
 
-
     fig1 = plt.figure(1)
-
     plt.plot(training_losses)
     plt.plot(test_losses)
     plt.plot(validation_losses)
-    fig1.suptitle('Loss VS epoches', fontsize=15)
+    fig1.suptitle('Loss VS Epoch', fontsize=15)
     plt.legend(['training_losses', 'test_losses', 'validation_losses'], loc='upper right')
-    plt.xlabel('epoches')
-    plt.ylabel('cross entropy loss')
+    plt.xlabel('Epoch', fontsize=10)
+    plt.ylabel('Cross entropy loss', fontsize=10)
     fig1.show()
 
     fig2 = plt.figure(2)
     plt.plot(training_accuracy_)
     plt.plot(test_accuracy_)
     plt.plot(validation_accuracy_)
-    fig2.suptitle('Accuracy VS epoch', fontsize=15)
+    fig2.suptitle('Accuracy VS Epoch', fontsize=15)
     plt.legend(['training accuracy', 'test accuracy', 'validation accuracy'], loc='lower right')
-    plt.xlabel('epoches')
-    plt.ylabel('Accuracy')
+    plt.xlabel('Epoch', fontsize=10)
+    plt.ylabel('Accuracy', fontsize=10)
     fig2.show()
 
     # Visualize weights and digits
@@ -253,8 +216,46 @@ def plot_graph():
         ax2 = plt.subplot(gs[index,1])
         plt.imshow(np.reshape(ave_image, (28,28)), cmap=plt.cm.gray, aspect='equal')
         plt.axis('off')
-    plt.show
+    plt.show()
 
 if __name__ == '__main__':
-    find_best_parameters()
-    plot_graph()
+
+    data = MNIST('../python-mnist/data')
+    training_images, training_labels = data.load_training()
+    test_images, test_labels = data.load_testing()
+
+    training_images_old = training_images[:20000]
+    training_labels_old = training_labels[:20000]
+    test_images = test_images[-2000:]
+    test_labels = test_labels[-2000:]
+    training_images_old = [[1] + image for image in training_images_old]
+    test_images = [[1] + image for image in test_images]
+
+    training_images = np.array(training_images_old[2000:]) / 255.0# (18000, 785)
+    training_labels = np.array(training_labels_old[2000:]) 
+    validation_images = np.array(training_images_old[:2000]) / 255.0
+    validation_labels = np.array(training_labels_old[:2000])
+    test_images = np.array(test_images) / 255.0
+    test_labels = np.array(test_labels)
+
+    epoch = 300
+    inital_step_size = 0.004
+    T = 2.0
+
+    lambds_set_1 = [0.01, 0.001, 0.0001]
+    lambds_set_2 = [0.05, 0.005, 0.0005]
+    lambd = 0.0005
+    regularization_types = ["L2"]
+
+    classes = 10
+    dimensions = 785
+
+    weights = np.random.randn(dimensions, classes).astype(np.float32)  #
+
+    one_hot_training_labels = np.eye(classes)[training_labels] 
+    one_hot_validation_labels = np.eye(classes)[validation_labels]
+    one_hot_test_labels = np.eye(classes)[test_labels]  
+
+
+    #find_best_parameters(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
+    plot_graph(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)
