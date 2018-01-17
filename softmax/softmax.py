@@ -9,7 +9,7 @@ sys.path.append('../python-mnist/')
 from mnist import MNIST
 
 # Find best hyperparameters 
-def find_best_parameters(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds, weights, inital_step_size, T, epoch, classes, dimensions):
+def hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds, weights, inital_step_size, T, epoch, classes, dimensions):
 
     best_validation_weights_L2 = np.random.randn(dimensions, classes).astype(np.float32) 
     best_validation_lamdb_L2 = 0
@@ -28,7 +28,8 @@ def find_best_parameters(training_images, one_hot_training_labels, test_images, 
                 last_accuracy  = 0.0
                 cnt = 0
                 for i in range(epoch):
-                    print i
+
+                    # Batch graident descent
                     a = np.matmul(training_images, weights) # 18000, 10
                     a_max = np.max(a,1).reshape(a.shape[0],1)
                     sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) # 18000, 1
@@ -67,7 +68,7 @@ def find_best_parameters(training_images, one_hot_training_labels, test_images, 
                 cnt = 0
 
                 for i in range(epoch):
-
+                    # Batch graident descent
                     a = np.matmul(training_images, weights)
                     a_max = np.max(a,1).reshape(a.shape[0],1)
                     sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1)  
@@ -125,6 +126,7 @@ def train(training_images, test_images, validation_images, training_labels, test
 
     for i in range(epoch):
         print "epoch " + str(i)
+        # Batch graident descent
         a = np.matmul(training_images, weights) 
         a_max = np.max(a,1).reshape(a.shape[0],1)
         sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) 
@@ -153,7 +155,7 @@ def train(training_images, test_images, validation_images, training_labels, test
         pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) # 18000, 10
         pred_class = np.argmax(pred_y, axis=1)
         test_accuracy = np.sum(pred_class == test_labels)/(pred_class.shape[0]+0.0)
-        print test_accuracy
+        print "test accuracy " + str(test_accuracy)
         test_accuracy_.append(test_accuracy)
         pred_y[pred_y == 0.0] = 1e-15
         log_pred_y = np.log(pred_y)
@@ -249,7 +251,6 @@ if __name__ == '__main__':
 
     classes = 10
     dimensions = 785
-    
     # Weight initialization
     weights = np.random.randn(dimensions, classes).astype(np.float32)  #
 
@@ -257,5 +258,8 @@ if __name__ == '__main__':
     one_hot_validation_labels = np.eye(classes)[validation_labels]
     one_hot_test_labels = np.eye(classes)[test_labels]  
 
-    #find_best_parameters(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
+    # Hyperparamter selction
+    hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
+
+    # Training based on the best hyperparameters
     train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)
