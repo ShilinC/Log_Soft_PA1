@@ -8,6 +8,7 @@ import sys
 sys.path.append('../python-mnist/')
 from mnist import MNIST
 
+# Find best hyperparameters 
 def find_best_parameters(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds, weights, inital_step_size, T, epoch, classes, dimensions):
 
     best_validation_weights_L2 = np.random.randn(dimensions, classes).astype(np.float32) 
@@ -112,7 +113,7 @@ def find_best_parameters(training_images, one_hot_training_labels, test_images, 
     print "test_accuracy " + str(test_accuracy) 
 
 
-def plot_graph(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights):
+def train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights):
 
     training_losses = []
     test_losses = []
@@ -229,6 +230,7 @@ if __name__ == '__main__':
     training_images_old = [[1] + image for image in training_images_old]
     test_images = [[1] + image for image in test_images]
 
+    # Normalize data
     training_images = np.array(training_images_old[2000:]) / 255.0# (18000, 785)
     training_labels = np.array(training_labels_old[2000:]) 
     validation_images = np.array(training_images_old[:2000]) / 255.0
@@ -247,7 +249,8 @@ if __name__ == '__main__':
 
     classes = 10
     dimensions = 785
-
+    
+    # Weight initialization
     weights = np.random.randn(dimensions, classes).astype(np.float32)  #
 
     one_hot_training_labels = np.eye(classes)[training_labels] 
@@ -255,4 +258,4 @@ if __name__ == '__main__':
     one_hot_test_labels = np.eye(classes)[test_labels]  
 
     #find_best_parameters(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
-    plot_graph(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)
+    train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.1)  16 JAN 2018 15:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.1)  17 JAN 2018 11:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -302,7 +302,11 @@ Package caption Info: hyperref package is loaded.
 \sf@top=\skip50
 \sf@bottom=\skip51
 )
-(./document.aux)
+(./document.aux
+
+LaTeX Warning: Label `fig:P4' multiply defined.
+
+)
 \openout1 = `document.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
@@ -324,7 +328,8 @@ LaTeX Font Info:    Try loading font information for OT1+ptm on input line 39.
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 \AtBeginShipoutBox=\box30
- (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+
+(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count123
 \scratchdimen=\dimen129
@@ -388,161 +393,270 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
  [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.80 I
-      n this work we use the famous MNIST hand written digits database creat...
-
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-<images/P1_2.png, id=65, 390.45876pt x 279.0425pt>
+<images/P1_2.png, id=73, 390.45876pt x 279.0425pt>
 File: images/P1_2.png Graphic file (type png)
  <use images/P1_2.png>
-Package pdftex.def Info: images/P1_2.png used on input line 92.
+Package pdftex.def Info: images/P1_2.png used on input line 94.
 (pdftex.def)             Requested size: 180.67499pt x 129.11899pt.
 
-<images/P1.png, id=67, 390.45876pt x 279.0425pt>
+<images/P1.png, id=75, 390.45876pt x 279.0425pt>
 File: images/P1.png Graphic file (type png)
  <use images/P1.png>
-Package pdftex.def Info: images/P1.png used on input line 94.
+Package pdftex.def Info: images/P1.png used on input line 96.
 (pdftex.def)             Requested size: 180.67499pt x 129.11899pt.
 
-<images/P2_2.png, id=68, 390.45876pt x 279.0425pt>
+<images/P2_2.png, id=76, 390.45876pt x 279.0425pt>
 File: images/P2_2.png Graphic file (type png)
  <use images/P2_2.png>
-Package pdftex.def Info: images/P2_2.png used on input line 101.
+Package pdftex.def Info: images/P2_2.png used on input line 103.
 (pdftex.def)             Requested size: 180.67499pt x 129.11899pt.
 
-<images/P2.png, id=69, 390.45876pt x 279.0425pt>
+<images/P2.png, id=77, 390.45876pt x 279.0425pt>
 File: images/P2.png Graphic file (type png)
  <use images/P2.png>
-Package pdftex.def Info: images/P2.png used on input line 103.
+Package pdftex.def Info: images/P2.png used on input line 105.
 (pdftex.def)             Requested size: 180.67499pt x 129.11899pt.
 
 
-LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 108.
+LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 110.
 
 
-LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 111.
+LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 113.
 
 [2 <./images/P1_2.png> <./images/P1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 113--114
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
 
  []
 
-<images/P3_2.png, id=81, 387.4475pt x 279.0425pt>
+<images/P3_2.png, id=89, 387.4475pt x 279.0425pt>
 File: images/P3_2.png Graphic file (type png)
  <use images/P3_2.png>
-Package pdftex.def Info: images/P3_2.png used on input line 117.
+Package pdftex.def Info: images/P3_2.png used on input line 119.
 (pdftex.def)             Requested size: 180.67499pt x 130.12384pt.
 
-<images/P3.png, id=82, 387.4475pt x 279.0425pt>
+<images/P3.png, id=90, 387.4475pt x 279.0425pt>
 File: images/P3.png Graphic file (type png)
  <use images/P3.png>
-Package pdftex.def Info: images/P3.png used on input line 119.
+Package pdftex.def Info: images/P3.png used on input line 121.
 (pdftex.def)             Requested size: 180.67499pt x 130.12384pt.
 
-<images/P4_2.png, id=83, 255.95625pt x 252.945pt>
+<images/P4_2.png, id=91, 255.95625pt x 252.945pt>
 File: images/P4_2.png Graphic file (type png)
  <use images/P4_2.png>
-Package pdftex.def Info: images/P4_2.png used on input line 129.
+Package pdftex.def Info: images/P4_2.png used on input line 131.
 (pdftex.def)             Requested size: 180.67499pt x 178.55011pt.
 
-<images/P4.png, id=84, 255.95625pt x 252.945pt>
+<images/P4.png, id=92, 255.95625pt x 252.945pt>
 File: images/P4.png Graphic file (type png)
  <use images/P4.png>
-Package pdftex.def Info: images/P4.png used on input line 131.
+Package pdftex.def Info: images/P4.png used on input line 133.
 (pdftex.def)             Requested size: 180.67499pt x 178.55011pt.
 
 
-LaTeX Warning: Reference `fig: P5' on page 3 undefined on input line 136.
+LaTeX Warning: Reference `fig: P5' on page 3 undefined on input line 138.
 
-<images/P5.png, id=85, 255.95625pt x 252.945pt>
+<images/P5.png, id=93, 255.95625pt x 252.945pt>
 File: images/P5.png Graphic file (type png)
  <use images/P5.png>
-Package pdftex.def Info: images/P5.png used on input line 140.
+Package pdftex.def Info: images/P5.png used on input line 142.
 (pdftex.def)             Requested size: 158.99156pt x 157.12146pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--146
-
- []
-
-
-Underfull \vbox (badness 2781) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3 <./images/P2_2.png> <./images/P2.png> <./images/P3_2.png> <./images/P3.png>
 ] [4 <./images/P4_2.png> <./images/P4.png> <./images/P5.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 226--227
+<images/P7.png, id=124, 387.4475pt x 279.0425pt>
+File: images/P7.png Graphic file (type png)
+ <use images/P7.png>
+Package pdftex.def Info: images/P7.png used on input line 186.
+(pdftex.def)             Requested size: 108.405pt x 78.07175pt.
+
+<images/P7_2.png, id=125, 387.4475pt x 279.0425pt>
+File: images/P7_2.png Graphic file (type png)
+ <use images/P7_2.png>
+Package pdftex.def Info: images/P7_2.png used on input line 188.
+(pdftex.def)             Requested size: 108.405pt x 78.07175pt.
+
+<images/P7_3.png, id=126, 387.4475pt x 279.0425pt>
+File: images/P7_3.png Graphic file (type png)
+ <use images/P7_3.png>
+Package pdftex.def Info: images/P7_3.png used on input line 190.
+(pdftex.def)             Requested size: 108.405pt x 78.07175pt.
+
+<images/P8.png, id=127, 387.4475pt x 279.0425pt>
+File: images/P8.png Graphic file (type png)
+ <use images/P8.png>
+Package pdftex.def Info: images/P8.png used on input line 197.
+(pdftex.def)             Requested size: 108.405pt x 78.07175pt.
+
+<images/P8_2.png, id=128, 387.4475pt x 279.0425pt>
+File: images/P8_2.png Graphic file (type png)
+ <use images/P8_2.png>
+Package pdftex.def Info: images/P8_2.png used on input line 199.
+(pdftex.def)             Requested size: 108.405pt x 78.07175pt.
+
+<images/P8_3.png, id=129, 387.4475pt x 279.0425pt>
+File: images/P8_3.png Graphic file (type png)
+ <use images/P8_3.png>
+Package pdftex.def Info: images/P8_3.png used on input line 201.
+(pdftex.def)             Requested size: 108.405pt x 78.07175pt.
+
+<images/P6.png, id=131, 387.4475pt x 279.0425pt>
+File: images/P6.png Graphic file (type png)
+ <use images/P6.png>
+Package pdftex.def Info: images/P6.png used on input line 211.
+(pdftex.def)             Requested size: 180.67499pt x 130.12384pt.
+
+<images/P6_2.png, id=132, 396.48125pt x 279.0425pt>
+File: images/P6_2.png Graphic file (type png)
+ <use images/P6_2.png>
+Package pdftex.def Info: images/P6_2.png used on input line 213.
+(pdftex.def)             Requested size: 180.67499pt x 127.16039pt.
+
+<images/P9.png, id=133, 397.485pt x 279.0425pt>
+File: images/P9.png Graphic file (type png)
+ <use images/P9.png>
+Package pdftex.def Info: images/P9.png used on input line 225.
+(pdftex.def)             Requested size: 180.67499pt x 126.84105pt.
+
+<images/P9_2.png, id=134, 393.47pt x 279.0425pt>
+File: images/P9_2.png Graphic file (type png)
+ <use images/P9_2.png>
+Package pdftex.def Info: images/P9_2.png used on input line 227.
+(pdftex.def)             Requested size: 180.67499pt x 128.13118pt.
+
+<images/P10.png, id=135, 255.95625pt x 252.945pt>
+File: images/P10.png Graphic file (type png)
+ <use images/P10.png>
+Package pdftex.def Info: images/P10.png used on input line 237.
+(pdftex.def)             Requested size: 108.405pt x 107.12775pt.
+
+Underfull \hbox (badness 1342) in paragraph at lines 237--237
+[]\OT1/ptm/m/n/9 (a) |weights when lambda =
+ []
+
+<images/P10_2.png, id=136, 255.95625pt x 252.945pt>
+File: images/P10_2.png Graphic file (type png)
+ <use images/P10_2.png>
+Package pdftex.def Info: images/P10_2.png used on input line 239.
+(pdftex.def)             Requested size: 108.405pt x 107.12775pt.
+
+Underfull \hbox (badness 2073) in paragraph at lines 239--239
+[]\OT1/ptm/m/n/9 (b) |weights when lambda =
+ []
+
+<images/P10_3.png, id=137, 255.95625pt x 252.945pt>
+File: images/P10_3.png Graphic file (type png)
+ <use images/P10_3.png>
+Package pdftex.def Info: images/P10_3.png used on input line 241.
+(pdftex.def)             Requested size: 108.405pt x 107.12775pt.
+
+Underfull \hbox (badness 1342) in paragraph at lines 241--241
+[]\OT1/ptm/m/n/9 (c) |weights when lambda =
+ []
+
+<images/P10_4.png, id=138, 255.95625pt x 252.945pt>
+File: images/P10_4.png Graphic file (type png)
+ <use images/P10_4.png>
+Package pdftex.def Info: images/P10_4.png used on input line 243.
+(pdftex.def)             Requested size: 108.405pt x 107.12775pt.
+
+Underfull \hbox (badness 1194) in paragraph at lines 243--243
+[]\OT1/ptm/m/n/9 (d) |weights when lambda =
+ []
+
+<images/P10_5.png, id=139, 255.95625pt x 252.945pt>
+File: images/P10_5.png Graphic file (type png)
+ <use images/P10_5.png>
+Package pdftex.def Info: images/P10_5.png used on input line 245.
+(pdftex.def)             Requested size: 108.405pt x 107.12775pt.
+
+Underfull \hbox (badness 2293) in paragraph at lines 245--245
+[]\OT1/ptm/m/n/9 (e) |weights when lambda =
+ []
+
+<images/P10_6.png, id=140, 255.95625pt x 252.945pt>
+File: images/P10_6.png Graphic file (type png)
+ <use images/P10_6.png>
+Package pdftex.def Info: images/P10_6.png used on input line 247.
+(pdftex.def)             Requested size: 108.405pt x 107.12775pt.
+
+Underfull \hbox (badness 1681) in paragraph at lines 247--247
+[]\OT1/ptm/m/n/9 (f) |weights when lambda =
+ []
+
+[5 <./images/P7.png> <./images/P7_2.png> <./images/P7_3.png> <./images/P8.png> 
+<./images/P8_2.png> <./images/P8_3.png>] [6 <./images/P6.png> <./images/P6_2.pn
+g> <./images/P9.png> <./images/P9_2.png>] [7 <./images/P10.png> <./images/P10_2
+.png> <./images/P10_3.png> <./images/P10_4.png> <./images/P10_5.png> <./images/
+P10_6.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 300--301
 
  []
 
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 263--265
+
+Underfull \hbox (badness 10000) in paragraph at lines 337--339
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 266--268
+Underfull \hbox (badness 10000) in paragraph at lines 340--342
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--275
+Underfull \hbox (badness 10000) in paragraph at lines 348--349
 
  []
 
-<../softmax/figs/accuracy.png, id=129, 462.528pt x 346.896pt>
-File: ../softmax/figs/accuracy.png Graphic file (type png)
-
-<use ../softmax/figs/accuracy.png>
-Package pdftex.def Info: ../softmax/figs/accuracy.png used on input line 282.
-(pdftex.def)             Requested size: 130.08568pt x 130.08568pt.
-
-<../softmax/figs/loss.png, id=130, 462.528pt x 346.896pt>
+[8] <../softmax/figs/loss.png, id=209, 462.528pt x 346.896pt>
 File: ../softmax/figs/loss.png Graphic file (type png)
 
 <use ../softmax/figs/loss.png>
-Package pdftex.def Info: ../softmax/figs/loss.png used on input line 286.
+Package pdftex.def Info: ../softmax/figs/loss.png used on input line 356.
 (pdftex.def)             Requested size: 130.08568pt x 130.08568pt.
 
-<../softmax/figs/image_of_weights_and_digits.png, id=131, 433.62pt x 144.54pt>
+<../softmax/figs/accuracy.png, id=210, 462.528pt x 346.896pt>
+File: ../softmax/figs/accuracy.png Graphic file (type png)
+
+<use ../softmax/figs/accuracy.png>
+Package pdftex.def Info: ../softmax/figs/accuracy.png used on input line 360.
+(pdftex.def)             Requested size: 130.08568pt x 130.08568pt.
+
+<../softmax/figs/image_of_weights_and_digits.png, id=211, 433.62pt x 144.54pt>
 File: ../softmax/figs/image_of_weights_and_digits.png Graphic file (type png)
 
 <use ../softmax/figs/image_of_weights_and_digits.png>
 Package pdftex.def Info: ../softmax/figs/image_of_weights_and_digits.png used o
-n input line 292.
+n input line 366.
 (pdftex.def)             Requested size: 195.1272pt x 86.72244pt.
- [6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 317.
- [7 <../softmax/figs/accuracy.png> <../softmax/figs/loss.png> <../softmax/figs/
+ [9 <../softmax/figs/loss.png> <../softmax/figs/accuracy.png> <../softmax/figs/
 image_of_weights_and_digits.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 317.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 397.
+ [10]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 397.
  (./document.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 317.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 317.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 397.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 397.
 Package rerunfilecheck Info: File `document.out' has not changed.
-(rerunfilecheck)             Checksum: 9C7B26FEE6CC714A627A02856FD7E4B6;689.
+(rerunfilecheck)             Checksum: 88686C71EA62328791E71E1F7D9598CB;850.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 317.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 397.
  ) 
 Here is how much of TeX's memory you used:
- 7604 strings out of 493014
- 114005 string characters out of 6133352
- 210255 words of memory out of 5000000
- 11005 multiletter control sequences out of 15000+600000
+ 7716 strings out of 493014
+ 115785 string characters out of 6133352
+ 212555 words of memory out of 5000000
+ 11075 multiletter control sequences out of 15000+600000
  16920 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,17n,49p,961b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,17n,49p,952b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -558,10 +672,10 @@ ist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2016/texmf-dist/font
 s/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on document.pdf (7 pages, 382761 bytes).
+Output written on document.pdf (10 pages, 551930 bytes).
 PDF statistics:
- 220 PDF objects out of 1000 (max. 8388607)
- 171 compressed objects within 2 object streams
- 57 named destinations out of 1000 (max. 500000)
- 141 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 302 PDF objects out of 1000 (max. 8388607)
+ 217 compressed objects within 3 object streams
+ 83 named destinations out of 1000 (max. 500000)
+ 237 words of extra memory for PDF output out of 10000 (max. 10000000)
 
