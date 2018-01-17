@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  16 JAN 2018 11:18
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  16 JAN 2018 19:09
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -277,7 +277,11 @@ Package caption Info: hyperref package is loaded.
 \c@lotdepth=\count123
 \sf@top=\skip50
 \sf@bottom=\skip51
-) (./TSWLatexianTemp_document.aux)
+) (./TSWLatexianTemp_document.aux
+
+LaTeX Warning: Label `fig:P4' multiply defined.
+
+)
 \openout1 = `TSWLatexianTemp_document.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
@@ -335,13 +339,13 @@ File: se-ascii-print.def 2011/12/02 v1.10 stringenc: Printable ASCII characters
 
 ]
 
-/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:80: LaTeX Error: There's no line here to end.
+/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:82: LaTeX Error: There's no line here to end.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.80 I
+l.82 I
       n this work we use the famous MNIST hand written digits database created by Yann LeCun. Each image in the database contains $28 \times 28$ pixels and each pixel has a grayscale intensity, so that the input feature $x \in R^{784}$ after we unroll ...
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -356,13 +360,13 @@ File: images/P2_2.png Graphic file (type QTm)
 File: images/P2.png Graphic file (type QTm)
  <use  "images/P2.png" >
 
-LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 108.
+LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 110.
 
 
-LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 111.
+LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 113.
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 113--114
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
 
  []
 
@@ -375,53 +379,118 @@ File: images/P4_2.png Graphic file (type QTm)
 File: images/P4.png Graphic file (type QTm)
  <use  "images/P4.png" >
 
-LaTeX Warning: Reference `fig: P5' on page 3 undefined on input line 136.
+LaTeX Warning: Reference `fig: P5' on page 3 undefined on input line 138.
 
 File: images/P5.png Graphic file (type QTm)
 <use  "images/P5.png" >
-Underfull \hbox (badness 10000) in paragraph at lines 145--146
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3] [4]
+File: images/P7.png Graphic file (type QTm)
+ <use  "images/P7.png" >
+File: images/P7_2.png Graphic file (type QTm)
+ <use  "images/P7_2.png" >
+File: images/P7_3.png Graphic file (type QTm)
+ <use  "images/P7_3.png" >
+File: images/P8.png Graphic file (type QTm)
+ <use  "images/P8.png" >
+File: images/P8_2.png Graphic file (type QTm)
+ <use  "images/P8_2.png" >
+File: images/P8_3.png Graphic file (type QTm)
+ <use  "images/P8_3.png" >
+File: images/P6.png Graphic file (type QTm)
+ <use  "images/P6.png" >
+File: images/P6_2.png Graphic file (type QTm)
+ <use  "images/P6_2.png" >
+File: images/P9.png Graphic file (type QTm)
+ <use  "images/P9.png" >
+File: images/P9_2.png Graphic file (type QTm)
+ <use  "images/P9_2.png" >
+File: images/P10.png Graphic file (type QTm)
+ <use  "images/P10.png" >
+Underfull \hbox (badness 1342) in paragraph at lines 237--237
+[]\OT1/ptm/m/n/9 (a) |weights when lambda =
+ []
+
+File: images/P10_2.png Graphic file (type QTm)
+<use  "images/P10_2.png" >
+Underfull \hbox (badness 2073) in paragraph at lines 239--239
+[]\OT1/ptm/m/n/9 (b) |weights when lambda =
+ []
+
+File: images/P10_3.png Graphic file (type QTm)
+<use  "images/P10_3.png" >
+Underfull \hbox (badness 1342) in paragraph at lines 241--241
+[]\OT1/ptm/m/n/9 (c) |weights when lambda =
+ []
+
+File: images/P10_4.png Graphic file (type QTm)
+<use  "images/P10_4.png" >
+Underfull \hbox (badness 1194) in paragraph at lines 243--243
+[]\OT1/ptm/m/n/9 (d) |weights when lambda =
+ []
+
+File: images/P10_5.png Graphic file (type QTm)
+<use  "images/P10_5.png" >
+Underfull \hbox (badness 2293) in paragraph at lines 245--245
+[]\OT1/ptm/m/n/9 (e) |weights when lambda =
+ []
+
+File: images/P10_6.png Graphic file (type QTm)
+<use  "images/P10_6.png" >
+Underfull \hbox (badness 1681) in paragraph at lines 247--247
+[]\OT1/ptm/m/n/9 (f) |weights when lambda =
+ []
+
+[5] [6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 300--301
 
  []
 
 
-Underfull \vbox (badness 2781) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 337--339
 
- [3] [4]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 340--342
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 348--349
+
+ []
+
+[8]
 File: ../softmax/figs/accuracy.png Graphic file (type QTm)
  <use  "../softmax/figs/accuracy.png" >
 File: ../softmax/figs/loss.png Graphic file (type QTm)
  <use  "../softmax/figs/loss.png" >
-
-LaTeX Warning: Reference `figure: 1' on page 5 undefined on input line 248.
-
-
-LaTeX Warning: Reference `figure: 2' on page 5 undefined on input line 251.
-
-[5]
 File: ../softmax/figs/image_of_weights_and_digits.png Graphic file (type QTm)
- <use  "../softmax/figs/image_of_weights_and_digits.png" >
-Underfull \vbox (badness 8113) has occurred while \output is active []
-
- [6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 273.
- [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 273.
+ <use  "../softmax/figs/image_of_weights_and_digits.png" > [9]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 397.
+ [10]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 397.
  (./TSWLatexianTemp_document.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 273.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 273.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 397.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 397.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 273.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 397.
  ) 
 Here is how much of TeX's memory you used:
- 10452 strings out of 493706
- 149252 string characters out of 6145769
- 230522 words of memory out of 5000000
- 13720 multiletter control sequences out of 15000+600000
+ 10490 strings out of 493706
+ 149657 string characters out of 6145769
+ 232522 words of memory out of 5000000
+ 13742 multiletter control sequences out of 15000+600000
  10368 words of font info for 29 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  44i,17n,47p,1024b,379s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on TSWLatexianTemp_document.pdf (7 pages).
+Output written on TSWLatexianTemp_document.pdf (10 pages).

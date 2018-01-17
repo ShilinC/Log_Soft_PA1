@@ -44,7 +44,7 @@ La Jolla, CA \\
 \subsection{Problem Definition}
 In this work, we realize the handwritten digit classification using MNIST database. Our goal is to accurately and robustly recognize what number is present in a new image. In this section we will first use logistic regression to classify only two digit classes (binary classification), later in the next section we will use softmax regression to generalize logistic regression into $N$ classes.
 
-\subsection{Mathematical Derivation}
+\subsection{Mathematical Derivation of Gradient}
 \textbf{Derive the gradient for logistic regression:} \\
 The cross-entropy cost function can be expressed as
 
@@ -75,6 +75,8 @@ where $z ^{n}= \sum_{j=0}^{m}w_{j}x_{j}^{n}$. According to the chain rule in cal
 \begin{equation}
 	-\frac{\partial E^{n}(w)}{\partial w_{j}} = -\frac{\partial E^{n}(w)}{\partial y^{n}}\frac{\partial y^{n}}{\partial z^{n}}\frac{\partial z^{n}}{\partial w_{j}} = (\frac{t^{n}}{y^{n}}-\frac{1-t^{n}}{1-y^{n}})\cdot y^{n}(1-y^{n})\cdot x_{j}^{n} = (t^{n}-y^{n})x_{j}^{n}
 \end{equation}
+
+Note that we can always add a factor of $1/N$ to scale the cost and gradient to somehow speed up the learning, and this will not change the optimization results (learned parameters).
 
 \subsection{Data Reading, Parsing and Feature Extraction} \\
 In this work we use the famous MNIST hand written digits database created by Yann LeCun. Each image in the database contains $28 \times 28$ pixels and each pixel has a grayscale intensity, so that the input feature $x \in R^{784}$ after we unroll the 2D image into an 1D vector. To include the bias term, after reading the data, we append a '1' to the beginning of each $x$ vector so the final $x \in R^{785}$. We will use the first 20,000 training images and the last 2,000 test images. Note that for logistic regression to do binary classification, we can only use the images of two specific digit classes, so that the actual training images and test images are smaller than 20,000 and 2,000 respectively. To speed up learning, we need to apply feature normalization. For images, the most common way is to normalize the pixel values by the maximum pixel value 255. After normalization, all the values in $x$ is now ranging from 0 to 1.
@@ -142,7 +144,9 @@ Computing the difference between these two different classifiers, we can get a n
  \label{fig:P5}
 \end{figure}
 
-\textbf{Derive the gradient for regularized logistic regression:} \\
+In the next part of this section, we are going to add regularization to our model and analyze it via experiments.
+
+\subsection{Derive the gradient for regularized logistic regression:}
 
 To prevent potential overfitting, regularization is used in logistic regression. The cross-entropy cost function with regularization term can be computed as
 
@@ -174,13 +178,82 @@ where $sign(w_{j})$ is the signature function of $w_{j}$.
 
 Note that we can always add a factor of $1/N$ to scale the cost and gradient to somehow speed up the learning, and this will not change the optimization results (learned parameters).
 
+\textbf{Tuning the Regularization Parameter}\\
+In order to choose a reasonably good regularization model, we need to tune the regularization parameter and choose the one which results in the best accuracy on the hold-out validation set. Here we try three values for regularization parameter $\lambda$: 0.0001, 0.001 and 0.01. Fig. \ref{fig:P7} and Fig. \ref{fig:P8} show the results with different $\lambda$ on L1 and L2 regularization.
+
+\begin{figure}%
+	\centering
+	\subfloat[accuracy when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P7_2.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_3.png}  }}%
+	\caption{accuracy using L1 regularization}%
+	\label{fig:P7}%
+\end{figure}
+
+\begin{figure}%
+	\centering
+	\subfloat[accuracy when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_2.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_3.png}  }}%
+	\caption{accuracy using L2 regularization}%
+	\label{fig:P8}%
+\end{figure}
+
+\textbf{Reality Check on the Length of Weight Vector}\\
+Fig. \ref{fig:P4} shows the experimental results using L1 and L2 regularization. 
+
+\begin{figure}%
+	\centering
+	\subfloat[length of weight vector using L1 regularization]{{\includegraphics[width=2.5in]{images/P6.png}  }}%
+	\qquad
+	\subfloat[length of weight vector using L2 regularization]{{	\includegraphics[width=2.5in]{images/P6_2.png}  }}%
+	\caption{Reality check on the length of the weight vector}%
+	\label{fig:P4}%
+\end{figure}
+
+From the figures we can see that stronger regularization will result in smaller weights since the regularization penalizes large weights.
+
+\textbf{Final Test Set Error with Regularization}\\
+We also plot the final test set error with different values of the regularization parameter.
+
+\begin{figure}%
+	\centering
+	\subfloat[final test accuracy using L1 regularization]{{\includegraphics[width=2.5in]{images/P9.png}  }}%
+	\qquad
+	\subfloat[final test accuracy using L2 regularization]{{	\includegraphics[width=2.5in]{images/P9_2.png}  }}%
+	\caption{final test accuracy using regularization}%
+	\label{fig:P9}%
+\end{figure}
+
+\textbf{Weight Visualization with Regularization}\\
+We further visualize the weights learned with our regularized model.
+
+\begin{figure}%
+	\centering
+	\subfloat[weights when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.5in]{images/P10.png}  }}%
+	\qquad
+	\subfloat[weights when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P10_2.png}  }}%
+	\qquad
+	\subfloat[weights when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.5in]{images/P10_3.png}  }}%
+	\qquad
+	\subfloat[weights when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P10_4.png}  }}%
+	\qquad
+	\subfloat[weights when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P10_5.png}  }}%
+	\qquad
+	\subfloat[weights when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P10_6.png}  }}%
+	\caption{weights visualization using regularization}%
+	\label{fig:P10}%
+\end{figure}
 
 \section{Softmax Regression via Gradient Descent}
 \subsection{Problem definition}
 In this problem, we need to classify MNIST datasets using softmax regression. In the experiments, we only use the first 20,000 training images and the last 2,000 test images.
 
 \subsection{Methods}
-We use softmax regresion for this problem. \\
 \textbf{Derive the gradient for Softmax Regression:} \\
 The cross-entropy cost function can be expressed as,
 
@@ -192,7 +265,7 @@ Where,
 \begin{equation}
 	y_k^n = \frac{\exp{(a_k^n)}}{ \sum_{k'}\exp{(a_{k'}^n})}
 \end{equation}
-And,
+And, 
 \begin{equation}
 	a_k^n = w_k^Tx^n
 \end{equation}
@@ -224,43 +297,94 @@ Substitute Equation (5) and Equation (6) into Equation (4) we get,
 \end{split}
 \end{equation}
 
+\textbf{Derive the gradient for Softmax Regression with Regularizations:} \\
+
+With regularization, generally the loss function can be writen as,
+\begin{equation}
+J(w) = E(w) + \lambda C(w)
+\end{equation}
+If we use $L_1$ regularization in softmax regression,
+\begin{equation}
+	\lambda C(w) = \lambda C_{L_1}(w) =   \lambda \sum_{ij}|w_{i,j}|
+\end{equation}
+
+We can compute the derivate of $\frac{\partial C}{\partial w}$ as follows,
+\begin{equation}
+	\frac{\partial C_{L_1}(w)}{\partial w_{ij}} = sign(w_{i,j})
+\end{equation}
+Where $sign(x) = 1$ if $x > 0$, $sign(x) = 0$ if $x = 0$ and $sign(x) = -1$ if $x < 0$.
+
+If we use $L_2$ regularization in softmax regression,
+
+\begin{equation}
+\lambda C(w) = \lambda C_{L_2}(w) =   \lambda \sum_{ij}w_{i,j}^2
+\end{equation}
+
+We can compute the derivate of $\frac{\partial C}{\partial w}$ as follows,
+
+\begin{equation}
+\frac{\partial C_{L_2}(w)}{\partial w_{ij}} = 2w_{i,j}
+\end{equation}
+
+In summary, 
+  \[
+-\frac{\partial J^n(w)}{\partial w_{j,k}} =\left\{
+\begin{array}{ll}
+(t_k - y_k)x_j^n - \lambda sign(w_{j,k}),\qquad \text{if use $L_1$ regularization} \\
+(t_k - y_k)x_j^n - 2\lambda w_{j,k}, \qquad \text{if use $L_2$ regularization}
+\end{array}
+\right.
+\]
+\\
 
 \textbf{Preprossing}: First, we extract the first 20,000 training images and the last 2,000 test images. Then normailize the images to make sure the pixel values are in the range of [0,1]. Convert the labels to one-hot vectors. Divide the training images into two parts, the first 10\% are used for as a hold-out set and the rest 90\% are used for training.
 \\
-\textbf{Experiments settings:} To determine the best type of regurization and the best $\lambda$, we try $L_2$ regularization and $L_1$ regularization seperately.\\
- For the $L_2$ regularizartion, we search the best $\lambda$ in the set $\{0.01, 0.001, 0.0001\}$. If the accuracy on the hold-out set decreases for 3 epochs, we stop the algorithm and use the weights with the minimum error (highest accuracy) on the hold-out set as the final answer. For the $L_1$ regularization, we follow the same steps. Then we compare the results get from these two regularization methods and use it as the best final result.
+
+\textbf{Experiments settings:} We use standard normal distributions to initilize the weights. We use an initial learning rate $\eta({0})$ = 0.004 and use equation $\eta({t}) = \eta{(0)}/(1+t/T)$ to anneal the learning rate by reducing it over time. $t$ is used to index the epoch number and $T$ is a metaparameter which is set to be 2. In the
+experiements, we find that above learning settings work best.   \\
+To determine the best type of regurization and the best $\lambda$, we try $L_2$ regularization and $L_1$ regularization seperately. For the $L_2$ regularizartion, we search the best $\lambda$ in the set $\{0.01, 0.001, 0.0001\}$. If the accuracy on the hold-out set decreases for 3 epochs, we stop the algorithm and use the weights with the highest accuracy on the hold-out set as the final answer. For the $L_1$ regularization, we follow the same steps. We run the 1000 epochs for each setting. \textbf{}Then we compare the results got from these two regularization methods and use the best one as the final result.
  
 \subsection{Results}
-(a) In the experiments, we find that using $L_2$ regularization with $\lambda = 0.01$ obtain the best result on the validation set. With an accuracy of 0.9045\% on the validation set. With such settings, the accuracy on the test set is 0.927\%.
+(a) In the experiments, we find that using $L_2$ regularization with $\lambda = 0.01$ obtain the best result on the validation set with an accuracy of 0.9045\% on the validation set. The accuracy is 0.927\% on the test set under such settings. \\
 
+To further examine the performance of the algorithm, we try other $\lambda$s. We choose $\lambda$ in the set $\{0.05,0.005,0.0005\}$ and use $L_2$ regularization. The highest accuracy on the validation set is $0.8965\%$ with $\lambda = 0.0005$. And the test accuracy is $0.933\%$ which is slightly higher than when $\lambda = 0.01$. So in following experiments, we fix $\lambda$ to be 0.0005.
 
-\begin{figure}%
+\begin{figure}[t]%
 	\centering
-	\subfloat[label 1]{{\includegraphics[width=2.5in]{../softmax/figs/accuracy.png}  }}%
+	\subfloat[The percent correct over the number of training iterations for the training, hold-out and test set.]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/accuracy.png} }
+		\label{fig: 1}
+	}%
 	\qquad
-	\subfloat[label 2]{{	\includegraphics[width=2.5in]{../softmax/figs/loss.png}  }}%
-	\caption{2 Figures side by side}%
-	\label{fig:example}%
+	\subfloat[The value of the loss function over the number of training iterations for the training, hold-out, and test set.]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/loss.png}  }
+			\label{fig: 2}%
+		}%
+	\caption{The performance of the algorithm over the number of training iterations. }%
 \end{figure}
 
-
-
-(b) In this experiement, we use  $L_2$ regularization with $\lambda = 0.01$. The figure is shown in Fig \ref{figure: 1}. 
-
-
-(c) In this experiement, we use  $L_2$ regularization with $\lambda = 0.01$. The figure is shown in Fig \ref{figure: 2}.
-
-(d) We plot the results in Fig \ref{figure: 3}. We can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixesls with the weights. And the inner product is maximized when the angle between the weight and the image is zero. So we see that the image of the weight and the corresponding image of the average digit is similar.
-
-\begin{figure}[h]
+\begin{figure}[t]
 	\centering	
-	\includegraphics[width=2.8in,height=3.2in]{../softmax/figs/image_of_weights_and_digits.png} 
-	\caption{}
-	\label{figure: 3}
+	\includegraphics[width=2.7in,height=1.2in]{../softmax/figs/image_of_weights_and_digits.png} 
+	\caption{Images of the weights and the average examples.}
+	\label{fig: 3}
 \end{figure}
+
+(b) In this experiement, we use $L_2$ regularization with $\lambda = 0.005$. The figure is shown in Fig \ref{fig: 1}.
+
+
+(c) In this experiement, we use $L_2$ regularization with $\lambda = 0.005$. The figure is shown in Fig \ref{fig: 2}. Note that we use the sum of loss of individual data rather than the average one.
+
+(d) We plot the results in Fig \ref{fig: 3}. 
+
+
 
 \subsection{Discussion}
+From \ref{fig: 1} and \ref{fig: 2} we can see that the loss function went up before going down. And the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates in the first few epoches maybe a little large but after "annealing", the learning rates are suitable enough to make the algorithm converge. Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
 
+
+From \ref{fig: 3} we can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixels with the weights. And the inner product is maximized when the angle between the weight and the image is zero. So we see that the image of the weight and the corresponding image of the average digit is similar.
+
+\section{Summary}
+In this work, we successfully derived and implemented logistic regression (binary classification) and softmax regression (multi-class classification) for handwritten digit classification problem from scratch and achieved roughly $98\%$ classification accuracy. We also embedded regularization to prevent overfitting so that the model generalized well to the unseen test examples. Through rigorous experiments and analysis, we can systematically tune the hyper-parameters and implement model selection by looking at the error on validation set. 
 
 
 
