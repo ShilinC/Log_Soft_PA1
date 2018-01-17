@@ -220,8 +220,34 @@ From the figures we can see that stronger regularization will result in smaller 
 \textbf{Final Test Set Error with Regularization}\\
 We also plot the final test set error with different values of the regularization parameter.
 
+\begin{figure}%
+	\centering
+	\subfloat[final test accuracy using L1 regularization]{{\includegraphics[width=2.5in]{images/P9.png}  }}%
+	\qquad
+	\subfloat[final test accuracy using L2 regularization]{{	\includegraphics[width=2.5in]{images/P9_2.png}  }}%
+	\caption{final test accuracy using regularization}%
+	\label{fig:P9}%
+\end{figure}
+
 \textbf{Weight Visualization with Regularization}\\
 We further visualize the weights learned with our regularized model.
+
+\begin{figure}%
+	\centering
+	\subfloat[weights when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.5in]{images/P10.png}  }}%
+	\qquad
+	\subfloat[weights when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P10_2.png}  }}%
+	\qquad
+	\subfloat[weights when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.5in]{images/P10_3.png}  }}%
+	\qquad
+	\subfloat[weights when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P10_4.png}  }}%
+	\qquad
+	\subfloat[weights when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P10_5.png}  }}%
+	\qquad
+	\subfloat[weights when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P10_6.png}  }}%
+	\caption{weights visualization using regularization}%
+	\label{fig:P10}%
+\end{figure}
 
 \section{Softmax Regression via Gradient Descent}
 \subsection{Problem definition}
