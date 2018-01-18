@@ -40,6 +40,7 @@ La Jolla, CA \\
 \maketitle
 
 \section{Abstract}
+In this report, we will introduce how to use logistic regression and softmax regression to do handwritten digits classification. We did extensive experiments on the MNIST datasets. For 2-way classification, we can achieve an accuracy of $98\%$ if the targets are digit `2' and digit `3' and we can achieve an accuracy of $97\%$ if the targets are digit `2' and digit `8' by using logistic regression. For 10-way classification, we can achieve an accuracy  of $93.65\%$ by using softmax regression.
 
 \section{Logistic Regression via Gradient Descent}
 
@@ -80,7 +81,7 @@ where $z ^{n}= \sum_{j=0}^{m}w_{j}x_{j}^{n}$. According to the chain rule in cal
 
 Note that we can always add a factor of $1/N$ to scale the cost and gradient to somehow speed up the learning, and this will not change the optimization results (learned parameters).
 
-\subsection{Data Reading, Parsing and Feature Extraction} \\
+\subsection{Data Reading, Parsing and Feature Extraction} 
 In this work we use the famous MNIST hand written digits database created by Yann LeCun. Each image in the database contains $28 \times 28$ pixels and each pixel has a grayscale intensity, so that the input feature $x \in R^{784}$ after we unroll the 2D image into an 1D vector. To include the bias term, after reading the data, we append a '1' to the beginning of each $x$ vector so the final $x \in R^{785}$. We will use the first 20,000 training images and the last 2,000 test images. Note that for logistic regression to do binary classification, we can only use the images of two specific digit classes, so that the actual training images and test images are smaller than 20,000 and 2,000 respectively. To speed up learning, we need to apply feature normalization. For images, the most common way is to normalize the pixel values by the maximum pixel value 255. After normalization, all the values in $x$ is now ranging from 0 to 1.
 
 The following code shows how we can choose the example images corresponding to two specific digit classes. For the rest of the report, we choose two binary classification problems: 2 vs. 3 and 2 vs. 8.
@@ -204,11 +205,11 @@ In order to choose a reasonably good regularization model, we need to tune the r
 	\qquad
 	\subfloat[accuracy when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_3.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.003 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_4.png}  }}%
-	\qquad
-	\subfloat[accuracy when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_5.png}  }}%
-	\qquad
-	\subfloat[accuracy when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_6.png}  }}%
+	%\subfloat[accuracy when lambda = 0.003 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_4.png}  }}%
+	%\qquad
+	%\subfloat[accuracy when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_5.png}  }}%
+	%\qquad
+	%\subfloat[accuracy when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_6.png}  }}%
 	\caption{accuracy using L2 regularization}%
 	\label{fig:P8}%
 \end{figure}
@@ -351,8 +352,9 @@ In summary,
 \textbf{Preprossing}: First, we extract the first 20,000 training images and the last 2,000 test images. Then normailize the images to make sure the pixel values are in the range of [0,1]. Convert the labels to one-hot vectors. Divide the training images into two parts, the first 10\% are used for as a hold-out set and the rest 90\% are used for training.
 \\
 
-\textbf{Experiments settings:} We use standard normal distributions to initilize the weights. We use an initial learning rate $\eta({0})$ = 0.004 and use equation $\eta({t}) = \eta{(0)}/(1+t/T)$ to anneal the learning rate by reducing it over time. $t$ is used to index the epoch number and $T$ is a metaparameter which is set to be 2. In the
-experiements, we find that above learning settings work best.   \\
+\textbf{Experiments settings:} We use standard normal distributions to initilize the weights. We use an initial learning rate $\eta({0})$ = 0.003 and use equation $\eta({t}) = \eta{(0)}/(1+t/T)$ to anneal the learning rate by reducing it over time. $t$ is used to index the epoch number and $T$ is a metaparameter which is set to be 2. In the
+experiements, we find that above learning settings work best. 
+  \\
 To determine the best type of regurization and the best $\lambda$, we try $L_2$ regularization and $L_1$ regularization seperately. For the $L_2$ regularizartion, we search the best $\lambda$ in the set $\{0.01, 0.001, 0.0001\}$. If the accuracy on the hold-out set decreases for 3 epochs, we stop the algorithm and use the weights with the highest accuracy on the hold-out set as the final answer. For the $L_1$ regularization, we follow the same steps. We run the 1000 epochs for each setting. \textbf{}Then we compare the results got from these two regularization methods and use the best one as the final result.
  
 \subsection{Results}
@@ -362,11 +364,11 @@ To further examine the performance of the algorithm, we try other $\lambda$s. We
 
 \begin{figure}[t]%
 	\centering
-		\subfloat[The value of the loss function over the number of training iterations for the training, hold-out, and test set.]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/loss.png}  }
+		\subfloat[The value of the loss function over the number of training iterations for the training, hold-out, and test set.]{{\includegraphics[width=2.5in]{../softmax/figs/loss.png}  }
 		\label{fig: 11}
 	}%
 	\qquad
-	\subfloat[The percent correct over the number of training iterations for the training, hold-out and test set.]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/accuracy.png} }
+	\subfloat[The percent correct over the number of training iterations for the training, hold-out and test set.]{{\includegraphics[width=2.5in]{../softmax/figs/accuracy.png} }
 		\label{fig: 12}
 	}%
 	\caption{The performance of the algorithm over the number of training iterations. }%
@@ -374,7 +376,7 @@ To further examine the performance of the algorithm, we try other $\lambda$s. We
 
 \begin{figure}[t]
 	\centering	
-	\includegraphics[width=2.7in,height=1.2in]{../softmax/figs/image_of_weights_and_digits.png} 
+	\includegraphics[width=2.6in,height=1.2in]{../softmax/figs/image_of_weights_and_digits.png} 
 	\caption{Images of the weights and the average examples. The images in the first row are the images of the weights. The images in the second row are the images of the average examples.}
 	\label{fig: 13}
 \end{figure}
@@ -387,12 +389,17 @@ To further examine the performance of the algorithm, we try other $\lambda$s. We
 (d) We plot the results in Fig \ref{fig: 13}.
 
 
-
 \subsection{Discussion}
-From Fig \ref{fig: 11} and Fig \ref{fig: 12} and  we can see that the loss function went up before going down. And the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates in the first few epoches maybe a little large but after "annealing", the learning rates are suitable enough to make the algorithm converge. Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
+From Fig \ref{fig: 11} and Fig \ref{fig: 12} and we can see that the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates in the first few epoches maybe a little large but after "annealing", the learning rates are suitable enough to make the algorithm converge. 
+
+
+Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
+
 
 
 From Fig \ref{fig: 13} we can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixels with the weights. And the inner product is maximized when the angle between the weight and the image is zero. So we see that the image of the weight and the corresponding image of the average digit is similar.
+
+\subsection{}
 
 \section{Summary}
 In this work, we successfully derived and implemented logistic regression (binary classification) and softmax regression (multi-class classification) for handwritten digit classification problem from scratch and achieved roughly $98\%$ classification accuracy. We also embedded regularization to prevent overfitting so that the model generalized well to the unseen test examples. Through rigorous experiments and analysis, we can systematically tune the hyper-parameters and implement model selection by looking at the error on validation set. 
