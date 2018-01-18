@@ -23,20 +23,19 @@ def hyper_parameters_tuning(training_images, one_hot_training_labels, test_image
 
     for l in regularization_types:
         if l == "L2":
-
             for lambd in lambds:
                 last_accuracy  = 0.0
                 cnt = 0
                 for i in range(epoch):
-
                     # Batch graident descent
-                    a = np.matmul(training_images, weights) # 18000, 10
+                    a = np.matmul(training_images, weights) 
+                    # Find the largest a, and subtract it from each a in order to prevent overflow
                     a_max = np.max(a,1).reshape(a.shape[0],1)
-                    sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) # 18000, 1
-                    pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) # 18000, 10
-
-                    delta = one_hot_training_labels - pred_y # (18000, 10)
+                    sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) 
+                    pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
+                    delta = one_hot_training_labels - pred_y 
                     grads = -np.dot(training_images.T, delta) + lambd*weights
+                    # Batch gradient with L2 regularization and learning rate "annealing"
                     weights = weights - (inital_step_size/(1+i/T)) * grads
 
                     # Calculate accuracy on validation set
@@ -60,9 +59,7 @@ def hyper_parameters_tuning(training_images, one_hot_training_labels, test_image
                     else:
                         cnt = 0
                     last_accuracy = validation_accuracy
-
         elif l == "L1":
-
             for lambd in lambds:
                 last_accuracy  = 0.0
                 cnt = 0
@@ -74,7 +71,8 @@ def hyper_parameters_tuning(training_images, one_hot_training_labels, test_image
                     sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1)  
                     pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
 
-                    delta = one_hot_training_labels - pred_y # (18000, 10)
+                    delta = one_hot_training_labels - pred_y 
+                    # Batch gradient with L1 regularization and learning rate "annealing"
                     grads = -np.dot(training_images.T, delta) + lambd* np.sign(weights)
                     weights = weights - inital_step_size/(1+i/T) * grads
 
@@ -135,13 +133,15 @@ def train(training_images, test_images, validation_images, training_labels, test
 
     for i in range(epoch):
         print "epoch " + str(i)
-        # Batch graident descent
+        # Batch graident descent of softmax regression
         a = np.matmul(training_images, weights) 
+        # Find the largest a, and subtract it from each a in order to prevent overflow
         a_max = np.max(a,1).reshape(a.shape[0],1)
         sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) 
         pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
         delta = one_hot_training_labels - pred_y 
         grads = -np.dot(training_images.T, delta) + lambd*weights
+        # Batch gradient with L2 regularization and learning rate "annealing"
         weights = weights - (inital_step_size/(1+i/T)) * grads
 
         # Calculate training loss and accuracy
@@ -248,13 +248,12 @@ if __name__ == '__main__':
     test_images = np.array(test_images) / 255.0
     test_labels = np.array(test_labels)
 
-    epoch = 300
+    epoch_for_tuning_parameters = 1000
     inital_step_size = 0.0015
     T = 3.0
 
     lambds_set_1 = [0.01, 0.001, 0.0001]
     lambds_set_2 = [0.05, 0.005, 0.0005]
-    lambd = 0.0001
     regularization_types = ["L1", "L2"]
 
     classes = 10
@@ -267,7 +266,9 @@ if __name__ == '__main__':
     one_hot_test_labels = np.eye(classes)[test_labels]  
 
     # Hyperparamter selction
-    #hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
+    hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch_for_tuning_parameters, classes, dimensions)
 
+    epoch = 300
+    lambd = 0.0001
     #Training based on the best hyperparameters
     train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)
