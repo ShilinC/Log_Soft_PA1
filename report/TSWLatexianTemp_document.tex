@@ -126,8 +126,7 @@ We can use mini-batch gradient descent to speed up learning process. Since the o
 \end{figure}
 
 \textbf{Weight Visualization}\\
-We can visualize the weights learned to see what logistic regression learns through the training process. Fig. \ref{fig:P4} shows that the model indeed learn the representation of numbers we want it to learn. The neurons are activated and de-activated based on the structure of the handwritten digit.
-
+We can visualize the weights learned to see what logistic regression learns through the training process. Fig. \ref{fig:P4} shows that the model indeed learn the representation of numbers we want it to learn. The neurons are activated and de-activated based on the structure of the handwritten digit. And since the cost function is cross-entropy loss, which means the maximum likelihood corresponds to the maximum prediction. In order to achieve maximum prediction value which is the inner product of input $X$ and weights, the angle between these two vectors in the feature space should be zero so that their inner product is maximized. Thus the weights look very similar to $X$ in the feature space and so as our 2-D visualization.
 \begin{figure}%
 	\centering
 	\subfloat[Weights learned on classifying 2 vs. 3]{{\includegraphics[width=1.5in]{images/P4_2.png}  }}%
@@ -237,7 +236,7 @@ Fig. \ref{fig:P4} shows the experimental results using L1 and L2 regularization.
 \end{figure}
 
 \textbf{Final Test Set Error with Regularization}\\
-We also plot the final test set error with different values of the regularization parameter. For L1 regularization we can see that when $\lambda$ is relatively small, the test accuracy will increase as we increase $\lambda$. This proves that regularization can sometimes make the model generalize better. In this example the performance improvement is very small since the training dataset is reasonably large and with good quality, so that overfitting is not a great issue anymore. We can also observe that when $\lambda$ is getting larger and larger, the test accuracy actually decreases (as well as on the training and validation set). This is because although strong regularization makes the model generalize well, over strong regularization will cause the model to be too simple and cannot even fit the data very well (as shown in Fig. \ref{fig:P11}). But we can conclude that using $\lambda$ between 0.0001 and 0.001 can all work reasonably well for L1 and L2 regularized model. For L2 regularization, it is more robust and less sensitive as we change $\lamda$ compared with L1 regularization.
+We also plot the final test set error with different values of the regularization parameter. For L1 regularization we can see that when $\lambda$ is relatively small, the test accuracy will increase as we increase $\lambda$. This proves that regularization can sometimes make the model generalize better. In this example the performance improvement is very small since the training dataset is reasonably large and with good quality, so that overfitting is not a great issue anymore. We can also observe that when $\lambda$ is getting larger and larger, the test accuracy actually decreases (as well as on the training and validation set). This is because although strong regularization makes the model generalize well, over strong regularization will cause the model to be too simple and cannot even fit the data very well (as shown in Fig. \ref{fig:P11}). But we can conclude that using $\lambda$ between 0.0001 and 0.001 can all work reasonably well for L1 and L2 regularized model. For L2 regularization, it is more robust and less sensitive as we change $\lambda$ compared with L1 regularization.
 
 \begin{figure}%
 	\centering
@@ -249,7 +248,7 @@ We also plot the final test set error with different values of the regularizatio
 \end{figure}
 
 \textbf{Weight Visualization with Regularization}\\
-We further visualize the weights learned with our regularized model, which are shown in Fig. \ref{fig:P10}. From the results we can see that when $\lambda$ increases, the learned parameters (weights) become simpler and cannot represent the data very well since we cannot see the structure of the digits anymore under the case with too large $\lambda$. But when $\lambda$ is set a good enough value, then they can learn the structure and distribution of the data quite well. From this result we can also see that L2 regularization is less sensitive as we change $\lamda$ compared with L1 regularization since L2 regularization can still make the model to learn good representations even if $\lamda$ is large.
+We further visualize the weights learned with our regularized model, which are shown in Fig. \ref{fig:P10}. From the results we can see that when $\lambda$ increases, the learned parameters (weights) become simpler and cannot represent the data very well since we cannot see the structure of the digits anymore under the case with too large $\lambda$. But when $\lambda$ is set a good enough value, then they can learn the structure and distribution of the data quite well. From this result we can also see that L2 regularization is less sensitive as we change $\lambda$ compared with L1 regularization since L2 regularization can still make the model to learn good representations even if $\lambda$ is large.
 
 \begin{figure}%
 	\centering
@@ -272,6 +271,7 @@ We further visualize the weights learned with our regularized model, which are s
 	\label{fig:P10}%
 \end{figure}
 
+\newpage
 \section{Softmax Regression via Gradient Descent}
 \subsection{Problem definition}
 In this problem, we need to classify MNIST datasets using softmax regression. In the experiments, we only use the first 20,000 training images and the last 2,000 test images.
@@ -405,7 +405,8 @@ Since using $L_2$ regularization with $\lambda = 0.01$ gives us the highest accu
 \subsection{Discussion}
 From Fig \ref{fig: 11} and Fig \ref{fig: 12} and we can see that the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates are reasonble enough to make the loss function to converge quickly to a local minimum. Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked and if setting the learning rate too large initially makes the loss function up and down and makes it hard to converge. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
 
-From Fig \ref{fig: 13} we can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixels with the weights. And the inner product is maximized when the angle between the weight and the image is zero. So we see that the image of the weight and the corresponding image of the average digit is similar.
+From Fig \ref{fig: 13} we can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixels with the weights. And the inner product is maximized when the angle between the weight and the image is zero. Since the inner product also relies on the norm of the vectors, so we see that the image of the weight and the corresponding image of the average digit is similar but not exactly the same.
+
 
 \section{Summary}
 In this work, we successfully derived and implemented logistic regression (binary classification) and softmax regression (multi-class classification) for handwritten digit classification problem from scratch and achieved roughly $98\%$ classification accuracy. We also embedded regularization to prevent overfitting so that the model generalized well to the unseen test examples. Through rigorous experiments and analysis, we can systematically tune the hyper-parameters and implement model selection by looking at the error on validation set. 
@@ -414,5 +415,6 @@ In this work, we successfully derived and implemented logistic regression (binar
 \subsection{Logistic regression}
 
 \subsection{Softmax regression}
+
 
 \end{document}
