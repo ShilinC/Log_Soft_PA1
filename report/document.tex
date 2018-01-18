@@ -41,14 +41,14 @@ La Jolla, CA \\
 \maketitle
 
 \section{Abstract}
-In this report, we will introduce how to use logistic regression and softmax regression to do handwritten digits classification. We did extensive experiments on the MNIST datasets. For 2-way classification, we can achieve an accuracy of $98\%$ if the targets are digit `2' and digit `3' and we can achieve an accuracy of $97\%$ if the targets are digit `2' and digit `8' by using logistic regression. For 10-way classification, we can achieve an accuracy  of $92.7\%$ by using softmax regression.
+In this report, we will introduce how to use logistic regression and softmax regression to do handwritten digits classification. We did extensive experiments on the MNIST datasets [2]. For 2-way classification, we can achieve an accuracy of $98\%$ if the targets are digit `2' and digit `3' and we can achieve an accuracy of $97\%$ if the targets are digit `2' and digit `8' by using logistic regression. For 10-way classification for all 10 digits, we can achieve an accuracy  of $92.7\%$ by using softmax regression.
 
 \section{Logistic Regression via Gradient Descent}
 
 \subsection{Problem Definition}
 In this work, we realize the handwritten digit classification using MNIST database. Our goal is to accurately and robustly recognize what number is present in a new image. In this section we will first use logistic regression to classify only two digit classes (binary classification), later in the next section we will use softmax regression to generalize logistic regression into $N$ classes.
 
-\subsection{Mathematical Derivation of Gradient}
+\subsection{Mathematical Derivation and Methods}
 \textbf{Derive the gradient for logistic regression:} \\
 The cross-entropy cost function can be expressed as
 
@@ -87,7 +87,7 @@ In this work we use the famous MNIST hand written digits database created by Yan
 
 The following code shows how we can choose the example images corresponding to two specific digit classes. For the rest of the report, we choose two binary classification problems: 2 vs. 3 and 2 vs. 8.
 
-\subsection{Experimental Results}
+\subsection{Experimental Results and Discussion}
 \textbf{Batch gradient descent}\\
 We first apply batch gradient descent rule on logistic regression since the training set is not that huge, thus batch gradient descent can work reasonably fast. 
 
@@ -109,10 +109,10 @@ We first apply batch gradient descent rule on logistic regression since the trai
 	\label{fig:P2}%
 \end{figure}
 
-After trying different values of learning rate, we found $0.005$ is a reasonably good learning rate for this problem. Fig. \ref{fig: P1}(a) plots the  loss function over training for the training set, the hold-out validation set and the test set. From the results we can see the model tries to minimize the cost and meanwhile maximize the likelihood to perform good prediction on the data. Here for both 2 vs. 8 and 3 vs. 8 cases, the test set accuracies are both around $97\%$ so our model generalizes reasonably well given this large dataset used for the training.
+After trying different values of learning rate, we found $0.005$ is a reasonably good learning rate for this problem. Fig. \ref{fig:P1} plots the  loss function over training for the training set, the hold-out validation set and the test set. From the results we can see the model tries to minimize the cost and meanwhile maximize the likelihood to perform good prediction on the data. Here for both 2 vs. 8 and 3 vs. 8 cases, the test set accuracies are both around $97\%$ so our model generalizes reasonably well given this large dataset used for the training, as shown in Fig. \ref{fig:P3}.
 
 \textbf{Mini-Batch gradient descent}\\
-We can use mini-batch gradient descent to speed up learning process. Since the one-step optimization is done on a smaller mini-batch, the cost function will not monotonically decrease as batch gradient descent. Here we change the weights after a mini-batch of roughly $10\%$ of the entire training set. This set of mini-batch size can result in relatively smooth curve of the cost function. Fig. \ref{fig: P1}(b) plots the loss function over training for consecutive mini-batches. Since the validation set always has very similar errors as the test set, we can conclude the hold-out set work as a good stand-in for the test set and their underlying data distributions are same.
+We can use mini-batch gradient descent to speed up learning process. Since the one-step optimization is done on a smaller mini-batch, the cost function will not monotonically decrease as batch gradient descent. Here we change the weights after a mini-batch of roughly $10\%$ of the entire training set. This set of mini-batch size can result in relatively smooth curve of the cost function. Fig. \ref{fig:P2} plots the loss function over training for consecutive mini-batches. Since the validation set always has very similar errors as the test set, we can conclude the hold-out set work as a good stand-in for the test set and their underlying data distributions are same.
 
 \textbf{Accuracy of Prediction Using Logistic Regression Classifier}\\
 
@@ -126,7 +126,7 @@ We can use mini-batch gradient descent to speed up learning process. Since the o
 \end{figure}
 
 \textbf{Weight Visualization}\\
-We can visualize the weights learned to see what logistic regression learns through the training process. Fig. \ref{fig:P4} shows that the model indeed learn the representation of numbers we want it to learn. The neurons are activated and de-activated based on the structure of the handwritten digit. And since the cost function is cross-entropy loss, which means the maximum likelihood corresponds to the maximum prediction. In order to achieve maximum prediction value which is the inner product of input $X$ and weights, the angle between these two vectors in the feature space is 
+We can visualize the weights learned to see what logistic regression learns through the training process. Fig. \ref{fig:P4} shows that the model indeed learn the representation of numbers we want it to learn. The neurons are activated and de-activated based on the structure of the handwritten digit. And since the cost function is cross-entropy loss, which means the maximum likelihood corresponds to the maximum prediction. In order to achieve maximum prediction value which is the inner product of input $X$ and weights, the angle between these two vectors in the feature space should be zero so that their inner product is maximized. Thus the weights look very similar to $X$ in the feature space and so as our 2-D visualization.
 \begin{figure}%
 	\centering
 	\subfloat[Weights learned on classifying 2 vs. 3]{{\includegraphics[width=1.5in]{images/P4_2.png}  }}%
@@ -138,7 +138,7 @@ We can visualize the weights learned to see what logistic regression learns thro
 	\label{fig:P4}%
 \end{figure}
 
-Computing the difference between these two different classifiers, we can get a new weight matrix visualized in Fig. \ref{fig: P5}. This result shows that the new weights can be used to accurately classify digit 3 and digit 8 since the neurons will be activated and de-activated based on these new weights.
+Computing the difference between these two different classifiers, we can get a new weight matrix visualized in Fig. \ref{fig:P4}. This result shows that the new weights can be used to accurately classify digit 3 and digit 8 since the neurons will be activated and de-activated based on these new weights.
 
 
 In the next part of this section, we are going to add regularization to our model and analyze it via experiments.
@@ -154,11 +154,11 @@ To prevent potential overfitting, regularization is used in logistic regression.
 where $C(w)$ represents the complexity of the model. $L1$ and $L2$ regularizations are two most common functions people use
 
 \begin{equation}
-	C(w) = ||w||^{2} = \sum_{i, j}w_{i, j}^{2}, \text{if }L2
+	C(w) = ||w||^{2} = \sum_{i, j}w_{i, j}^{2}, \text{if use $L_2$ regularization}
 \end{equation}
 
 \begin{equation}
-	C(w) = |w| = \sum_{i, j}|w_{i, j}|, \text{if }L1
+	C(w) = |w| = \sum_{i, j}|w_{i, j}|, \text{if use $L_1$ regularization}
 \end{equation}
 
 Thus the gradient of cost function on example $n$ is 
@@ -166,8 +166,8 @@ Thus the gradient of cost function on example $n$ is
 \[
     -\frac{\partial E^{n}(w)}{\partial w_{j}} = 
 \begin{cases}
-    (t^{n}-y^{n})x_{j}^{n} - 2\lambda w_{j},& \text{if } L2\\
-    (t^{n}-y^{n})x_{j}^{n} - \lambda sign(w_{j}), & \text{if } L1
+    (t^{n}-y^{n})x_{j}^{n} - 2\lambda w_{j},& \text{if use $L_2$ regularization}\\
+    (t^{n}-y^{n})x_{j}^{n} - \lambda sign(w_{j}), & \text{if use $L_1$ regularization}
 \end{cases}
 \]
 
@@ -177,18 +177,18 @@ Note that we can always add a factor of $1/N$ to scale the cost and gradient to 
 
 \begin{figure}%
 	\centering
-	\subfloat[accuracy when lambda = 0.1 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7.png}  }}%
+	\subfloat[Accuracy when lambda = 0.1 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.03 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P7_2.png}  }}%
+	\subfloat[Accuracy when lambda = 0.03 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P7_2.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_3.png}  }}%
+	\subfloat[Accuracy when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_3.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.003 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_4.png}  }}%
+	\subfloat[Accuracy when lambda = 0.003 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_4.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P7_5.png}  }}%
+	\subfloat[Accuracy when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P7_5.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_7.png}  }}%
-	\caption{accuracy using L1 regularization}%
+	\subfloat[Accuracy when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_7.png}  }}%
+	\caption{Accuracy using L1 regularization}%
 	\label{fig:P7}%
 \end{figure}
 
@@ -199,18 +199,18 @@ If we set lambda very large as shown in Fig. \ref{fig:P11}, we can see that L1 r
 
 \begin{figure}%
 	\centering
-	\subfloat[accuracy when lambda = 0.1 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8.png}  }}%
+	\subfloat[Accuracy when lambda = 0.1 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.03 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_2.png}  }}%
+	\subfloat[Accuracy when lambda = 0.03 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_2.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_3.png}  }}%
+	\subfloat[Accuracy when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_3.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.003 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_4.png}  }}%
+	\subfloat[Accuracy when lambda = 0.003 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_4.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_5.png}  }}%
+	\subfloat[Accuracy when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_5.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_7.png}  }}%
-	\caption{accuracy using L2 regularization}%
+	\subfloat[Accuracy when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_7.png}  }}%
+	\caption{Accuracy using L2 regularization}%
 	\label{fig:P8}%
 \end{figure}
 
@@ -228,50 +228,51 @@ Fig. \ref{fig:P4} shows the experimental results using L1 and L2 regularization.
 
 \begin{figure}[h]%
 	\centering
-	\subfloat[length of weight vector using L1 regularization]{{\includegraphics[width=2.5in]{images/P6.png}  }}%
+	\subfloat[Length of weight vector using L1 regularization]{{\includegraphics[width=2.5in]{images/P6.png}  }}%
 	\qquad
-	\subfloat[length of weight vector using L2 regularization]{{	\includegraphics[width=2.5in]{images/P6_2.png}  }}%
+	\subfloat[Length of weight vector using L2 regularization]{{	\includegraphics[width=2.5in]{images/P6_2.png}  }}%
 	\caption{Reality check on the length of the weight vector}%
 	\label{fig:P4}%
 \end{figure}
 
 \textbf{Final Test Set Error with Regularization}\\
-We also plot the final test set error with different values of the regularization parameter. For L1 regularization we can see that when $\lambda$ is relatively small, the test accuracy will increase as we increase $\lambda$. This proves that regularization can sometimes make the model generalize better. In this example the performance improvement is very small since the training dataset is reasonably large and with good quality, so that overfitting is not a great issue anymore. We can also observe that when $\lambda$ is getting larger and larger, the test accuracy actually decreases (as well as on the training and validation set). This is because although strong regularization makes the model generalize well, over strong regularization will cause the model to be too simple and cannot even fit the data very well (as shown in Fig. \ref{fig:P11}). But we can conclude that using $\lambda$ between 0.0001 and 0.001 can all work reasonably well for L1 and L2 regularized model. For L2 regularization, it is more robust and less sensitive as we change $\lambda$ compared with L1 regularization.
+We also plot the final test set error with different values of the regularization parameter, as shown in Fig. \ref{fig:P9}. For L1 regularization we can see that when $\lambda$ is relatively small, the test accuracy will increase as we increase $\lambda$. This proves that regularization can sometimes make the model generalize better. In this example the performance improvement is very small since the training dataset is reasonably large and with good quality, so that overfitting is not a great issue anymore. We can also observe that when $\lambda$ is getting larger and larger, the test accuracy actually decreases (as well as on the training and validation set). This is because although strong regularization makes the model generalize well, over strong regularization will cause the model to be too simple and cannot even fit the data very well (as shown in Fig. \ref{fig:P11}). But we can conclude that using $\lambda$ between 0.0001 and 0.001 can all work reasonably well for L1 and L2 regularized model. For L2 regularization, it is more robust and less sensitive as we change $\lambda$ compared with L1 regularization.
 
 \begin{figure}%
 	\centering
-	\subfloat[final test accuracy using L1 regularization]{{\includegraphics[width=2.5in]{images/P9.png}  }}%
+	\subfloat[Final test accuracy using L1 regularization]{{\includegraphics[width=2.5in]{images/P9.png}  }}%
 	\qquad
-	\subfloat[final test accuracy using L2 regularization]{{	\includegraphics[width=2.5in]{images/P9_2.png}  }}%
-	\caption{final test accuracy using regularization}%
+	\subfloat[Final test accuracy using L2 regularization]{{	\includegraphics[width=2.5in]{images/P9_2.png}  }}%
+	\caption{Final test accuracy using regularization}%
 	\label{fig:P9}%
 \end{figure}
 
 \textbf{Weight Visualization with Regularization}\\
 We further visualize the weights learned with our regularized model, which are shown in Fig. \ref{fig:P10}. From the results we can see that when $\lambda$ increases, the learned parameters (weights) become simpler and cannot represent the data very well since we cannot see the structure of the digits anymore under the case with too large $\lambda$. But when $\lambda$ is set a good enough value, then they can learn the structure and distribution of the data quite well. From this result we can also see that L2 regularization is less sensitive as we change $\lambda$ compared with L1 regularization since L2 regularization can still make the model to learn good representations even if $\lambda$ is large.
 
+To conclude, our logistic regression classifier is well trained and can be generalized to predict on test data very well. Using cross-entropy cost function as the optimization objective, we can visualize the weights which reflect the structure of the digits. Regularization can be applied to the model and choosing a good $\lambda$ is critical for the classifier. For large training datasets, the overfitting is not an issue with complex models. Since the logistic classifier only has one output unit, to classify all the 10 digits we need to use multiple output units where softmax regression is useful.
+
 \begin{figure}%
 	\centering
-	\subfloat[weights when lambda = 0.1 using L1 regularization]{{\includegraphics[width=1.0in]{images/P10_7.png}  }}%
+	\subfloat[Weights when lambda = 0.1 using L1 regularization]{{\includegraphics[width=1.0in]{images/P10_7.png}  }}%
 	\qquad	
-	\subfloat[weights when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.0in]{images/P10.png}  }}%
+	\subfloat[Weights when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.0in]{images/P10.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.0in]{images/P10_2.png}  }}%
+	\subfloat[Weights when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.0in]{images/P10_2.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.0in]{images/P10_3.png}  }}%
+	\subfloat[Weights when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.0in]{images/P10_3.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.1 using L2 regularization]{{\includegraphics[width=1.0in]{images/P10_8.png}  }}%
+	\subfloat[Weights when lambda = 0.1 using L2 regularization]{{\includegraphics[width=1.0in]{images/P10_8.png}  }}%
 	\qquad	
-	\subfloat[weights when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.0in]{images/P10_4.png}  }}%
+	\subfloat[Weights when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.0in]{images/P10_4.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.0in]{images/P10_5.png}  }}%
+	\subfloat[Weights when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.0in]{images/P10_5.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.0in]{images/P10_6.png}  }}%
-	\caption{weights visualization using regularization}%
+	\subfloat[Weights when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.0in]{images/P10_6.png}  }}%
+	\caption{Weights visualization using regularization}%
 	\label{fig:P10}%
 \end{figure}
 
-\newpage
 \section{Softmax Regression via Gradient Descent}
 \subsection{Problem definition}
 In this problem, we need to classify MNIST datasets using softmax regression. In the experiments, we only use the first 20,000 training images and the last 2,000 test images.
@@ -411,7 +412,32 @@ From Fig \ref{fig: 13} we can see that the image of the weight and the correspon
 \section{Summary}
 In this work, we successfully derived and implemented logistic regression (binary classification) and softmax regression (multi-class classification) for handwritten digit classification problem from scratch and achieved roughly $98\%$ classification accuracy. We also embedded regularization to prevent overfitting so that the model generalized well to the unseen test examples. Through rigorous experiments and analysis, we can systematically tune the hyper-parameters and implement model selection by looking at the error on validation set. 
 
+\section{Contributions}
+\textbf{Shilin Zhu} did all the derivations, implementation codes, experiments, analysis of logistic regression part in this report (Section 2). 
+
+\textbf{Yunhui Guo} did all the derivations, implementation codes, experiments, analysis of softmax regression part in this report (Section 3). 
+
+Both Shilin Zhu and Yunhui Guo implemented both logistic and softmax regressions for own study purpose. Three discussions and pair programming were made before submitting this report.
+
+\subsubsection*{Acknowledgments}
+
+We would like to thank Prof. Gary Cottrell and all TAs' efforts in preparing and grading this assignment.
+
+\subsubsection*{References}
+
+\small{
+[1] Bishop, C. M. (1995). Neural networks for pattern recognition. Oxford university press.
+
+[2] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. "Gradient-based learning applied to document recognition." Proceedings of the IEEE, 86(11):2278-2324, November 1998.
+
 \section{Code}
+<<<<<<< HEAD
+=======
+\subsection{Logistic regression}
+
+
+\subsection{Softmax regression}
+>>>>>>> 6ad4289f9d390c09662fd2f91d8936ac168d80b8
 
 
 \end{document}
