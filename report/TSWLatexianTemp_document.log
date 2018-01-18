@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  17 JAN 2018 17:34
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  17 JAN 2018 17:36
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -558,12 +558,12 @@ File: ../softmax/figs/accuracy.png Graphic file (type QTm)
  <use  "../softmax/figs/accuracy.png" >
 File: ../softmax/figs/image_of_weights_and_digits.png Graphic file (type QTm)
  <use  "../softmax/figs/image_of_weights_and_digits.png" > [9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 419.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 418.
  [10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 419.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 418.
  (./TSWLatexianTemp_document.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 419.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 419.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 418.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 418.
 
 
 LaTeX Warning: There were undefined references.
@@ -571,7 +571,7 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 419.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 418.
  ) 
 Here is how much of TeX's memory you used:
  11678 strings out of 493706
