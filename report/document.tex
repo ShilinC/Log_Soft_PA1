@@ -237,7 +237,7 @@ Fig. \ref{fig:P4} shows the experimental results using L1 and L2 regularization.
 \end{figure}
 
 \textbf{Final Test Set Error with Regularization}\\
-We also plot the final test set error with different values of the regularization parameter. For L1 regularization we can see that when $\lambda$ is relatively small, the test accuracy will increase as we increase $\lambda$. This proves that regularization can sometimes make the model generalize better. In this example the performance improvement is very small since the training dataset is reasonably large and with good quality, so that overfitting is not a great issue anymore. We can also observe that when $\lambda$ is getting larger and larger, the test accuracy actually decreases (as well as on the training and validation set). This is because although strong regularization makes the model generalize well, over strong regularization will cause the model to be too simple and cannot even fit the data very well (as shown in Fig. \ref{fig:P11}). But we can conclude that using $\lambda$ between 0.0001 and 0.001 can all work reasonably well for L1 and L2 regularized model. For L2 regularization, it is more robust and less sensitive as we change $\lamda$ compared with L1 regularization.
+We also plot the final test set error with different values of the regularization parameter. For L1 regularization we can see that when $\lambda$ is relatively small, the test accuracy will increase as we increase $\lambda$. This proves that regularization can sometimes make the model generalize better. In this example the performance improvement is very small since the training dataset is reasonably large and with good quality, so that overfitting is not a great issue anymore. We can also observe that when $\lambda$ is getting larger and larger, the test accuracy actually decreases (as well as on the training and validation set). This is because although strong regularization makes the model generalize well, over strong regularization will cause the model to be too simple and cannot even fit the data very well (as shown in Fig. \ref{fig:P11}). But we can conclude that using $\lambda$ between 0.0001 and 0.001 can all work reasonably well for L1 and L2 regularized model. For L2 regularization, it is more robust and less sensitive as we change $\lambda$ compared with L1 regularization.
 
 \begin{figure}%
 	\centering
@@ -249,7 +249,7 @@ We also plot the final test set error with different values of the regularizatio
 \end{figure}
 
 \textbf{Weight Visualization with Regularization}\\
-We further visualize the weights learned with our regularized model, which are shown in Fig. \ref{fig:P10}. From the results we can see that when $\lambda$ increases, the learned parameters (weights) become simpler and cannot represent the data very well since we cannot see the structure of the digits anymore under the case with too large $\lambda$. But when $\lambda$ is set a good enough value, then they can learn the structure and distribution of the data quite well. From this result we can also see that L2 regularization is less sensitive as we change $\lamda$ compared with L1 regularization since L2 regularization can still make the model to learn good representations even if $\lamda$ is large.
+We further visualize the weights learned with our regularized model, which are shown in Fig. \ref{fig:P10}. From the results we can see that when $\lambda$ increases, the learned parameters (weights) become simpler and cannot represent the data very well since we cannot see the structure of the digits anymore under the case with too large $\lambda$. But when $\lambda$ is set a good enough value, then they can learn the structure and distribution of the data quite well. From this result we can also see that L2 regularization is less sensitive as we change $\lambda$ compared with L1 regularization since L2 regularization can still make the model to learn good representations even if $\lambda$ is large.
 
 \begin{figure}%
 	\centering
@@ -272,6 +272,7 @@ We further visualize the weights learned with our regularized model, which are s
 	\label{fig:P10}%
 \end{figure}
 
+\newpage
 \section{Softmax Regression via Gradient Descent}
 \subsection{Problem definition}
 In this problem, we need to classify MNIST datasets using softmax regression. In the experiments, we only use the first 20,000 training images and the last 2,000 test images.
@@ -415,5 +416,6 @@ In this work, we successfully derived and implemented logistic regression (binar
 \subsection{Logistic regression}
 
 \subsection{Softmax regression}
+
 
 \end{document}

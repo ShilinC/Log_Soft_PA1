@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.1)  17 JAN 2018 17:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.1)  17 JAN 2018 17:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -574,153 +574,149 @@ File: images/P11_2.png Graphic file (type png)
 Package pdftex.def Info: images/P11_2.png used on input line 222.
 (pdftex.def)             Requested size: 180.67499pt x 130.12384pt.
 
-<images/P6.png, id=143, 387.4475pt x 279.0425pt>
+[4 <./images/P4_2.png> <./images/P4.png> <./images/P5.png>] [5 <./images/P7.png
+> <./images/P7_2.png> <./images/P7_3.png> <./images/P7_4.png> <./images/P7_5.pn
+g> <./images/P7_7.png> <./images/P8.png> <./images/P8_2.png> <./images/P8_3.png
+> <./images/P8_4.png> <./images/P8_5.png> <./images/P8_7.png>]
+<images/P6.png, id=188, 387.4475pt x 279.0425pt>
 File: images/P6.png Graphic file (type png)
  <use images/P6.png>
 Package pdftex.def Info: images/P6.png used on input line 232.
 (pdftex.def)             Requested size: 180.67499pt x 130.12384pt.
 
-<images/P6_2.png, id=144, 387.4475pt x 279.0425pt>
+<images/P6_2.png, id=189, 387.4475pt x 279.0425pt>
 File: images/P6_2.png Graphic file (type png)
  <use images/P6_2.png>
 Package pdftex.def Info: images/P6_2.png used on input line 234.
 (pdftex.def)             Requested size: 180.67499pt x 130.12384pt.
 
-[4 <./images/P4_2.png> <./images/P4.png> <./images/P5.png>] [5 <./images/P7.png
-> <./images/P7_2.png> <./images/P7_3.png> <./images/P7_4.png> <./images/P7_5.pn
-g> <./images/P7_7.png> <./images/P8.png> <./images/P8_2.png> <./images/P8_3.png
-> <./images/P8_4.png> <./images/P8_5.png> <./images/P8_7.png>]
-<images/P9.png, id=190, 397.485pt x 279.0425pt>
+<images/P9.png, id=191, 397.485pt x 279.0425pt>
 File: images/P9.png Graphic file (type png)
  <use images/P9.png>
-Package pdftex.def Info: images/P9.png used on input line 246.
+Package pdftex.def Info: images/P9.png used on input line 244.
 (pdftex.def)             Requested size: 180.67499pt x 126.84105pt.
 
-<images/P9_2.png, id=191, 393.47pt x 279.0425pt>
+<images/P9_2.png, id=192, 393.47pt x 279.0425pt>
 File: images/P9_2.png Graphic file (type png)
  <use images/P9_2.png>
-Package pdftex.def Info: images/P9_2.png used on input line 248.
+Package pdftex.def Info: images/P9_2.png used on input line 246.
 (pdftex.def)             Requested size: 180.67499pt x 128.13118pt.
-
-<images/P10_7.png, id=192, 255.95625pt x 252.945pt>
+ [6 <./images/P11.png> <./images/P11_2.png> <./images/P6.png> <./images/P6_2.pn
+g>]
+<images/P10_7.png, id=208, 255.95625pt x 252.945pt>
 File: images/P10_7.png Graphic file (type png)
  <use images/P10_7.png>
-Package pdftex.def Info: images/P10_7.png used on input line 258.
+Package pdftex.def Info: images/P10_7.png used on input line 256.
 (pdftex.def)             Requested size: 72.26999pt x 71.41849pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 258--258
+Underfull \hbox (badness 10000) in paragraph at lines 256--256
 []\OT1/ptm/m/n/9 (a) |weights when
  []
 
-<images/P10.png, id=193, 255.95625pt x 252.945pt>
+<images/P10.png, id=209, 255.95625pt x 252.945pt>
 File: images/P10.png Graphic file (type png)
  <use images/P10.png>
-Package pdftex.def Info: images/P10.png used on input line 260.
+Package pdftex.def Info: images/P10.png used on input line 258.
 (pdftex.def)             Requested size: 72.26999pt x 71.41849pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--260
+Underfull \hbox (badness 10000) in paragraph at lines 258--258
 []\OT1/ptm/m/n/9 (b) |weights when
  []
 
-<images/P10_2.png, id=194, 255.95625pt x 252.945pt>
+<images/P10_2.png, id=210, 255.95625pt x 252.945pt>
 File: images/P10_2.png Graphic file (type png)
  <use images/P10_2.png>
-Package pdftex.def Info: images/P10_2.png used on input line 262.
+Package pdftex.def Info: images/P10_2.png used on input line 260.
 (pdftex.def)             Requested size: 72.26999pt x 71.41849pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 262--262
+Underfull \hbox (badness 10000) in paragraph at lines 260--260
 []\OT1/ptm/m/n/9 (c) |weights when
  []
 
-<images/P10_3.png, id=195, 255.95625pt x 252.945pt>
+<images/P10_3.png, id=211, 255.95625pt x 252.945pt>
 File: images/P10_3.png Graphic file (type png)
  <use images/P10_3.png>
-Package pdftex.def Info: images/P10_3.png used on input line 264.
+Package pdftex.def Info: images/P10_3.png used on input line 262.
 (pdftex.def)             Requested size: 72.26999pt x 71.41849pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 262--262
 []\OT1/ptm/m/n/9 (d) |weights when
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 262--262
 \OT1/ptm/m/n/9 lambda = 0.0001
  []
 
-<images/P10_8.png, id=196, 255.95625pt x 252.945pt>
+<images/P10_8.png, id=212, 255.95625pt x 252.945pt>
 File: images/P10_8.png Graphic file (type png)
  <use images/P10_8.png>
-Package pdftex.def Info: images/P10_8.png used on input line 266.
+Package pdftex.def Info: images/P10_8.png used on input line 264.
 (pdftex.def)             Requested size: 72.26999pt x 71.41849pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 266--266
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
 []\OT1/ptm/m/n/9 (e) |weights when
  []
 
-<images/P10_4.png, id=197, 255.95625pt x 252.945pt>
+<images/P10_4.png, id=213, 255.95625pt x 252.945pt>
 File: images/P10_4.png Graphic file (type png)
  <use images/P10_4.png>
-Package pdftex.def Info: images/P10_4.png used on input line 268.
+Package pdftex.def Info: images/P10_4.png used on input line 266.
 (pdftex.def)             Requested size: 72.26999pt x 71.41849pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 268--268
+Underfull \hbox (badness 10000) in paragraph at lines 266--266
 []\OT1/ptm/m/n/9 (f) |weights when
  []
 
-<images/P10_5.png, id=198, 255.95625pt x 252.945pt>
+<images/P10_5.png, id=214, 255.95625pt x 252.945pt>
 File: images/P10_5.png Graphic file (type png)
  <use images/P10_5.png>
-Package pdftex.def Info: images/P10_5.png used on input line 270.
+Package pdftex.def Info: images/P10_5.png used on input line 268.
 (pdftex.def)             Requested size: 72.26999pt x 71.41849pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 270--270
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 []\OT1/ptm/m/n/9 (g) |weights when
  []
 
-<images/P10_6.png, id=199, 255.95625pt x 252.945pt>
+<images/P10_6.png, id=215, 255.95625pt x 252.945pt>
 File: images/P10_6.png Graphic file (type png)
  <use images/P10_6.png>
-Package pdftex.def Info: images/P10_6.png used on input line 272.
+Package pdftex.def Info: images/P10_6.png used on input line 270.
 (pdftex.def)             Requested size: 72.26999pt x 71.41849pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--272
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
 []\OT1/ptm/m/n/9 (h) |weights when
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--272
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
 \OT1/ptm/m/n/9 lambda = 0.0001
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [6 <./images/P11.png> <./images/P11_2.png> <./images/P6.png> <./images/P6_2.pn
-g>]
 [7 <./images/P9.png> <./images/P9_2.png> <./images/P10_7.png> <./images/P10.png
 > <./images/P10_2.png> <./images/P10_3.png> <./images/P10_8.png> <./images/P10_
 4.png> <./images/P10_5.png> <./images/P10_6.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 323--325
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 361--363
+Underfull \hbox (badness 10000) in paragraph at lines 322--324
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 364--366
+Underfull \hbox (badness 10000) in paragraph at lines 360--362
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 367--370
+Underfull \hbox (badness 10000) in paragraph at lines 363--365
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 374--375
+Underfull \hbox (badness 10000) in paragraph at lines 366--369
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 373--374
 
  []
 
@@ -728,14 +724,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 374--375
 File: ../softmax/figs/loss.png Graphic file (type png)
 
 <use ../softmax/figs/loss.png>
-Package pdftex.def Info: ../softmax/figs/loss.png used on input line 384.
+Package pdftex.def Info: ../softmax/figs/loss.png used on input line 383.
 (pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
 
 <../softmax/figs/accuracy.png, id=258, 462.528pt x 346.896pt>
 File: ../softmax/figs/accuracy.png Graphic file (type png)
 
 <use ../softmax/figs/accuracy.png>
-Package pdftex.def Info: ../softmax/figs/accuracy.png used on input line 388.
+Package pdftex.def Info: ../softmax/figs/accuracy.png used on input line 387.
 (pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
 
 <../softmax/figs/image_of_weights_and_digits.png, id=259, 433.62pt x 144.54pt>
@@ -743,11 +739,15 @@ File: ../softmax/figs/image_of_weights_and_digits.png Graphic file (type png)
 
 <use ../softmax/figs/image_of_weights_and_digits.png>
 Package pdftex.def Info: ../softmax/figs/image_of_weights_and_digits.png used o
-n input line 394.
+n input line 393.
 (pdftex.def)             Requested size: 187.90198pt x 86.72244pt.
- [9 <../softmax/figs/loss.png> <../softmax/figs/accuracy.png>]
+ [9]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 421.
- [10 <../softmax/figs/image_of_weights_and_digits.png>]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10 <../softmax/figs/loss.png> <../softmax/figs/accuracy.png> <../softmax/figs
+/image_of_weights_and_digits.png>] [11]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 421.
  (./document.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 421.
@@ -764,13 +764,13 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 421.
  ) 
 Here is how much of TeX's memory you used:
- 8949 strings out of 493014
- 134175 string characters out of 6133352
- 235232 words of memory out of 5000000
+ 8950 strings out of 493014
+ 134182 string characters out of 6133352
+ 234234 words of memory out of 5000000
  12275 multiletter control sequences out of 15000+600000
  15236 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,17n,49p,952b,383s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,17n,49p,1134b,383s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -785,10 +785,10 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf
 ist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2016/texmf-dist/font
 s/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb>
-Output written on document.pdf (10 pages, 786805 bytes).
+Output written on document.pdf (11 pages, 747211 bytes).
 PDF statistics:
- 347 PDF objects out of 1000 (max. 8388607)
- 243 compressed objects within 3 object streams
- 96 named destinations out of 1000 (max. 500000)
+ 354 PDF objects out of 1000 (max. 8388607)
+ 249 compressed objects within 3 object streams
+ 97 named destinations out of 1000 (max. 500000)
  319 words of extra memory for PDF output out of 10000 (max. 10000000)
 
