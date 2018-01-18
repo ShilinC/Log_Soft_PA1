@@ -452,9 +452,12 @@ We would like to thank Prof. Gary Cottrell and all TAs' efforts in preparing and
 
 \subsection{Logistic regression}
 \begin{lstlisting}[language=Python]
+#packages
 %matplotlib inline
 import numpy as np
 import matplotlib.pyplot as plt
+
+#read MNIST data
 from mnist import MNIST
 mndata = MNIST('./python-mnist/data')
 train_images, train_labels = mndata.load_training()
@@ -464,6 +467,7 @@ test_images = np.array(test_images)
 train_labels = np.array(train_labels).reshape([60000,1])
 test_labels = np.array(test_labels).reshape([10000,1])
 
+#extract examples with two specific digits
 train_size = train_images.shape[0]
 test_size = test_images.shape[0]
 train_images_sub = np.zeros([784,train_size])
@@ -502,12 +506,15 @@ for i in range(0,test_size):
 test_images_sub = test_images_sub[:,0:counter-1]
 test_labels_sub = test_labels_sub[:,0:counter-1]
 
+#normalize the input features
 validation_set_x = validation_images_sub/255.
 validation_set_y = validation_labels_sub
 train_set_x = train_images_sub/255.
 test_set_x = test_images_sub/255.
 train_set_y = train_labels_sub
 test_set_y = test_labels_sub
+
+#helper functions
 
 def sigmoid(z):
 
@@ -635,6 +642,7 @@ def predict(w, b, X):
     
     return Y_prediction
 
+#batch gradient descent
 def model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, num_iterations = 5000, learning_rate = 0.5, print_cost = True, early_stopping = True):
 
     #Builds the logistic regression model by calling the function you've implemented previously
@@ -672,10 +680,458 @@ def model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, 
     
     return d
 
+#mini-batch gradient descent
+def mb_model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, batch_size, num_epoch, learning_rate, T = 2, print_cost = True, weight_decay = False):
+    """
+    Builds the logistic regression model by calling the function you've implemented previously
+
+    """
+    costs_mb = []
+    val_costs_mb = []
+    test_costs_mb = []
+    w, b = np.zeros((X_train.shape[0],1)), 0.
+    
+    for i in range(0,num_epoch):
+        if weight_decay == True:
+            learning_rate = learning_rate / (1 + i / T)
+        for j in range(0,train_set_x.shape[1]-batch_size+1,batch_size):
+            parameters, grads, costs, val_costs, test_costs, prediction_accuracy_early_train, prediction_accuracy_early_val, prediction_accuracy_early_test = optimize(w, b, X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, 1, learning_rate, print_cost = True, early_stopping = False)
+            w = parameters["w"]
+            b = parameters["b"]
+            costs_mb.append(costs)
+            val_costs_mb.append(val_costs)
+            test_costs_mb.append(test_costs)
+    
+    Y_prediction_test = predict(w, b, X_test)
+    Y_prediction_train = predict(w, b, X_train)
+    Y_prediction_val = predict(w, b, X_val)
+
+    print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
+    print("Hold-out validation set accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_val - Y_val)) * 100))
+    print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
+
+    
+    d = {"costs": costs_mb,
+         "val_costs": val_costs_mb,
+         "test_costs": test_costs_mb,
+         "Y_prediction_test": Y_prediction_test, 
+         "Y_prediction_train" : Y_prediction_train,
+         "Y_prediction_val": Y_prediction_val,
+         "w" : w, 
+         "b" : b,
+         "learning_rate" : learning_rate}
+    
+    return d
+
+#batch gradient descent
 d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = 0, reg_type = 2, num_iterations = 5000, learning_rate = 0.01, print_cost = True, early_stopping = False)
+
+#mini-batch gradient descent
+d = mb_model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = 0, reg_type = 2, batch_size = int(0.1*train_set_x.shape[1]), num_epoch = 500, learning_rate = 0.005, T = 2, print_cost = True, weight_decay = False)
+
+#weight-decay
+d = mb_model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = 0, batch_size = 500, num_epoch = 100, learning_rate = 0.01, T = 10, print_cost = True, weight_decay = True)
+
+#plot accuracy during the training
+train_accuracy = np.squeeze(d['Y_prediction_train_early'])
+val_accuracy = np.squeeze(d['Y_prediction_val_early'])
+test_accuracy = np.squeeze(d['Y_prediction_test_early'])
+plt.plot(train_accuracy)
+plt.plot(val_accuracy)
+plt.plot(test_accuracy)
+plt.legend(['training', 'hold-out(validation)', 'test'], loc='lower right')
+plt.ylabel('accuracy')
+plt.xlabel('iterations')
+plt.title("Learning rate =" + str(d["learning_rate"]))
+plt.show()
+
+#plot cost function during the training
+costs = np.squeeze(d['costs'])
+val_costs = np.squeeze(d['val_costs'])
+test_costs = np.squeeze(d['test_costs'])
+plt.plot(costs)
+plt.plot(val_costs)
+plt.plot(test_costs)
+plt.ylabel('cost')
+plt.xlabel('iterations (per two hundreds)')
+plt.title("Learning rate =" + str(d["learning_rate"]))
+plt.show()
+
+#weight visualization
+w = d["w"]
+print(w.shape)
+plt.imshow(w.reshape([28,28]))
+
+#L2 regularization
+lambda_cand = [0.1, 0.03, 0.01, 0.003, 0.001, 0.0003, 0.0001]
+norm_len = []
+accuracy_train_L2 = []
+accuracy_val_L2 = []
+accuracy_test_L2 = []
+final_test_set_accuracy_L2 = []
+w_L2_lambda = []
+
+for i in range(0,7):
+    d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = lambda_cand[i], reg_type = 2, num_iterations = 5000, learning_rate = 0.005, print_cost = False, early_stopping = True)
+    w = d["w"]
+    w_L2_lambda.append(w)
+    accuracy_train_L2.append(d["Y_prediction_train_early"])
+    accuracy_val_L2.append(d["Y_prediction_val_early"])
+    accuracy_test_L2.append(d["Y_prediction_test_early"])
+    norm_len.append(np.sum(np.abs(w), keepdims=True))
+    final_test_set_accuracy_L2.append(d["final_test_accuracy"])
+
+#L1 regularization
+lambda_cand = [0.1, 0.03, 0.01, 0.003, 0.001, 0.0003, 0.0001]
+norm_len = []
+accuracy_train_L1 = []
+accuracy_val_L1 = []
+accuracy_test_L1 = []
+w_L1_lambda = []
+final_test_set_accuracy_L1 = []
+
+for i in range(0,7):
+    d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = lambda_cand[i], reg_type = 1, num_iterations = 5000, learning_rate = 0.005, print_cost = True, early_stopping = True)
+    w = d["w"]
+    w_L1_lambda.append(w)
+    accuracy_train_L1.append(d["Y_prediction_train_early"])
+    accuracy_val_L1.append(d["Y_prediction_val_early"])
+    accuracy_test_L1.append(d["Y_prediction_test_early"])
+    norm_len.append(np.sum(np.abs(w), keepdims=True))
+    final_test_set_accuracy_L1.append(d["final_test_accuracy"])
+
+#plot length of weight vector
+plt.plot(np.squeeze(np.array([0.1, 0.03, 0.01, 0.003, 0.001, 0.0003, 0.0001]).reshape(1,7)),np.squeeze(np.array(norm_len[4:11]).reshape(1,7)))
+plt.ylabel('length of weight vector')
+plt.xlabel('lambda')
+plt.title("Learning rate =" + str(d["learning_rate"]))
+plt.show()
+
+#plot accuracy during training
+accuracy_train_L1_red = np.squeeze(np.array(accuracy_train_L1)[2])
+accuracy_val_L1_red = np.squeeze(np.array(accuracy_val_L1)[2])
+accuracy_test_L1_red = np.squeeze(np.array(accuracy_test_L1)[2])
+
+plt.plot(accuracy_train_L1_red)
+plt.plot(accuracy_val_L1_red)
+plt.plot(accuracy_test_L1_red)
+plt.ylabel('accuracy')
+plt.xlabel('iterations')
+plt.title("Learning rate =" + str(d["learning_rate"]) + ", " + "Lambda =" + str(1))
+plt.show()
+
+#plot final test accuracy with different lambda
+plt.plot(np.squeeze(np.array([0.01, 0.003, 0.001, 0.0003, 0.0001]).reshape(1,5)),np.squeeze(np.array(final_test_set_accuracy_L1[6:11]).reshape(1,5)), np.squeeze(np.array([0.01, 0.003, 0.001, 0.0003, 0.0001]).reshape(1,5)),np.squeeze(np.array(final_test_set_accuracy_L1[6:11]).reshape(1,5)), 'or')
+plt.ylabel('test accuracy')
+plt.ylim((95,100))
+plt.xlabel('lambda')
+plt.title("Learning rate =" + str(0.005))
+plt.show()
+
+#visualize the weights
+w = np.array(w_L1_lambda[0])
+print(w.shape)
+plt.imshow(w.reshape([28,28]))
+
+#test early stopping
+d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = 0, reg_type = 2, num_iterations = 5000, learning_rate = 0.005, print_cost = True, early_stopping = True)
+
+
+
 \end{lstlisting}
 
 \subsection{Softmax regression}
+\begin{lstlisting}[language=Python]
+#!/usr/bin/python 
 
+import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+from numpy import linalg as LA
+
+import sys
+sys.path.append('../python-mnist/')
+from mnist import MNIST
+
+# Find best hyperparameters 
+def hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, \
+validation_images, validation_labels, regularization_types, \
+lambds, weights, inital_step_size, T, epoch, classes, dimensions):
+
+best_validation_weights_L2 = np.random.randn(dimensions, classes).astype(np.float32) 
+best_validation_lamdb_L2 = 0
+best_validation_accuracy_L2 = 0
+
+best_validation_weights_L1 = np.random.randn(dimensions, classes).astype(np.float32) 
+best_validation_lamdb_L1 = 0
+best_validation_accuracy_L1 = 0
+
+early_stoping_threshholds = 5
+
+for l in regularization_types:
+if l == "L2":
+for lambd in lambds:
+last_accuracy  = 0.0
+cnt = 0
+for i in range(epoch):
+# Batch graident descent
+a = np.matmul(training_images, weights) 
+# Find the largest a, and subtract it from each a in order to prevent overflow
+a_max = np.max(a,1).reshape(a.shape[0],1)
+sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) 
+pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
+delta = one_hot_training_labels - pred_y 
+grads = -np.dot(training_images.T, delta) + lambd*weights
+# Batch gradient with L2 regularization and learning rate "annealing"
+weights = weights - (inital_step_size/(1+i/T)) * grads
+
+# Calculate accuracy on validation set
+a = np.matmul(validation_images, weights) #
+a_max = np.max(a,1).reshape(a.shape[0],1)
+sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) # 18000, 1
+pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) # 18000, 10
+pred_y[pred_y == 0.0] = 1e-15       
+pred_class = np.argmax(pred_y, axis=1)
+validation_accuracy = np.sum(pred_class == validation_labels)/(pred_class.shape[0]+0.0)
+
+if validation_accuracy > best_validation_accuracy_L2:
+best_validation_accuracy_L2 = validation_accuracy
+best_validation_weights_L2 = weights
+best_validation_lamdb_L2 = lambd
+
+if validation_accuracy < last_accuracy:
+cnt = cnt + 1
+if cnt >= early_stoping_threshholds:
+break
+else:
+cnt = 0
+last_accuracy = validation_accuracy
+elif l == "L1":
+for lambd in lambds:
+last_accuracy  = 0.0
+cnt = 0
+
+for i in range(epoch):
+# Batch graident descent
+a = np.matmul(training_images, weights)
+a_max = np.max(a,1).reshape(a.shape[0],1)
+sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1)  
+pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
+
+delta = one_hot_training_labels - pred_y 
+# Batch gradient with L1 regularization and learning rate "annealing"
+grads = -np.dot(training_images.T, delta) + lambd* np.sign(weights)
+weights = weights - inital_step_size/(1+i/T) * grads
+
+# Calculate accuracy on validation set
+a = np.matmul(validation_images, weights) #
+a_max = np.max(a,1).reshape(a.shape[0],1)
+sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1)
+pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
+pred_y[pred_y == 0.0] = 1e-15       
+pred_class = np.argmax(pred_y, axis=1)
+validation_accuracy = np.sum(pred_class == validation_labels)/(pred_class.shape[0]+0.0)
+
+if validation_accuracy > best_validation_accuracy_L1:
+best_validation_accuracy_L1 = validation_accuracy
+best_validation_weights_L1 = weights
+best_validation_lamdb_L1 = lambd
+
+if validation_accuracy < last_accuracy:
+cnt = cnt + 1
+if cnt >= early_stoping_threshholds:
+break
+else:
+cnt = 0
+last_accuracy = validation_accuracy
+
+print "best validation with L1 " + str(best_validation_accuracy_L1)
+print "best validation with L1 when lambd = " + str(best_validation_lamdb_L1)
+print "best validation with L2 " + str(best_validation_accuracy_L2)
+print "best validation with L2 when lambd = " + str(best_validation_lamdb_L2)
+
+# Claculate test accuracy using L1 regularization with the weights achieve highest 
+# accuracy on the validation set
+a = np.matmul(test_images, best_validation_weights_L1) 
+a_max = np.max(a,1).reshape(a.shape[0],1)
+sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1)
+pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
+pred_class = np.argmax(pred_y, axis=1)
+test_accuracy = np.sum(pred_class == test_labels)/(pred_class.shape[0]+0.0)
+print "test accuracy if using L1 " + str(test_accuracy) 
+
+# Claculate test accuracy using L2 regularization with the weights achieve highest 
+# accuracy on the validation set
+a = np.matmul(test_images, best_validation_weights_L2) 
+a_max = np.max(a,1).reshape(a.shape[0],1)
+sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) 
+pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
+pred_class = np.argmax(pred_y, axis=1)
+test_accuracy = np.sum(pred_class == test_labels)/(pred_class.shape[0]+0.0)
+
+print "test accuracy if using L2 " + str(test_accuracy) 
+
+
+def train(training_images, test_images, validation_images, training_labels, test_labels, \
+validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, \
+lambd, epoch, inital_step_size, T, weights):
+
+training_losses = []
+test_losses = []
+validation_losses = []
+
+training_accuracy_ = []
+test_accuracy_ = []
+validation_accuracy_ = []
+
+for i in range(epoch):
+print "epoch " + str(i)
+# Batch graident descent of softmax regression
+a = np.matmul(training_images, weights) 
+# Find the largest a, and subtract it from each a in order to prevent overflow
+a_max = np.max(a,1).reshape(a.shape[0],1)
+sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) 
+pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
+delta = one_hot_training_labels - pred_y 
+grads = -np.dot(training_images.T, delta) + lambd*weights
+# Batch gradient with L2 regularization and learning rate "annealing"
+weights = weights - (inital_step_size/(1+i/T)) * grads
+
+# Calculate training loss and accuracy
+a = np.matmul(training_images, weights) 
+a_max = np.max(a,1).reshape(a.shape[0],1)
+sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) 
+pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
+pred_class = np.argmax(pred_y, axis=1)
+training_accuracy = np.sum(pred_class == training_labels)/(pred_class.shape[0]+0.0)
+training_accuracy_.append(training_accuracy)
+pred_y[pred_y == 0.0] = 1e-15
+log_pred_y = np.log(pred_y)
+training_loss = (-np.sum(one_hot_training_labels * log_pred_y)  + lambd*LA.norm(weights)**2) / training_images.shape[0]
+training_losses.append(training_loss)
+
+# Calculate test loss and accuracy
+a = np.matmul(test_images, weights) # 18000, 10
+a_max = np.max(a,1).reshape(a.shape[0],1)
+sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) # 18000, 1
+pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) # 18000, 10
+pred_class = np.argmax(pred_y, axis=1)
+test_accuracy = np.sum(pred_class == test_labels)/(pred_class.shape[0]+0.0)
+print "test accuracy " + str(test_accuracy)
+test_accuracy_.append(test_accuracy)
+pred_y[pred_y == 0.0] = 1e-15
+log_pred_y = np.log(pred_y)
+test_loss = (-np.sum(one_hot_test_labels * log_pred_y)  +  lambd*LA.norm(weights)**2) / test_images.shape[0]
+test_losses.append(test_loss)
+
+# Calculate validation loss and accuracy
+a = np.matmul(validation_images, weights) # 18000, 10
+a_max = np.max(a,1).reshape(a.shape[0],1)
+sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) # 18000, 1
+pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) # 18000, 10
+pred_class = np.argmax(pred_y, axis=1)
+validation_accuracy = np.sum(pred_class == validation_labels)/(pred_class.shape[0]+0.0) 
+validation_accuracy_.append(validation_accuracy)
+pred_y[pred_y == 0.0] = 1e-15
+log_pred_y = np.log(pred_y)
+validation_loss = (-np.sum(one_hot_validation_labels * log_pred_y)  +  lambd*LA.norm(weights)**2) / validation_images.shape[0]
+validation_losses.append(validation_loss) 
+
+fig1 = plt.figure(1)
+plt.plot(training_losses)
+plt.plot(test_losses)
+plt.plot(validation_losses)
+fig1.suptitle('Loss VS Epoch', fontsize=15)
+plt.legend(['training loss', 'test loss', 'validation loss'], loc='upper right')
+plt.xlabel('Epoch', fontsize=15)
+plt.ylabel('Average Loss', fontsize=15)
+fig1.show()
+
+fig2 = plt.figure(2)
+plt.plot(training_accuracy_)
+plt.plot(test_accuracy_)
+plt.plot(validation_accuracy_)
+fig2.suptitle('Accuracy VS Epoch', fontsize=15)
+plt.legend(['training accuracy', 'test accuracy', 'validation accuracy'], loc='lower right')
+plt.xlabel('Epoch', fontsize=15)
+plt.ylabel('Accuracy', fontsize=15)
+fig2.show()
+
+# Visualize weights and digits
+weights = weights[1:,:]
+training_images = training_images[:,1:]
+
+fig3 = plt.figure(figsize = (6,2))
+gs = gridspec.GridSpec(2, classes)
+gs.update(wspace=0, hspace=0)
+
+for index in range(weights.shape[1]):
+weight = weights[:,index]
+ave_image = np.zeros((1,784))
+for instance in range(training_images.shape[0]):
+if training_labels[instance] == index:
+ave_image += training_images[instance].reshape(1,784)
+
+ax1 = plt.subplot(gs[0,index])
+plt.imshow(np.reshape(weight, (28,28)), cmap=plt.cm.gray, aspect='equal')
+plt.axis('off')
+ax2 = plt.subplot(gs[1,index])
+plt.imshow(np.reshape(ave_image, (28,28)), cmap=plt.cm.gray, aspect='equal')
+plt.axis('off')
+plt.show()
+
+if __name__ == '__main__':
+
+data = MNIST('../python-mnist/data')
+training_images, training_labels = data.load_training()
+test_images, test_labels = data.load_testing()
+
+training_images_old = training_images[:20000]
+training_labels_old = training_labels[:20000]
+test_images = test_images[-2000:]
+test_labels = test_labels[-2000:]
+training_images_old = [[1] + image for image in training_images_old]
+test_images = [[1] + image for image in test_images]
+
+# Normalize data
+training_images = np.array(training_images_old[2000:]) / 255.0
+training_labels = np.array(training_labels_old[2000:]) 
+validation_images = np.array(training_images_old[:2000]) / 255.0
+validation_labels = np.array(training_labels_old[:2000])
+test_images = np.array(test_images) / 255.0
+test_labels = np.array(test_labels)
+
+epoch_for_tuning_parameters = 10
+inital_step_size = 0.0015
+T = 3.0
+
+# trying different lambdas
+lambds_set_1 = [0.01, 0.001, 0.0001]
+lambds_set_2 = [0.05, 0.005, 0.0005]
+regularization_types = ["L1", "L2"]
+
+classes = 1000
+dimensions = 785
+# Weight initialization
+weights = np.random.randn(dimensions, classes).astype(np.float32)  #
+
+one_hot_training_labels = np.eye(classes)[training_labels] 
+one_hot_validation_labels = np.eye(classes)[validation_labels]
+one_hot_test_labels = np.eye(classes)[test_labels]  
+
+# Hyperparamter selction
+hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, \
+validation_images, validation_labels, regularization_types, lambds_set_1, weights, \
+inital_step_size, T, epoch_for_tuning_parameters, classes, dimensions)
+
+epoch = 300
+# This lambd is used with L2 regularization and achieved the highest accuracy on the validation set 
+lambd = 0.0001
+#Training based on the best hyperparameters and using L2 regularization
+train(training_images, test_images, validation_images, training_labels, test_labels, \
+validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, \
+lambd, epoch, inital_step_size, T, weights)
+\end{lstlisting}
 
 \end{document}
