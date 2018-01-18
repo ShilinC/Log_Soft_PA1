@@ -256,7 +256,7 @@ if __name__ == '__main__':
     lambds_set_1 = [0.01, 0.001, 0.0001]
     lambds_set_2 = [0.05, 0.005, 0.0005]
     lambd = 0.01
-    regularization_types = ["L1"]
+    regularization_types = ["L1", "L2"]
 
     classes = 10
     dimensions = 785

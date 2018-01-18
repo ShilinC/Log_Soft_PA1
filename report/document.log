@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.1)  17 JAN 2018 17:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.1)  17 JAN 2018 17:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -746,12 +746,12 @@ Package pdftex.def Info: ../softmax/figs/image_of_weights_and_digits.png used o
 n input line 394.
 (pdftex.def)             Requested size: 187.90198pt x 86.72244pt.
  [9 <../softmax/figs/loss.png> <../softmax/figs/accuracy.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 420.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 421.
  [10 <../softmax/figs/image_of_weights_and_digits.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 420.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 421.
  (./document.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 420.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 420.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 421.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 421.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: CDA977CA3546816B66FFEE279A626B90;1071.
 
@@ -761,7 +761,7 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 420.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 421.
  ) 
 Here is how much of TeX's memory you used:
  8949 strings out of 493014
@@ -785,7 +785,7 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf
 ist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2016/texmf-dist/font
 s/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb>
-Output written on document.pdf (10 pages, 741276 bytes).
+Output written on document.pdf (10 pages, 786805 bytes).
 PDF statistics:
  347 PDF objects out of 1000 (max. 8388607)
  243 compressed objects within 3 object streams
