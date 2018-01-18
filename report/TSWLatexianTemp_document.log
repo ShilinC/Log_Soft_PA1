@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  17 JAN 2018 17:53
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  17 JAN 2018 18:04
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -523,15 +523,29 @@ File: ../softmax/figs/accuracy.png Graphic file (type QTm)
  <use  "../softmax/figs/accuracy.png" >
 File: ../softmax/figs/image_of_weights_and_digits.png Graphic file (type QTm)
  <use  "../softmax/figs/image_of_weights_and_digits.png" > [9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 420.
+
+/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:416: LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.416 \usepackage
+                 {listings}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [10] [11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 420.
+ [10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 422.
+ [11]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 422.
  (./TSWLatexianTemp_document.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 420.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 420.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 422.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 422.
 
 
 LaTeX Warning: There were undefined references.
@@ -539,7 +553,7 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 420.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 422.
  ) 
 Here is how much of TeX's memory you used:
  11677 strings out of 493706
