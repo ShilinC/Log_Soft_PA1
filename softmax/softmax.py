@@ -100,10 +100,10 @@ def hyper_parameters_tuning(training_images, one_hot_training_labels, test_image
                         cnt = 0
                     last_accuracy = validation_accuracy
 
-    print best_validation_accuracy_L1
-    print best_validation_lamdb_L1
-    print best_validation_accuracy_L2
-    print best_validation_lamdb_L2
+    print "best validation with L1 " + str(best_validation_accuracy_L1)
+    print "best validation with L1 when lambd = " + str(best_validation_lamdb_L1)
+    print "best validation with L2 " + str(best_validation_accuracy_L2)
+    print "best validation with L2 when lambd = " + str(best_validation_lamdb_L2)
 
     a = np.matmul(test_images, best_validation_weights_L1) # 18000, 10
     a_max = np.max(a,1).reshape(a.shape[0],1)
@@ -268,7 +268,7 @@ if __name__ == '__main__':
     one_hot_test_labels = np.eye(classes)[test_labels]  
 
     # Hyperparamter selction
-    #hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
+    hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
 
     #Training based on the best hyperparameters
-    train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)
+    #train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)
