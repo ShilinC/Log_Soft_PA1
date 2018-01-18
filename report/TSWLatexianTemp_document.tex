@@ -115,6 +115,7 @@ After trying different values of learning rate, we found $0.005$ is a reasonably
 We can use mini-batch gradient descent to speed up learning process. Since the one-step optimization is done on a smaller mini-batch, the cost function will not monotonically decrease as batch gradient descent. Here we change the weights after a mini-batch of roughly $10\%$ of the entire training set. This set of mini-batch size can result in relatively smooth curve of the cost function. Fig. \ref{fig:P2} plots the loss function over training for consecutive mini-batches. Since the validation set always has very similar errors as the test set, we can conclude the hold-out set work as a good stand-in for the test set and their underlying data distributions are same.
 
 \textbf{Accuracy of Prediction Using Logistic Regression Classifier}\\
+From batch gradient descent and mini-batch gradient descent, we can roughly achieve $97\%$ classification accuracy on the test set for binary case. This means that our model can perform pretty well on the unseen data.
 
 \begin{figure}%
 	\centering
@@ -193,9 +194,9 @@ Note that we can always add a factor of $1/N$ to scale the cost and gradient to 
 \end{figure}
 
 \textbf{Tuning the Regularization Parameter}\\
-In order to choose a reasonably good regularization model, we need to tune the regularization parameter and choose the one which results in the best accuracy on the hold-out validation set. Here we try three values for regularization parameter $\lambda$: 0.0001, 0.001 and 0.01. Fig. \ref{fig:P7} and Fig. \ref{fig:P8} show the results with different $\lambda$ on L1 and L2 regularization. From the experimental results we can see as soon as we do not set $\lambda$ too large, we can always get reasonably well performance (so the performance is not very sensitive to the regularization strength) if we are training our model using a large enough dataset. 
+In order to choose a reasonably good regularization model, we need to tune the regularization parameter and choose the one which results in the best accuracy on the hold-out validation set. Here we try different values for regularization parameter $\lambda$: 0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, and 0.1. Fig. \ref{fig:P7} and Fig. \ref{fig:P8} show the results with different $\lambda$ on L1 and L2 regularization. From the experimental results we can see as soon as we do not set $\lambda$ too large, we can always get reasonably well performance (so the performance is not very sensitive to the regularization strength) if we are training our model using a large enough dataset. 
 
-If we set lambda very large as shown in Fig. \ref{fig:P11}, we can see that L1 regularization will be over strong and cause the model fail to converge and may experience underfit problem. L2 regularization is more robust against large $\lambda$ compared to L1 regularization.
+If we set lambda very large ($\lambda=1$) as shown in Fig. \ref{fig:P11}, we can see that L1 regularization will be over strong and cause the model fail to converge and may experience underfit problem. L2 regularization is more robust against large $\lambda$ compared to L1 regularization. Thus it is better to use L2 regularization with carefully tuned $\lambda$ such as from 0.0001 to 0.001 in this example.
 
 \begin{figure}%
 	\centering
@@ -428,7 +429,7 @@ So for an image belongs to class $k$, we want our model to output a large $y_k$ 
 
 
 \section{Summary}
-In this work, we successfully derived and implemented logistic regression (binary classification) and softmax regression (multi-class classification) for handwritten digit classification problem from scratch and achieved roughly $98\%$ classification accuracy. We also embedded regularization to prevent overfitting so that the model generalized well to the unseen test examples. Through rigorous experiments and analysis, we can systematically tune the hyper-parameters and implement model selection by looking at the error on validation set. 
+In this work, we successfully derived and implemented logistic regression (binary classification) and softmax regression (multi-class classification) for handwritten digit classification problem from scratch and achieved roughly $98\%$ binary classification accuracy and roughly $93\%$ 10-way classification accuracy. We also embedded regularization to prevent overfitting so that the model generalized well to the unseen test examples. Through rigorous experiments and analysis, we can systematically tune the hyper-parameters and implement model selection by looking at the error on validation set. 
 
 \section{Contributions}
 \textbf{Shilin Zhu} did all the derivations, implementation codes, experiments, analysis of logistic regression part in this report (Section 2). 
@@ -449,10 +450,11 @@ We would like to thank Prof. Gary Cottrell and all TAs' efforts in preparing and
 [2] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. "Gradient-based learning applied to document recognition." Proceedings of the IEEE, 86(11):2278-2324, November 1998.
 
 \section{Code}
+The code below shows the skeleton of our implementation of logistic and softmax regression. To do specific experiments of your own, please change the parameters and indices accordingly to meet your specific needs.
 
 \subsection{Logistic regression}
 \begin{lstlisting}[language=Python]
-#packages
+#packages import
 %matplotlib inline
 import numpy as np
 import matplotlib.pyplot as plt
@@ -467,7 +469,7 @@ test_images = np.array(test_images)
 train_labels = np.array(train_labels).reshape([60000,1])
 test_labels = np.array(test_labels).reshape([10000,1])
 
-#extract examples with two specific digits
+#extract examples corresponding to two specific digits and change the labels to 0 and 1
 train_size = train_images.shape[0]
 test_size = test_images.shape[0]
 train_images_sub = np.zeros([784,train_size])
@@ -540,10 +542,12 @@ def propagate(w, b, X, Y, lambda_reg, reg_type):
     A = sigmoid(np.dot(w.T,X)+b)
     
     if reg_type == 2:
-        cost = -(1/m)*np.sum(np.multiply(Y,np.log(A))+np.multiply(1-Y,np.log(1-A)),keepdims=True) + (lambda_reg/2) * np.sum(np.power(w,2)) 
+        cost = -(1/m)*np.sum(np.multiply(Y,np.log(A))+np.multiply(1-Y,np.log(1-A)),
+	keepdims=True) + (lambda_reg/2) * np.sum(np.power(w,2)) 
         dw = (1/m)*(np.dot(X,(A-Y).T)) + (lambda_reg) * w
     if reg_type == 1:
-        cost = -(1/m)*np.sum(np.multiply(Y,np.log(A))+np.multiply(1-Y,np.log(1-A)),keepdims=True) + (lambda_reg) * np.sum(np.abs(w))
+        cost = -(1/m)*np.sum(np.multiply(Y,np.log(A))+np.multiply(1-Y,np.log(1-A)),
+	keepdims=True) + (lambda_reg) * np.sum(np.abs(w))
         dw = (1/m)*(np.dot(X,(A-Y).T)) + (lambda_reg) * np.sign(w)
     
     db = (1/m)*np.sum(A-Y,keepdims=True)
@@ -555,7 +559,8 @@ def propagate(w, b, X, Y, lambda_reg, reg_type):
     
     return grads, cost
 
-def optimize(w, b, X, Y, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, num_iterations, learning_rate, print_cost = False, early_stopping = True):
+def optimize(w, b, X, Y, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, num_iterations, 
+	learning_rate, print_cost = False, early_stopping = True):
 
     #This function optimizes w and b by running a gradient descent algorithm
     
@@ -584,8 +589,11 @@ def optimize(w, b, X, Y, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, num
             prediction_accuracy_early_val.append(val_temp_accuracy)
             prediction_accuracy_early_test.append(test_temp_accuracy)
             
+	    #three consecutive error increases
             if np.array(prediction_accuracy_early_val).shape[0] > 3:
-                if prediction_accuracy_early_val[i] < prediction_accuracy_early_val[i-1] and prediction_accuracy_early_val[i-1] < prediction_accuracy_early_val[i-2] and prediction_accuracy_early_val[i-2] < prediction_accuracy_early_val[i-3]:
+                if prediction_accuracy_early_val[i] < prediction_accuracy_early_val[i-1] and 
+		prediction_accuracy_early_val[i-1] < prediction_accuracy_early_val[i-2] and 
+		prediction_accuracy_early_val[i-2] < prediction_accuracy_early_val[i-3]:
                     w = w_prevprev
                     b = b_prevprev
                     print('stopped!')
@@ -624,7 +632,8 @@ def optimize(w, b, X, Y, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, num
     grads = {"dw": dw,
              "db": db}
     
-    return params, grads, training_costs, val_costs, test_costs, prediction_accuracy_early_train, prediction_accuracy_early_val, prediction_accuracy_early_test
+    return params, grads, training_costs, val_costs, test_costs, 
+	prediction_accuracy_early_train, prediction_accuracy_early_val, prediction_accuracy_early_test
 
 def predict(w, b, X):
 
@@ -643,13 +652,17 @@ def predict(w, b, X):
     return Y_prediction
 
 #batch gradient descent
-def model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, num_iterations = 5000, learning_rate = 0.5, print_cost = True, early_stopping = True):
+def model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, 
+	num_iterations = 5000, learning_rate = 0.5, print_cost = True, early_stopping = True):
 
-    #Builds the logistic regression model by calling the function you've implemented previously
+    #Builds the logistic regression model by calling the helper functions
     
     w, b = np.zeros((X_train.shape[0],1)), 0.
     
-    parameters, grads, costs, val_costs, test_costs, prediction_accuracy_early_train, prediction_accuracy_early_val, prediction_accuracy_early_test = optimize(w, b, X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, num_iterations, learning_rate, print_cost = True, early_stopping = True)
+    parameters, grads, costs, val_costs, test_costs, prediction_accuracy_early_train, 
+	prediction_accuracy_early_val, prediction_accuracy_early_test = optimize(w, b, 
+	X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, num_iterations, 
+	learning_rate, print_cost = True, early_stopping = True)
     
     w = parameters["w"]
     b = parameters["b"]
@@ -658,9 +671,12 @@ def model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, 
     Y_prediction_train = predict(w, b, X_train)
     Y_prediction_val = predict(w, b, X_val)
 
-    print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
-    print("Hold-out validation set accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_val - Y_val)) * 100))
-    print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
+    print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train))
+	 * 100))
+    print("Hold-out validation set accuracy: {} %".format(100 - np.mean(np.abs(
+	Y_prediction_val - Y_val))* 100))
+    print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test))
+	 * 100))
 
     
     d = {"costs": costs,
@@ -681,9 +697,10 @@ def model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, 
     return d
 
 #mini-batch gradient descent
-def mb_model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, batch_size, num_epoch, learning_rate, T = 2, print_cost = True, weight_decay = False):
+def mb_model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, 
+	batch_size, num_epoch, learning_rate, T = 2, print_cost = True, weight_decay = False):
 
-    #Builds the logistic regression model by calling the function you've implemented previously
+    #Builds the logistic regression model by calling the helper functions
 
     costs_mb = []
     val_costs_mb = []
@@ -694,7 +711,10 @@ def mb_model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_typ
         if weight_decay == True:
             learning_rate = learning_rate / (1 + i / T)
         for j in range(0,train_set_x.shape[1]-batch_size+1,batch_size):
-            parameters, grads, costs, val_costs, test_costs, prediction_accuracy_early_train, prediction_accuracy_early_val, prediction_accuracy_early_test = optimize(w, b, X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, 1, learning_rate, print_cost = True, early_stopping = False)
+            parameters, grads, costs, val_costs, test_costs, prediction_accuracy_early_train, 
+	    prediction_accuracy_early_val, prediction_accuracy_early_test = optimize(w, b, 
+	    X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, 1, 
+	    learning_rate, print_cost = True, early_stopping = False)
             w = parameters["w"]
             b = parameters["b"]
             costs_mb.append(costs)
@@ -705,9 +725,12 @@ def mb_model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_typ
     Y_prediction_train = predict(w, b, X_train)
     Y_prediction_val = predict(w, b, X_val)
 
-    print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
-    print("Hold-out validation set accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_val - Y_val)) * 100))
-    print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
+    print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train))
+	 * 100))
+    print("Hold-out validation set accuracy: {} %".format(100 - np.mean(np.abs(
+	Y_prediction_val - Y_val)) * 100))
+    print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test))
+	 * 100))
 
     
     d = {"costs": costs_mb,
@@ -722,16 +745,22 @@ def mb_model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_typ
     
     return d
 
-#batch gradient descent
-d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = 0, reg_type = 2, num_iterations = 5000, learning_rate = 0.01, print_cost = True, early_stopping = False)
+#training batch gradient descent
+d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, 
+	test_set_y, lambda_reg = 0, reg_type = 2, num_iterations = 5000, learning_rate = 0.01, 
+	print_cost = True, early_stopping = False)
 
-#mini-batch gradient descent
-d = mb_model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = 0, reg_type = 2, batch_size = int(0.1*train_set_x.shape[1]), num_epoch = 500, learning_rate = 0.005, T = 2, print_cost = True, weight_decay = False)
+#training mini-batch gradient descent
+d = mb_model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, 
+	test_set_y, lambda_reg = 0, reg_type = 2, batch_size = int(0.1*train_set_x.shape[1]), 
+	num_epoch = 500, learning_rate = 0.005, T = 2, print_cost = True, weight_decay = False)
 
 #weight-decay
-d = mb_model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = 0, batch_size = 500, num_epoch = 100, learning_rate = 0.01, T = 10, print_cost = True, weight_decay = True)
+d = mb_model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, 
+	test_set_y, lambda_reg = 0, batch_size = 500, num_epoch = 100, learning_rate = 0.01, 
+	T = 10, print_cost = True, weight_decay = True)
 
-#plot accuracy during the training
+#plot accuracy during the training process
 train_accuracy = np.squeeze(d['Y_prediction_train_early'])
 val_accuracy = np.squeeze(d['Y_prediction_val_early'])
 test_accuracy = np.squeeze(d['Y_prediction_test_early'])
@@ -744,7 +773,7 @@ plt.xlabel('iterations')
 plt.title("Learning rate =" + str(d["learning_rate"]))
 plt.show()
 
-#plot cost function during the training
+#plot cost function during the training process
 costs = np.squeeze(d['costs'])
 val_costs = np.squeeze(d['val_costs'])
 test_costs = np.squeeze(d['test_costs'])
@@ -756,12 +785,12 @@ plt.xlabel('iterations (per two hundreds)')
 plt.title("Learning rate =" + str(d["learning_rate"]))
 plt.show()
 
-#weight visualization
+#weight visualization after training
 w = d["w"]
 print(w.shape)
 plt.imshow(w.reshape([28,28]))
 
-#L2 regularization
+#training with L2 regularization for different lambda
 lambda_cand = [0.1, 0.03, 0.01, 0.003, 0.001, 0.0003, 0.0001]
 norm_len = []
 accuracy_train_L2 = []
@@ -771,7 +800,9 @@ final_test_set_accuracy_L2 = []
 w_L2_lambda = []
 
 for i in range(0,7):
-    d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = lambda_cand[i], reg_type = 2, num_iterations = 5000, learning_rate = 0.005, print_cost = False, early_stopping = True)
+    d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, 
+	test_set_y, lambda_reg = lambda_cand[i], reg_type = 2, num_iterations = 5000, 
+	learning_rate = 0.005, print_cost = False, early_stopping = True)
     w = d["w"]
     w_L2_lambda.append(w)
     accuracy_train_L2.append(d["Y_prediction_train_early"])
@@ -780,7 +811,7 @@ for i in range(0,7):
     norm_len.append(np.sum(np.abs(w), keepdims=True))
     final_test_set_accuracy_L2.append(d["final_test_accuracy"])
 
-#L1 regularization
+#training with L1 regularization for different lambda
 lambda_cand = [0.1, 0.03, 0.01, 0.003, 0.001, 0.0003, 0.0001]
 norm_len = []
 accuracy_train_L1 = []
@@ -790,7 +821,9 @@ w_L1_lambda = []
 final_test_set_accuracy_L1 = []
 
 for i in range(0,7):
-    d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = lambda_cand[i], reg_type = 1, num_iterations = 5000, learning_rate = 0.005, print_cost = True, early_stopping = True)
+    d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, 
+	test_set_y, lambda_reg = lambda_cand[i], reg_type = 1, num_iterations = 5000, 
+	learning_rate = 0.005, print_cost = True, early_stopping = True)
     w = d["w"]
     w_L1_lambda.append(w)
     accuracy_train_L1.append(d["Y_prediction_train_early"])
@@ -799,14 +832,15 @@ for i in range(0,7):
     norm_len.append(np.sum(np.abs(w), keepdims=True))
     final_test_set_accuracy_L1.append(d["final_test_accuracy"])
 
-#plot length of weight vector
-plt.plot(np.squeeze(np.array([0.1, 0.03, 0.01, 0.003, 0.001, 0.0003, 0.0001]).reshape(1,7)),np.squeeze(np.array(norm_len[4:11]).reshape(1,7)))
+#plot length of weight vector after training with regularization
+plt.plot(np.squeeze(np.array([0.1, 0.03, 0.01, 0.003, 0.001, 0.0003, 0.0001]).reshape(1,7)),
+	np.squeeze(np.array(norm_len[4:11]).reshape(1,7)))
 plt.ylabel('length of weight vector')
 plt.xlabel('lambda')
 plt.title("Learning rate =" + str(d["learning_rate"]))
 plt.show()
 
-#plot accuracy during training
+#plot accuracy during training process
 accuracy_train_L1_red = np.squeeze(np.array(accuracy_train_L1)[2])
 accuracy_val_L1_red = np.squeeze(np.array(accuracy_val_L1)[2])
 accuracy_test_L1_red = np.squeeze(np.array(accuracy_test_L1)[2])
@@ -820,20 +854,25 @@ plt.title("Learning rate =" + str(d["learning_rate"]) + ", " + "Lambda =" + str(
 plt.show()
 
 #plot final test accuracy with different lambda
-plt.plot(np.squeeze(np.array([0.01, 0.003, 0.001, 0.0003, 0.0001]).reshape(1,5)),np.squeeze(np.array(final_test_set_accuracy_L1[6:11]).reshape(1,5)), np.squeeze(np.array([0.01, 0.003, 0.001, 0.0003, 0.0001]).reshape(1,5)),np.squeeze(np.array(final_test_set_accuracy_L1[6:11]).reshape(1,5)), 'or')
+plt.plot(np.squeeze(np.array([0.01, 0.003, 0.001, 0.0003, 0.0001]).reshape(1,5)),
+	np.squeeze(np.array(final_test_set_accuracy_L1[6:11]).reshape(1,5)), 
+	np.squeeze(np.array([0.01, 0.003, 0.001, 0.0003, 0.0001]).reshape(1,5)),
+	np.squeeze(np.array(final_test_set_accuracy_L1[6:11]).reshape(1,5)), 'or')
 plt.ylabel('test accuracy')
 plt.ylim((95,100))
 plt.xlabel('lambda')
-plt.title("Learning rate =" + str(0.005))
+plt.title("Learning rate =" + str(d["learning_rate"]))
 plt.show()
 
-#visualize the weights
+#visualize the weights after training
 w = np.array(w_L1_lambda[0])
 print(w.shape)
 plt.imshow(w.reshape([28,28]))
 
 #test early stopping
-d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = 0, reg_type = 2, num_iterations = 5000, learning_rate = 0.005, print_cost = True, early_stopping = True)
+d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, 
+	test_set_y, lambda_reg = 0, reg_type = 2, num_iterations = 5000, 
+	learning_rate = 0.005, print_cost = True, early_stopping = True)
 
 
 
