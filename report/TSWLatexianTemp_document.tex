@@ -39,6 +39,8 @@ La Jolla, CA \\
 \begin{document}
 \maketitle
 
+\section{Abstract}
+
 \section{Logistic Regression via Gradient Descent}
 
 \subsection{Problem Definition}
@@ -128,21 +130,17 @@ We can visualize the weights learned to see what logistic regression learns thro
 
 \begin{figure}%
 	\centering
-	\subfloat[weights learned on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P4_2.png}  }}%
+	\subfloat[weights learned on classifying 2 vs. 3]{{\includegraphics[width=1.5in]{images/P4_2.png}  }}%
 	\qquad
-	\subfloat[weights learned on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P4.png}  }}%
+	\subfloat[weights learned on classifying 2 vs. 8]{{	\includegraphics[width=1.5in]{images/P4.png}  }}%
+	\qquad
+	\subfloat[Difference of the weights between the two classifiers]{{	\includegraphics[width=1.5in]{images/P5.png}  }}%
 	\caption{Weight visualization on binary classification using logistic regression}%
 	\label{fig:P4}%
 \end{figure}
 
 Computing the difference between these two different classifiers, we can get a new weight matrix visualized in Fig. \ref{fig: P5}. This result shows that the new weights can be used to accurately classify digit 3 and digit 8.
 
-\begin{figure}[t]
- \centering
- \includegraphics[width=0.4\linewidth]{images/P5.png}
- \caption{Difference of the weights between the two classifiers (2 vs. 3 and 2 vs. 8)}
- \label{fig:P5}
-\end{figure}
 
 In the next part of this section, we are going to add regularization to our model and analyze it via experiments.
 
@@ -183,22 +181,34 @@ In order to choose a reasonably good regularization model, we need to tune the r
 
 \begin{figure}%
 	\centering
-	\subfloat[accuracy when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7.png}  }}%
+	\subfloat[accuracy when lambda = 0.1 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P7_2.png}  }}%
+	\subfloat[accuracy when lambda = 0.03 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P7_2.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_3.png}  }}%
+	\subfloat[accuracy when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_3.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.003 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_4.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P7_5.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_7.png}  }}%
 	\caption{accuracy using L1 regularization}%
 	\label{fig:P7}%
 \end{figure}
 
 \begin{figure}%
 	\centering
-	\subfloat[accuracy when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8.png}  }}%
+	\subfloat[accuracy when lambda = 0.1 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_2.png}  }}%
+	\subfloat[accuracy when lambda = 0.03 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_2.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_3.png}  }}%
+	\subfloat[accuracy when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_3.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.003 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_4.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_5.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_6.png}  }}%
 	\caption{accuracy using L2 regularization}%
 	\label{fig:P8}%
 \end{figure}
@@ -234,17 +244,19 @@ We further visualize the weights learned with our regularized model.
 
 \begin{figure}%
 	\centering
-	\subfloat[weights when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.5in]{images/P10.png}  }}%
+	\subfloat[weights when lambda = 0.1 using L1 regularization]{{\includegraphics[width=1.3in]{images/P10_7.png}  }}%
+	\qquad	
+	\subfloat[weights when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.3in]{images/P10.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P10_2.png}  }}%
+	\subfloat[weights when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.3in]{images/P10_2.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.5in]{images/P10_3.png}  }}%
+	\subfloat[weights when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.3in]{images/P10_3.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P10_4.png}  }}%
+	\subfloat[weights when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.3in]{images/P10_4.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P10_5.png}  }}%
+	\subfloat[weights when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.3in]{images/P10_5.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P10_6.png}  }}%
+	\subfloat[weights when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.3in]{images/P10_6.png}  }}%
 	\caption{weights visualization using regularization}%
 	\label{fig:P10}%
 \end{figure}
@@ -296,7 +308,6 @@ Substitute Equation (5) and Equation (6) into Equation (4) we get,
 	-\frac{\partial E^n(w)}{\partial w_{jk}} = (t_k - y_k)x_j^n 
 \end{split}
 \end{equation}
-
 \textbf{Derive the gradient for Softmax Regression with Regularizations:} \\
 
 With regularization, generally the loss function can be writen as,
@@ -351,42 +362,40 @@ To further examine the performance of the algorithm, we try other $\lambda$s. We
 
 \begin{figure}[t]%
 	\centering
-	\subfloat[The percent correct over the number of training iterations for the training, hold-out and test set.]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/accuracy.png} }
-		\label{fig: 1}
+		\subfloat[The value of the loss function over the number of training iterations for the training, hold-out, and test set.]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/loss.png}  }
+		\label{fig: 11}
 	}%
 	\qquad
-	\subfloat[The value of the loss function over the number of training iterations for the training, hold-out, and test set.]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/loss.png}  }
-			\label{fig: 2}%
-		}%
+	\subfloat[The percent correct over the number of training iterations for the training, hold-out and test set.]{{\includegraphics[width=1.8in,height=1.8in]{../softmax/figs/accuracy.png} }
+		\label{fig: 12}
+	}%
 	\caption{The performance of the algorithm over the number of training iterations. }%
 \end{figure}
 
 \begin{figure}[t]
 	\centering	
 	\includegraphics[width=2.7in,height=1.2in]{../softmax/figs/image_of_weights_and_digits.png} 
-	\caption{Images of the weights and the average examples.}
-	\label{fig: 3}
+	\caption{Images of the weights and the average examples. The images in the first row are the images of the weights. The images in the second row are the images of the average examples.}
+	\label{fig: 13}
 \end{figure}
 
-(b) In this experiement, we use $L_2$ regularization with $\lambda = 0.005$. The figure is shown in Fig \ref{fig: 1}.
+(b) In this experiement, we use $L_2$ regularization with $\lambda = 0.005$. The figure is shown in Fig \ref{fig: 11}. Note that we use the sum of loss of individual data rather than the average one.
 
 
-(c) In this experiement, we use $L_2$ regularization with $\lambda = 0.005$. The figure is shown in Fig \ref{fig: 2}. Note that we use the sum of loss of individual data rather than the average one.
+(c) In this experiement, we use $L_2$ regularization with $\lambda = 0.005$. The figure is shown in Fig \ref{fig: 12}.
 
-(d) We plot the results in Fig \ref{fig: 3}. 
+(d) We plot the results in Fig \ref{fig: 13}.
 
 
 
 \subsection{Discussion}
-From \ref{fig: 1} and \ref{fig: 2} we can see that the loss function went up before going down. And the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates in the first few epoches maybe a little large but after "annealing", the learning rates are suitable enough to make the algorithm converge. Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
+From Fig \ref{fig: 11} and Fig \ref{fig: 12} and  we can see that the loss function went up before going down. And the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates in the first few epoches maybe a little large but after "annealing", the learning rates are suitable enough to make the algorithm converge. Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
 
 
-From \ref{fig: 3} we can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixels with the weights. And the inner product is maximized when the angle between the weight and the image is zero. So we see that the image of the weight and the corresponding image of the average digit is similar.
+From Fig \ref{fig: 13} we can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixels with the weights. And the inner product is maximized when the angle between the weight and the image is zero. So we see that the image of the weight and the corresponding image of the average digit is similar.
 
 \section{Summary}
 In this work, we successfully derived and implemented logistic regression (binary classification) and softmax regression (multi-class classification) for handwritten digit classification problem from scratch and achieved roughly $98\%$ classification accuracy. We also embedded regularization to prevent overfitting so that the model generalized well to the unseen test examples. Through rigorous experiments and analysis, we can systematically tune the hyper-parameters and implement model selection by looking at the error on validation set. 
-
-
 
 \subsubsection*{Acknowledgments}
 

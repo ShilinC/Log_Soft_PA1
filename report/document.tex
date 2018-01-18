@@ -81,7 +81,7 @@ where $z ^{n}= \sum_{j=0}^{m}w_{j}x_{j}^{n}$. According to the chain rule in cal
 
 Note that we can always add a factor of $1/N$ to scale the cost and gradient to somehow speed up the learning, and this will not change the optimization results (learned parameters).
 
-\subsection{Data Reading, Parsing and Feature Extraction} 
+\subsection{Data Reading, Parsing and Feature Extraction} \\
 In this work we use the famous MNIST hand written digits database created by Yann LeCun. Each image in the database contains $28 \times 28$ pixels and each pixel has a grayscale intensity, so that the input feature $x \in R^{784}$ after we unroll the 2D image into an 1D vector. To include the bias term, after reading the data, we append a '1' to the beginning of each $x$ vector so the final $x \in R^{785}$. We will use the first 20,000 training images and the last 2,000 test images. Note that for logistic regression to do binary classification, we can only use the images of two specific digit classes, so that the actual training images and test images are smaller than 20,000 and 2,000 respectively. To speed up learning, we need to apply feature normalization. For images, the most common way is to normalize the pixel values by the maximum pixel value 255. After normalization, all the values in $x$ is now ranging from 0 to 1.
 
 The following code shows how we can choose the example images corresponding to two specific digit classes. For the rest of the report, we choose two binary classification problems: 2 vs. 3 and 2 vs. 8.
@@ -131,21 +131,17 @@ We can visualize the weights learned to see what logistic regression learns thro
 
 \begin{figure}%
 	\centering
-	\subfloat[weights learned on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P4_2.png}  }}%
+	\subfloat[weights learned on classifying 2 vs. 3]{{\includegraphics[width=1.5in]{images/P4_2.png}  }}%
 	\qquad
-	\subfloat[weights learned on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P4.png}  }}%
+	\subfloat[weights learned on classifying 2 vs. 8]{{	\includegraphics[width=1.5in]{images/P4.png}  }}%
+	\qquad
+	\subfloat[Difference of the weights between the two classifiers]{{	\includegraphics[width=1.5in]{images/P5.png}  }}%
 	\caption{Weight visualization on binary classification using logistic regression}%
 	\label{fig:P4}%
 \end{figure}
 
 Computing the difference between these two different classifiers, we can get a new weight matrix visualized in Fig. \ref{fig: P5}. This result shows that the new weights can be used to accurately classify digit 3 and digit 8.
 
-\begin{figure}[t]
- \centering
- \includegraphics[width=0.4\linewidth]{images/P5.png}
- \caption{Difference of the weights between the two classifiers (2 vs. 3 and 2 vs. 8)}
- \label{fig:P5}
-\end{figure}
 
 In the next part of this section, we are going to add regularization to our model and analyze it via experiments.
 
@@ -186,22 +182,34 @@ In order to choose a reasonably good regularization model, we need to tune the r
 
 \begin{figure}%
 	\centering
-	\subfloat[accuracy when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7.png}  }}%
+	\subfloat[accuracy when lambda = 0.1 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P7_2.png}  }}%
+	\subfloat[accuracy when lambda = 0.03 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P7_2.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_3.png}  }}%
+	\subfloat[accuracy when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_3.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.003 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_4.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P7_5.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.5in]{images/P7_7.png}  }}%
 	\caption{accuracy using L1 regularization}%
 	\label{fig:P7}%
 \end{figure}
 
 \begin{figure}%
 	\centering
-	\subfloat[accuracy when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8.png}  }}%
+	\subfloat[accuracy when lambda = 0.1 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_2.png}  }}%
+	\subfloat[accuracy when lambda = 0.03 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_2.png}  }}%
 	\qquad
-	\subfloat[accuracy when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_3.png}  }}%
+	\subfloat[accuracy when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_3.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.003 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_4.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P8_5.png}  }}%
+	\qquad
+	\subfloat[accuracy when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_6.png}  }}%
 	\caption{accuracy using L2 regularization}%
 	\label{fig:P8}%
 \end{figure}
@@ -237,17 +245,19 @@ We further visualize the weights learned with our regularized model.
 
 \begin{figure}%
 	\centering
-	\subfloat[weights when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.5in]{images/P10.png}  }}%
+	\subfloat[weights when lambda = 0.1 using L1 regularization]{{\includegraphics[width=1.3in]{images/P10_7.png}  }}%
+	\qquad	
+	\subfloat[weights when lambda = 0.01 using L1 regularization]{{\includegraphics[width=1.3in]{images/P10.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.5in]{images/P10_2.png}  }}%
+	\subfloat[weights when lambda = 0.001 using L1 regularization]{{	\includegraphics[width=1.3in]{images/P10_2.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.5in]{images/P10_3.png}  }}%
+	\subfloat[weights when lambda = 0.0001 using L1 regularization]{{\includegraphics[width=1.3in]{images/P10_3.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.5in]{images/P10_4.png}  }}%
+	\subfloat[weights when lambda = 0.01 using L2 regularization]{{\includegraphics[width=1.3in]{images/P10_4.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.5in]{images/P10_5.png}  }}%
+	\subfloat[weights when lambda = 0.001 using L2 regularization]{{	\includegraphics[width=1.3in]{images/P10_5.png}  }}%
 	\qquad
-	\subfloat[weights when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P10_6.png}  }}%
+	\subfloat[weights when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.3in]{images/P10_6.png}  }}%
 	\caption{weights visualization using regularization}%
 	\label{fig:P10}%
 \end{figure}
@@ -299,7 +309,6 @@ Substitute Equation (5) and Equation (6) into Equation (4) we get,
 	-\frac{\partial E^n(w)}{\partial w_{jk}} = (t_k - y_k)x_j^n 
 \end{split}
 \end{equation}
-
 \textbf{Derive the gradient for Softmax Regression with Regularizations:} \\
 
 With regularization, generally the loss function can be writen as,
