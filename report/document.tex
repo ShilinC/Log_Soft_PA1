@@ -154,11 +154,11 @@ To prevent potential overfitting, regularization is used in logistic regression.
 where $C(w)$ represents the complexity of the model. $L1$ and $L2$ regularizations are two most common functions people use
 
 \begin{equation}
-	C(w) = ||w||^{2} = \sum_{i, j}w_{i, j}^{2}, \text{if }L2
+	C(w) = ||w||^{2} = \sum_{i, j}w_{i, j}^{2}, \text{if use $L_2$ regularization}
 \end{equation}
 
 \begin{equation}
-	C(w) = |w| = \sum_{i, j}|w_{i, j}|, \text{if }L1
+	C(w) = |w| = \sum_{i, j}|w_{i, j}|, \text{if use $L_1$ regularization}
 \end{equation}
 
 Thus the gradient of cost function on example $n$ is 
@@ -166,8 +166,8 @@ Thus the gradient of cost function on example $n$ is
 \[
     -\frac{\partial E^{n}(w)}{\partial w_{j}} = 
 \begin{cases}
-    (t^{n}-y^{n})x_{j}^{n} - 2\lambda w_{j},& \text{if } L2\\
-    (t^{n}-y^{n})x_{j}^{n} - \lambda sign(w_{j}), & \text{if } L1
+    (t^{n}-y^{n})x_{j}^{n} - 2\lambda w_{j},& \text{if use $L_2$ regularization}\\
+    (t^{n}-y^{n})x_{j}^{n} - \lambda sign(w_{j}), & \text{if use $L_1$ regularization}
 \end{cases}
 \]
 
