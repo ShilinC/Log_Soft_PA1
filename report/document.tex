@@ -225,7 +225,7 @@ If we set lambda very large as shown in Fig. \ref{fig:P11}, we can see that L1 r
 \end{figure}
 
 \textbf{Reality Check on the Length of Weight Vector}\\
-Fig. \ref{fig:P4} shows the experimental results using L1 and L2 regularization. 
+Fig. \ref{fig:P4} shows the experimental results using L1 and L2 regularization. From the figures we can see that stronger regularization will result in smaller weights since the regularization penalizes large weights. This is consistent with the mathematics of our cost function since if we use a very large $\lambda$, the optimizer will pay more attention to minimize the regularization term instead of minimizing the loss between the prediction and the ground truth labels. 
 
 \begin{figure}%
 	\centering
@@ -236,10 +236,8 @@ Fig. \ref{fig:P4} shows the experimental results using L1 and L2 regularization.
 	\label{fig:P4}%
 \end{figure}
 
-From the figures we can see that stronger regularization will result in smaller weights since the regularization penalizes large weights.
-
 \textbf{Final Test Set Error with Regularization}\\
-We also plot the final test set error with different values of the regularization parameter.
+We also plot the final test set error with different values of the regularization parameter. For L1 regularization we can see that when $\lambda$ is relatively small, the test accuracy will increase as we increase $\lambda$. This proves that regularization can sometimes make the model generalize better. In this example the performance improvement is very small since the training dataset is reasonably large and with good quality, so that overfitting is not a great issue anymore. We can also observe that when $\lambda$ is getting larger and larger, the test accuracy actually decreases (as well as on the training and validation set). This is because although strong regularization makes the model generalize well, over strong regularization will cause the model to be too simple and cannot even fit the data very well (as shown in Fig. \ref{fig:P11}). But we can conclude that using $\lambda$ between 0.0001 and 0.001 can all work reasonably well for L1 and L2 regularized model. For L2 regularization, it is more robust and less sensitive as we change $\lamda$ compared with L1 regularization.
 
 \begin{figure}%
 	\centering
@@ -251,7 +249,7 @@ We also plot the final test set error with different values of the regularizatio
 \end{figure}
 
 \textbf{Weight Visualization with Regularization}\\
-We further visualize the weights learned with our regularized model.
+We further visualize the weights learned with our regularized model, which are shown in Fig. \ref{fig:P10}. From the results we can see that when $\lambda$ increases, the learned parameters (weights) become simpler and cannot represent the data very well since we cannot see the structure of the digits anymore under the case with too large $\lambda$. But when $\lambda$ is set a good enough value, then they can learn the structure and distribution of the data quite well. From this result we can also see that L2 regularization is less sensitive as we change $\lamda$ compared with L1 regularization since L2 regularization can still make the model to learn good representations even if $\lamda$ is large.
 
 \begin{figure}%
 	\centering
