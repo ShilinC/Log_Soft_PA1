@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  17 JAN 2018 16:24
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  17 JAN 2018 16:36
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -338,21 +338,8 @@ File: se-ascii-print.def 2011/12/02 v1.10 stringenc: Printable ASCII characters
 ) [1
 
 ]
-
-/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:84: LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.84 I
-      n this work we use the famous MNIST hand written digits database created by Yann LeCun. Each image in the database contains $28 \times 28$ pixels and each pixel has a grayscale intensity, so that the input feature $x \in R^{784}$ after we unroll ...
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
 File: images/P1_2.png Graphic file (type QTm)
-<use  "images/P1_2.png" >
+ <use  "images/P1_2.png" >
 File: images/P1.png Graphic file (type QTm)
  <use  "images/P1.png" >
 File: images/P2_2.png Graphic file (type QTm)
@@ -360,13 +347,14 @@ File: images/P2_2.png Graphic file (type QTm)
 File: images/P2.png Graphic file (type QTm)
  <use  "images/P2.png" >
 
-LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 112.
-
-
-LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 115.
+LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 113.
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
+
+LaTeX Warning: Reference `fig: P1' on page 3 undefined on input line 116.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--119
 
  []
 
@@ -381,10 +369,10 @@ File: images/P4.png Graphic file (type QTm)
 File: images/P5.png Graphic file (type QTm)
  <use  "images/P5.png" >
 
-LaTeX Warning: Reference `fig: P5' on page 3 undefined on input line 142.
+LaTeX Warning: Reference `fig: P5' on page 3 undefined on input line 143.
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 6608) has occurred while \output is active []
 
  [3]
 File: images/P7.png Graphic file (type QTm)
@@ -405,116 +393,14 @@ File: images/P8_2.png Graphic file (type QTm)
  <use  "images/P8_2.png" >
 File: images/P8_3.png Graphic file (type QTm)
  <use  "images/P8_3.png" >
-
-LaTeX Warning: File `images/P8_4.png' not found on input line 207.
-
-/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:207: Unable to load picture or PDF file 'images/P8_4.png'.
-<to be read again> 
-                   }
-l.207 ...raphics[width=1.5in]{images/P8_4.png}  }}
-                                                  %
-The requested image couldn't be read because
-it was not a recognized image format.
-
-
-/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:207: Package graphics Error: Division by 0.
-
-See the graphics package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.207 ...raphics[width=1.5in]{images/P8_4.png}  }}
-                                                  %
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-File: images/P8_4.png Graphic file (type QTm)
-<use  "images/P8_4.png" >
-/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:207: Unable to load picture or PDF file 'images/P8_4.png'.
-<to be read again> 
-                   \GXT@clipend 
-l.207 ...raphics[width=1.5in]{images/P8_4.png}  }}
-                                                  %
-The requested image couldn't be read because
-it was not a recognized image format.
-
-
-LaTeX Warning: File `images/P8_5.png' not found on input line 209.
-
-/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:209: Unable to load picture or PDF file 'images/P8_5.png'.
-<to be read again> 
-                   }
-l.209 ...raphics[width=1.5in]{images/P8_5.png}  }}
-                                                  %
-The requested image couldn't be read because
-it was not a recognized image format.
-
-
-/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:209: Package graphics Error: Division by 0.
-
-See the graphics package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.209 ...raphics[width=1.5in]{images/P8_5.png}  }}
-                                                  %
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-File: images/P8_5.png Graphic file (type QTm)
-<use  "images/P8_5.png" >
-/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:209: Unable to load picture or PDF file 'images/P8_5.png'.
-<to be read again> 
-                   \GXT@clipend 
-l.209 ...raphics[width=1.5in]{images/P8_5.png}  }}
-                                                  %
-The requested image couldn't be read because
-it was not a recognized image format.
-
-
-LaTeX Warning: File `images/P8_6.png' not found on input line 211.
-
-/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:211: Unable to load picture or PDF file 'images/P8_6.png'.
-<to be read again> 
-                   }
-l.211 ...raphics[width=1.5in]{images/P8_6.png}  }}
-                                                  %
-The requested image couldn't be read because
-it was not a recognized image format.
-
-
-/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:211: Package graphics Error: Division by 0.
-
-See the graphics package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.211 ...raphics[width=1.5in]{images/P8_6.png}  }}
-                                                  %
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-File: images/P8_6.png Graphic file (type QTm)
-<use  "images/P8_6.png" >
-/Users/shilinzhu/Documents/Log_Soft_PA1/report/TSWLatexianTemp_document.tex:211: Unable to load picture or PDF file 'images/P8_6.png'.
-<to be read again> 
-                   \GXT@clipend 
-l.211 ...raphics[width=1.5in]{images/P8_6.png}  }}
-                                                  %
-The requested image couldn't be read because
-it was not a recognized image format.
-
 File: images/P6.png Graphic file (type QTm)
-<use  "images/P6.png" >
+ <use  "images/P6.png" >
 File: images/P6_2.png Graphic file (type QTm)
  <use  "images/P6_2.png" >
 File: images/P9.png Graphic file (type QTm)
  <use  "images/P9.png" >
 File: images/P9_2.png Graphic file (type QTm)
- <use  "images/P9_2.png" >
+ <use  "images/P9_2.png" > [4] [5]
 File: images/P10_7.png Graphic file (type QTm)
  <use  "images/P10_7.png" >
 File: images/P10.png Graphic file (type QTm)
@@ -528,38 +414,39 @@ File: images/P10_4.png Graphic file (type QTm)
 File: images/P10_5.png Graphic file (type QTm)
  <use  "images/P10_5.png" >
 File: images/P10_6.png Graphic file (type QTm)
- <use  "images/P10_6.png" > [4] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 310--312
-
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 348--350
+ <use  "images/P10_6.png" > [6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 311--313
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--353
+Underfull \hbox (badness 10000) in paragraph at lines 349--351
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 359--360
+Underfull \hbox (badness 10000) in paragraph at lines 352--354
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 361--362
+
+ []
+
+[8]
 File: ../softmax/figs/loss.png Graphic file (type QTm)
-<use  "../softmax/figs/loss.png" >
+ <use  "../softmax/figs/loss.png" >
 File: ../softmax/figs/accuracy.png Graphic file (type QTm)
  <use  "../softmax/figs/accuracy.png" >
 File: ../softmax/figs/image_of_weights_and_digits.png Graphic file (type QTm)
- <use  "../softmax/figs/image_of_weights_and_digits.png" > [8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 406.
- [9]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 406.
+ <use  "../softmax/figs/image_of_weights_and_digits.png" > [9]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 413.
+ [10]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 413.
  (./TSWLatexianTemp_document.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 406.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 406.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 413.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 413.
 
 
 LaTeX Warning: There were undefined references.
@@ -567,15 +454,15 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 406.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 413.
  ) 
 Here is how much of TeX's memory you used:
- 10503 strings out of 493706
- 149817 string characters out of 6145769
- 237522 words of memory out of 5000000
- 13748 multiletter control sequences out of 15000+600000
+ 10497 strings out of 493706
+ 149748 string characters out of 6145769
+ 233522 words of memory out of 5000000
+ 13745 multiletter control sequences out of 15000+600000
  10368 words of font info for 29 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
- 44i,17n,47p,1024b,379s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,17n,47p,1015b,379s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on TSWLatexianTemp_document.pdf (9 pages).
+Output written on TSWLatexianTemp_document.pdf (10 pages).
