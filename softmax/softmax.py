@@ -154,7 +154,7 @@ def train(training_images, test_images, validation_images, training_labels, test
         training_accuracy_.append(training_accuracy)
         pred_y[pred_y == 0.0] = 1e-15
         log_pred_y = np.log(pred_y)
-        training_loss = -np.sum(one_hot_training_labels * log_pred_y)  + lambd*LA.norm(weights)
+        training_loss = (-np.sum(one_hot_training_labels * log_pred_y)  + lambd*LA.norm(weights)**2) / training_images.shape[0]
         training_losses.append(training_loss)
         
         # Calculate test loss and accuracy
@@ -168,7 +168,7 @@ def train(training_images, test_images, validation_images, training_labels, test
         test_accuracy_.append(test_accuracy)
         pred_y[pred_y == 0.0] = 1e-15
         log_pred_y = np.log(pred_y)
-        test_loss = -np.sum(one_hot_test_labels * log_pred_y)  +  lambd*LA.norm(weights)
+        test_loss = (-np.sum(one_hot_test_labels * log_pred_y)  +  lambd*LA.norm(weights)**2) / test_images.shape[0]
         test_losses.append(test_loss)
         
         # Calculate validation loss and accuracy
@@ -181,9 +181,8 @@ def train(training_images, test_images, validation_images, training_labels, test
         validation_accuracy_.append(validation_accuracy)
         pred_y[pred_y == 0.0] = 1e-15
         log_pred_y = np.log(pred_y)
-        validation_loss = -np.sum(one_hot_validation_labels * log_pred_y)  +  lambd*LA.norm(weights)
+        validation_loss = (-np.sum(one_hot_validation_labels * log_pred_y)  +  lambd*LA.norm(weights)**2) / validation_images.shape[0]
         validation_losses.append(validation_loss) 
-
 
     fig1 = plt.figure(1)
     plt.plot(training_losses)
@@ -192,7 +191,7 @@ def train(training_images, test_images, validation_images, training_labels, test
     fig1.suptitle('Loss VS Epoch', fontsize=15)
     plt.legend(['training loss', 'test loss', 'validation loss'], loc='upper right')
     plt.xlabel('Epoch', fontsize=15)
-    plt.ylabel('Total loss', fontsize=15)
+    plt.ylabel('Average Loss', fontsize=15)
     fig1.show()
 
     fig2 = plt.figure(2)
@@ -250,12 +249,12 @@ if __name__ == '__main__':
     test_labels = np.array(test_labels)
 
     epoch = 300
-    inital_step_size = 0.003
-    T = 2.0
+    inital_step_size = 0.0015
+    T = 3.0
 
     lambds_set_1 = [0.01, 0.001, 0.0001]
     lambds_set_2 = [0.05, 0.005, 0.0005]
-    lambd = 0.01
+    lambd = 0.0001
     regularization_types = ["L1", "L2"]
 
     classes = 10
@@ -268,7 +267,7 @@ if __name__ == '__main__':
     one_hot_test_labels = np.eye(classes)[test_labels]  
 
     # Hyperparamter selction
-    hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
+    #hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
 
     #Training based on the best hyperparameters
-    #train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)
+    train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)

@@ -41,7 +41,7 @@ La Jolla, CA \\
 \maketitle
 
 \section{Abstract}
-In this report, we will introduce how to use logistic regression and softmax regression to do handwritten digits classification. We did extensive experiments on the MNIST datasets [2]. For 2-way classification, we can achieve an accuracy of $98\%$ if the targets are digit `2' and digit `3' and we can achieve an accuracy of $97\%$ if the targets are digit `2' and digit `8' by using logistic regression. For 10-way classification for all 10 digits, we can achieve an accuracy  of $92.7\%$ by using softmax regression.
+In this report, we will introduce how to use logistic regression and softmax regression to do handwritten digits classification. We did extensive experiments on the MNIST datasets [2]. For 2-way classification, we can achieve an accuracy of $98\%$ if the targets are digit `2' and digit `3' and we can achieve an accuracy of $97\%$ if the targets are digit `2' and digit `8' by using logistic regression. For 10-way classification for all 10 digits, we can achieve an accuracy  of $93.55\%$ by using softmax regression.
 
 \section{Logistic Regression via Gradient Descent}
 
@@ -273,16 +273,17 @@ To conclude, our logistic regression classifier is well trained and can be gener
 	\label{fig:P10}%
 \end{figure}
 
+\newpage
 \section{Softmax Regression via Gradient Descent}
 \subsection{Problem definition}
 In this problem, we need to classify MNIST datasets using softmax regression. In the experiments, we only use the first 20,000 training images and the last 2,000 test images.
 
 \subsection{Methods}
 \textbf{Derive the gradient for Softmax Regression:} \\
-The cross-entropy cost function can be expressed as,
+The cross entropy cost function can be expressed as,
 
 \begin{equation}
-	E = - \sum_{n}\sum_{k=1}^{c}t_k^n\ln y_k^n
+	E = \sum_{n=1}^{N}\sum_{k=1}^{c}t_k^n\ln y_k^n
 \end{equation}
 
 Where, 
@@ -293,6 +294,8 @@ And,
 \begin{equation}
 	a_k^n = w_k^Tx^n
 \end{equation}
+
+
 We can calculate the gradient for softmax regression as follows,
 \begin{equation}
 \begin{split}
@@ -303,7 +306,9 @@ We can calculate the gradient for softmax regression as follows,
 And 
 \begin{equation}
 \begin{split}
-\frac{\partial y^n_{k'}}{\partial a^n_k} =  y^n_{k'}\delta_{kk'} - y^n_{k
+\frac{\partial y^n_{k'}}{\partial a^n_k} &=
+\frac{\partial \frac{\exp{(a^n_{k'})}}{ \sum_{k'}\exp{(a_{k'}^n})}}{\partial a^n_k} \\
+& = y^n_{k'}\delta_{kk'} - y^n_{k
 '}y^n_{k}\\
 \end{split}
 \end{equation}
@@ -311,7 +316,7 @@ Where $\delta_{kk} = 1$ if $k = k'$, otherwise $\delta_{kk} = 0$.
 And
 \begin{equation}
 \begin{split}
-	\frac{\partial E^n(w)}{\partial y^n_{k'}} = -\frac{t^n_{k'}}{y^n_{k'}}
+	\frac{\partial E^n(w)}{\partial y^n_{k'}} = \frac{t^n_{k'}}{y^n_{k'}}
 \end{split}
 \end{equation}
 Substitute Equation (5) and Equation (6) into Equation (4) we get,
@@ -328,53 +333,58 @@ J(w) = E(w) + \lambda C(w)
 \end{equation}
 If we use $L_1$ regularization in softmax regression,
 \begin{equation}
-	\lambda C(w) = \lambda C_{L_1}(w) =   \lambda \sum_{ij}|w_{i,j}|
+	\lambda C(w) = \lambda C_{L_1}(w) =   \lambda \sum_{j,k}|w_{jk}|
 \end{equation}
 
 We can compute the derivate of $\frac{\partial C}{\partial w}$ as follows,
 \begin{equation}
-	\frac{\partial C_{L_1}(w)}{\partial w_{ij}} = sign(w_{i,j})
+	\frac{\partial C_{L_1}(w)}{\partial w_{jk}} = sign(w_{jk})
 \end{equation}
 Where $sign(x) = 1$ if $x > 0$, $sign(x) = 0$ if $x = 0$ and $sign(x) = -1$ if $x < 0$.
 
 If we use $L_2$ regularization in softmax regression,
 
 \begin{equation}
-\lambda C(w) = \lambda C_{L_2}(w) =   \lambda \sum_{ij}w_{i,j}^2
+\lambda C(w) = \lambda C_{L_2}(w) =   \lambda \sum_{j,k}w_{jk}^2
 \end{equation}
 
 We can compute the derivate of $\frac{\partial C}{\partial w}$ as follows,
 
 \begin{equation}
-\frac{\partial C_{L_2}(w)}{\partial w_{ij}} = 2w_{i,j}
+\frac{\partial C_{L_2}(w)}{\partial w_{jk}} = 2w_{jk}
 \end{equation}
 
 In summary, 
   \[
 -\frac{\partial J^n(w)}{\partial w_{j,k}} =\left\{
 \begin{array}{ll}
-(t^n_k - y^n_k)x_j^n - \lambda sign(w_{j,k}),\qquad \text{if use $L_1$ regularization} \\
-(t^n_k - y^n_k)x_j^n - 2\lambda w_{j,k}, \qquad \text{if use $L_2$ regularization}
+(t^n_k - y^n_k)x_j^n - \lambda sign(w_{jk}),\qquad \text{if use $L_1$ regularization} \\
+(t^n_k - y^n_k)x_j^n - 2\lambda w_{jk}, \qquad \text{if use $L_2$ regularization}
 \end{array}
 \right.
 \]
 \\
 
-\textbf{Preprossing}: First, we extract the first 20,000 training images and the last 2,000 test images. Then normailize the images to make sure the pixel values are in the range of [0,1]. Convert the labels to one-hot vectors. Divide the training images into two parts, the first 10\% are used for as a hold-out set and the rest 90\% are used for training.
+\textbf{Preprocessing}: First, we extract the first 20,000 training images and the last 2,000 test images. Then normailize the images to make sure the pixel values are in the range of [0,1] by dividing each pixel value by 255. And convert the labels to one-hot vectors. Divide the training images into two parts, the first 10\% are used for as a hold-out set and the rest 90\% are used for training.
 \\
 
-\textbf{Experiments settings:} We use standard normal distributions to initilize the weights. We use an initial learning rate $\eta({0})$ = 0.003 and use equation $\eta({t}) = \eta{(0)}/(1+t/T)$ to anneal the learning rate by reducing it over time. $t$ is used to index the epoch number and $T$ is a metaparameter which is set to be 2. In the
+\textbf{Experiments settings:} We use standard normal distributions to initilize the weights. We use an initial learning rate $\eta({0})$ = 0.0015 and use equation $\eta({t}) = \eta{(0)}/(1+t/T)$ to anneal the learning rate by reducing it over time. $t$ is used to index the epoch number and $T$ is a metaparameter which is set to be 3. In the
 experiements, we find that above learning settings work best.
 \\
 
-To determine the best type of regurization and the best $\lambda$, we try $L_2$ regularization and $L_1$ regularization seperately. For the $L_2$ regularizartion, we search the best $\lambda$ in the set $\{0.01, 0.001, 0.0001\}$. If the accuracy on the hold-out set decreases for 3 epochs, we stop the algorithm and use the weights with the highest accuracy on the hold-out set as the final answer. For the $L_1$ regularization, we follow the same steps. We run the 1000 epochs for each setting. \textbf{}Then we compare the results got from these two regularization methods and use the best one as the final result.
+To determine the best type of regurization and the best $\lambda$, we try $L_2$ regularization and $L_1$ regularization seperately. For the $L_2$ regularizartion, we search the best $\lambda$ in the set $\{0.01, 0.001, 0.0001\}$. If the error on the hold-out set increases for 3 epochs, we stop the algorithm and use the weights with the highest accuracy on the hold-out set as the final answer. For the $L_1$ regularization, we follow the same steps. We run the 1000 epochs for each setting. \textbf{}Then we compare the results got from these two regularization methods and use the best one as the final result.
+\\
+
+We report the average cross entropy loss in the plot because the total cost function depends on the number of training examples. 
  
 \subsection{Results}
-(a) In the experiments, we find that using $L_2$ regularization with $\lambda = 0.01$ obtain the best result on the validation set with an accuracy of $90.45\%$ on the validation set. The accuracy is $92.7\%$ on the test set under such settings. \\
+(a)In the experiments we find that if using $L_2$ regularization with $\lambda = 0.0001$ obtains the best result on the validation set with an accuracy of $90.1\%$. The accuracy is $93.55\%$ on the test set under such settings. Using $L_1$ regularization with $\lambda = 0.0001$ obtains an accuracy of $89.45\%$ on the validation set and with an accuracy of $92.95\%$ on the test set.
+\\
 
-To further examine the performance of the algorithm, we try other $\lambda$s. We choose $\lambda$ in the set $\{0.05,0.005,0.0005\}$ and use $L_1$ regularization and $L_2$ regularization. If use $L_1$ regularization, the highest accuracy on the validation set is $88.45\%$ with $\lambda = 0.0005$ and the test accuracy is $93.15\%$. If use $L_2$ regularization, the highest accuracy on the validation set is $89.65\%$ with $\lambda = 0.0005$ and the test accuracy is $93.65\%$. 
+To further examine the performance of the algorithm, we try other $\lambda$s. We choose $\lambda$ in the set $\{0.05,0.005,0.0005\}$ and use $L_1$ regularization and $L_2$ regularization. If use $L_1$ regularization, the highest accuracy on the validation set is $88.45\%$ with $\lambda = 0.0005$ and the test accuracy is $92.9\%$. If use $L_2$ regularization, the highest accuracy on the validation set is $89.85\%$ with $\lambda = 0.0005$ and the test accuracy is $93.4\%$. 
 
-Since using $L_2$ regularization with $\lambda = 0.01$ gives us the highest accuracy on the validation dataset, in the following experiments, we use $L_2$ regularization and fix $\lambda$ to be 0.01.
+
+Since using $L_2$ regularization with $\lambda = 0.0001$ gives us the highest accuracy on the validation dataset, in the following experiments, we use $L_2$ regularization and fix $\lambda$ to be 0.0001.
 
 \begin{figure}[t]%
 	\centering
@@ -395,18 +405,26 @@ Since using $L_2$ regularization with $\lambda = 0.01$ gives us the highest accu
 	\label{fig: 13}
 \end{figure}
 
-(b) In this experiement, we use $L_2$ regularization with $\lambda = 0.01$. The figure is shown in Fig \ref{fig: 11}. Note that we use the sum of loss of individual data rather than the average one.
+(b) In this experiement, we use $L_2$ regularization with $\lambda = 0.0001$. The figure is shown in Fig \ref{fig: 11}. Note that we use the sum of loss of individual data rather than the average one.
 
 
-(c) In this experiement, we use $L_2$ regularization with $\lambda = 0.01$. The figure is shown in Fig \ref{fig: 12}.
+(c) In this experiement, we use $L_2$ regularization with $\lambda = 0.0001$. The figure is shown in Fig \ref{fig: 12}.
 
 (d) We plot the results in Fig \ref{fig: 13}.
 
 
 \subsection{Discussion}
-From Fig \ref{fig: 11} and Fig \ref{fig: 12} and we can see that the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates are reasonble enough to make the loss function to converge quickly to a local minimum. Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked and if setting the learning rate too large initially makes the loss function up and down and makes it hard to converge. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
+From Fig \ref{fig: 11} and Fig \ref{fig: 12} and we can see that loss function went up and then  converges quickly and then becomes smooth. And the accuracy went up constantly accross diffrent datasets. The possible reason why the loss function went up in the first few epoches is that the learning rates maybe a little large to make to the loss function converge. But then after "annealing", we can see that the learining rates become reasonable enough to make the loss function to converge quickly to a local minimum. 
 
-From Fig \ref{fig: 13} we can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixels with the weights. And the inner product is maximized when the angle between the weight and the image is zero. Since the inner product also relies on the norm of the vectors, so we see that the image of the weight and the corresponding image of the average digit is similar but not exactly the same.
+We tried setting the learning rate smaller initially but makes the algorihtm too slow to converge or just being stucked. If we set the initial learning rate to be 0.0005, the curve of the loss function becomes smoother, but after 300 epoches, the accuracy on the test set is about $88.9\%$ and is stucked. And if setting the learning rate too large initially makes the loss function up and down and makes it hard to converge. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
+
+
+From Fig \ref{fig: 13} we can see that the image of the weight and the corresponding image of the average digit is similar. The reason is that we classify the images based on the inner product of the pixels with the weights as we can see from the function below,
+
+\begin{equation}
+y_k^n = \frac{\exp{( w_k^Tx^n)}}{ \sum_{k'}\exp{(w_{k'}^Tx^n)}}
+\end{equation}
+So for an image belongs to class $k$, we want our model to output a large $y_k$ which indicates with a high probability that the image will belong to class $k$, we should make $w_k^Tx^n$ as large as possible. And the inner product is maximized when the angle between the weight and the image is zero. so we see that the image of the weight and the corresponding image of the average digit is similar.
 
 
 \section{Summary}
@@ -431,13 +449,11 @@ We would like to thank Prof. Gary Cottrell and all TAs' efforts in preparing and
 [2] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. "Gradient-based learning applied to document recognition." Proceedings of the IEEE, 86(11):2278-2324, November 1998.
 
 \section{Code}
-<<<<<<< HEAD
-=======
+
 \subsection{Logistic regression}
 
 
 \subsection{Softmax regression}
->>>>>>> 6ad4289f9d390c09662fd2f91d8936ac168d80b8
 
 
 \end{document}
