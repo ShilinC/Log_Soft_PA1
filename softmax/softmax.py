@@ -270,5 +270,5 @@ if __name__ == '__main__':
 
     epoch = 300
     lambd = 0.0001
-    #Training based on the best hyperparameters
+    #Training based on the best hyperparameters and using L2 regularization
     train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)
