@@ -5,6 +5,7 @@
 %\documentstyle[nips14submit_09,times,art10]{article} % For LaTeX 2.09
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{listings}
 \usepackage{subfig}
 \title{Logistic and Softmax Regression for Handwritten Digits Classification}
 
@@ -353,8 +354,9 @@ In summary,
 \\
 
 \textbf{Experiments settings:} We use standard normal distributions to initilize the weights. We use an initial learning rate $\eta({0})$ = 0.003 and use equation $\eta({t}) = \eta{(0)}/(1+t/T)$ to anneal the learning rate by reducing it over time. $t$ is used to index the epoch number and $T$ is a metaparameter which is set to be 2. In the
-experiements, we find that above learning settings work best. 
-  \\
+experiements, we find that above learning settings work best for $L_1$ and $L_2$ regularization. 
+\\
+
 To determine the best type of regurization and the best $\lambda$, we try $L_2$ regularization and $L_1$ regularization seperately. For the $L_2$ regularizartion, we search the best $\lambda$ in the set $\{0.01, 0.001, 0.0001\}$. If the accuracy on the hold-out set decreases for 3 epochs, we stop the algorithm and use the weights with the highest accuracy on the hold-out set as the final answer. For the $L_1$ regularization, we follow the same steps. We run the 1000 epochs for each setting. \textbf{}Then we compare the results got from these two regularization methods and use the best one as the final result.
  
 \subsection{Results}
@@ -390,24 +392,17 @@ To further examine the performance of the algorithm, we try other $\lambda$s. We
 
 
 \subsection{Discussion}
-From Fig \ref{fig: 11} and Fig \ref{fig: 12} and we can see that the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates in the first few epoches maybe a little large but after "annealing", the learning rates are suitable enough to make the algorithm converge. 
-
-
-Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
-
-
+From Fig \ref{fig: 11} and Fig \ref{fig: 12} and we can see that the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates are reasonble enough to make the loss function to converge quickly to a local minimum. Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked and if setting the learning rate too large initially makes the loss function up and down and makes it hard to converge. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
 
 From Fig \ref{fig: 13} we can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixels with the weights. And the inner product is maximized when the angle between the weight and the image is zero. So we see that the image of the weight and the corresponding image of the average digit is similar.
-
-\subsection{}
 
 \section{Summary}
 In this work, we successfully derived and implemented logistic regression (binary classification) and softmax regression (multi-class classification) for handwritten digit classification problem from scratch and achieved roughly $98\%$ classification accuracy. We also embedded regularization to prevent overfitting so that the model generalized well to the unseen test examples. Through rigorous experiments and analysis, we can systematically tune the hyper-parameters and implement model selection by looking at the error on validation set. 
 
-\subsubsection*{Acknowledgments}
+\section{Code}
+\subsection{Logistic regression}
 
-. 
+\subsection{Softmax regression}
 
-\subsubsection*{References}
 
 \end{document}
