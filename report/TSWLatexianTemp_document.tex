@@ -5,6 +5,7 @@
 %\documentstyle[nips14submit_09,times,art10]{article} % For LaTeX 2.09
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{listings}
 \usepackage{subfig}
 \title{Logistic and Softmax Regression for Handwritten Digits Classification}
 
@@ -86,31 +87,29 @@ In this work we use the famous MNIST hand written digits database created by Yan
 
 The following code shows how we can choose the example images corresponding to two specific digit classes. For the rest of the report, we choose two binary classification problems: 2 vs. 3 and 2 vs. 8.
 
-\textit{TODO: Attach code here.}
-
 \subsection{Experimental Results}
 \textbf{Batch gradient descent}\\
 We first apply batch gradient descent rule on logistic regression since the training set is not that huge, thus batch gradient descent can work reasonably fast. 
 
 \begin{figure}%
 	\centering
-	\subfloat[cost function with iterations for batch GD on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P1_2.png}  }}%
+	\subfloat[Cost function with iterations for batch GD on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P1_2.png}  }}%
 	\qquad
-	\subfloat[cost function with iterations for batch GD on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P1.png}  }}%
+	\subfloat[Cost function with iterations for batch GD on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P1.png}  }}%
 	\caption{Cost function through batch GD training process}%
 	\label{fig:P1}%
 \end{figure}
 
 \begin{figure}%
 	\centering
-	\subfloat[cost function with iterations for mini-batch GD on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P2_2.png}  }}%
+	\subfloat[Cost function with iterations for mini-batch GD on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P2_2.png}  }}%
 	\qquad
-	\subfloat[cost function with iterations for mini-batch GD on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P2.png}  }}%
+	\subfloat[Cost function with iterations for mini-batch GD on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P2.png}  }}%
 	\caption{Cost function through mini-batch GD training process}%
 	\label{fig:P2}%
 \end{figure}
 
-After trying different values of learning rate, we found $0.005$ is a reasonably good learning rate for this problem. Fig. \ref{fig: P1}(a) plots the  loss function over training for the training set, the hold-out validation set and the test set. From the results we can see the model tries to minimize the cost and meanwhile maximize the likelihood to perform good prediction on the data.
+After trying different values of learning rate, we found $0.005$ is a reasonably good learning rate for this problem. Fig. \ref{fig: P1}(a) plots the  loss function over training for the training set, the hold-out validation set and the test set. From the results we can see the model tries to minimize the cost and meanwhile maximize the likelihood to perform good prediction on the data. Here for both 2 vs. 8 and 3 vs. 8 cases, the test set accuracies are both around $97\%$ so our model generalizes reasonably well given this large dataset used for the training.
 
 \textbf{Mini-Batch gradient descent}\\
 We can use mini-batch gradient descent to speed up learning process. Since the one-step optimization is done on a smaller mini-batch, the cost function will not monotonically decrease as batch gradient descent. Here we change the weights after a mini-batch of roughly $10\%$ of the entire training set. This set of mini-batch size can result in relatively smooth curve of the cost function. Fig. \ref{fig: P1}(b) plots the loss function over training for consecutive mini-batches. Since the validation set always has very similar errors as the test set, we can conclude the hold-out set work as a good stand-in for the test set and their underlying data distributions are same.
@@ -119,28 +118,28 @@ We can use mini-batch gradient descent to speed up learning process. Since the o
 
 \begin{figure}%
 	\centering
-	\subfloat[accuracy with iterations on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P3_2.png}  }}%
+	\subfloat[Accuracy with iterations on classifying 2 vs. 3]{{\includegraphics[width=2.5in]{images/P3_2.png}  }}%
 	\qquad
-	\subfloat[accuracy with iterations on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P3.png}  }}%
+	\subfloat[Accuracy with iterations on classifying 2 vs. 8]{{	\includegraphics[width=2.5in]{images/P3.png}  }}%
 	\caption{Accuracy through training process}%
 	\label{fig:P3}%
 \end{figure}
 
 \textbf{Weight Visualization}\\
-We can visualize the weights learned to see what logistic regression learns through the training process. 
+We can visualize the weights learned to see what logistic regression learns through the training process. Fig. \ref{fig:P4} shows that the model indeed learn the representation of numbers we want it to learn. The neurons are activated and de-activated based on the structure of the handwritten digit.
 
 \begin{figure}%
 	\centering
-	\subfloat[weights learned on classifying 2 vs. 3]{{\includegraphics[width=1.5in]{images/P4_2.png}  }}%
+	\subfloat[Weights learned on classifying 2 vs. 3]{{\includegraphics[width=1.5in]{images/P4_2.png}  }}%
 	\qquad
-	\subfloat[weights learned on classifying 2 vs. 8]{{	\includegraphics[width=1.5in]{images/P4.png}  }}%
+	\subfloat[Weights learned on classifying 2 vs. 8]{{	\includegraphics[width=1.5in]{images/P4.png}  }}%
 	\qquad
 	\subfloat[Difference of the weights between the two classifiers]{{	\includegraphics[width=1.5in]{images/P5.png}  }}%
 	\caption{Weight visualization on binary classification using logistic regression}%
 	\label{fig:P4}%
 \end{figure}
 
-Computing the difference between these two different classifiers, we can get a new weight matrix visualized in Fig. \ref{fig: P5}. This result shows that the new weights can be used to accurately classify digit 3 and digit 8.
+Computing the difference between these two different classifiers, we can get a new weight matrix visualized in Fig. \ref{fig: P5}. This result shows that the new weights can be used to accurately classify digit 3 and digit 8 since the neurons will be activated and de-activated based on these new weights.
 
 
 In the next part of this section, we are going to add regularization to our model and analyze it via experiments.
@@ -156,11 +155,11 @@ To prevent potential overfitting, regularization is used in logistic regression.
 where $C(w)$ represents the complexity of the model. $L1$ and $L2$ regularizations are two most common functions people use
 
 \begin{equation}
-	C(w) = ||w||^{2} = \sum_{i, j}w_{i, j}^{2}(L2)
+	C(w) = ||w||^{2} = \sum_{i, j}w_{i, j}^{2}, \text{if }L2
 \end{equation}
 
 \begin{equation}
-	C(w) = |w| = \sum_{i, j}|w_{i, j}|(L1)
+	C(w) = |w| = \sum_{i, j}|w_{i, j}|, \text{if }L1
 \end{equation}
 
 Thus the gradient of cost function on example $n$ is 
@@ -176,9 +175,6 @@ Thus the gradient of cost function on example $n$ is
 where $sign(w_{j})$ is the signature function of $w_{j}$. 
 
 Note that we can always add a factor of $1/N$ to scale the cost and gradient to somehow speed up the learning, and this will not change the optimization results (learned parameters).
-
-\textbf{Tuning the Regularization Parameter}\\
-In order to choose a reasonably good regularization model, we need to tune the regularization parameter and choose the one which results in the best accuracy on the hold-out validation set. Here we try three values for regularization parameter $\lambda$: 0.0001, 0.001 and 0.01. Fig. \ref{fig:P7} and Fig. \ref{fig:P8} show the results with different $\lambda$ on L1 and L2 regularization.
 
 \begin{figure}%
 	\centering
@@ -197,6 +193,11 @@ In order to choose a reasonably good regularization model, we need to tune the r
 	\label{fig:P7}%
 \end{figure}
 
+\textbf{Tuning the Regularization Parameter}\\
+In order to choose a reasonably good regularization model, we need to tune the regularization parameter and choose the one which results in the best accuracy on the hold-out validation set. Here we try three values for regularization parameter $\lambda$: 0.0001, 0.001 and 0.01. Fig. \ref{fig:P7} and Fig. \ref{fig:P8} show the results with different $\lambda$ on L1 and L2 regularization. From the experimental results we can see as soon as we do not set $\lambda$ too large, we can always get reasonably well performance (so the performance is not very sensitive to the regularization strength) if we are training our model using a large enough dataset. 
+
+If we set lambda very large as shown in Fig. \ref{fig:P11}, we can see that L1 regularization will be over strong and cause the model fail to converge and may experience underfit problem. L2 regularization is more robust against large $\lambda$ compared to L1 regularization.
+
 \begin{figure}%
 	\centering
 	\subfloat[accuracy when lambda = 0.1 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8.png}  }}%
@@ -212,6 +213,15 @@ In order to choose a reasonably good regularization model, we need to tune the r
 	\subfloat[accuracy when lambda = 0.0001 using L2 regularization]{{\includegraphics[width=1.5in]{images/P8_7.png}  }}%
 	\caption{accuracy using L2 regularization}%
 	\label{fig:P8}%
+\end{figure}
+
+\begin{figure}%
+	\centering
+	\subfloat[Accuracy when lambda = 1 using L1 regularization]{{\includegraphics[width=2.5in]{images/P11.png}  }}%
+	\qquad
+	\subfloat[Accuracy when lambda = 1 using L2 regularization]{{	\includegraphics[width=2.5in]{images/P11_2.png}  }}%
+	\caption{Setting up lambda to be very large values}%
+	\label{fig:P11}%
 \end{figure}
 
 \textbf{Reality Check on the Length of Weight Vector}\\
@@ -355,8 +365,9 @@ In summary,
 \\
 
 \textbf{Experiments settings:} We use standard normal distributions to initilize the weights. We use an initial learning rate $\eta({0})$ = 0.003 and use equation $\eta({t}) = \eta{(0)}/(1+t/T)$ to anneal the learning rate by reducing it over time. $t$ is used to index the epoch number and $T$ is a metaparameter which is set to be 2. In the
-experiements, we find that above learning settings work best. 
-  \\
+experiements, we find that above learning settings work best for $L_1$ and $L_2$ regularization. 
+\\
+
 To determine the best type of regurization and the best $\lambda$, we try $L_2$ regularization and $L_1$ regularization seperately. For the $L_2$ regularizartion, we search the best $\lambda$ in the set $\{0.01, 0.001, 0.0001\}$. If the accuracy on the hold-out set decreases for 3 epochs, we stop the algorithm and use the weights with the highest accuracy on the hold-out set as the final answer. For the $L_1$ regularization, we follow the same steps. We run the 1000 epochs for each setting. \textbf{}Then we compare the results got from these two regularization methods and use the best one as the final result.
  
 \subsection{Results}
@@ -392,24 +403,17 @@ To further examine the performance of the algorithm, we try other $\lambda$s. We
 
 
 \subsection{Discussion}
-From Fig \ref{fig: 11} and Fig \ref{fig: 12} and we can see that the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates in the first few epoches maybe a little large but after "annealing", the learning rates are suitable enough to make the algorithm converge. 
-
-
-Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
-
-
+From Fig \ref{fig: 11} and Fig \ref{fig: 12} and we can see that the accuracy and loss function converges quickly and then becomes smooth. The plausible reason is that the learining rates are reasonble enough to make the loss function to converge quickly to a local minimum. Setting the learning rate too small initially may let the algorihtm too slow to converge or just being stucked and if setting the learning rate too large initially makes the loss function up and down and makes it hard to converge. And we also see that there is no overfitting occurs. One possible reason for this is that the impact of the regularization. Another one is that the algorithm correctly learns the pattern underlying the data at hand.
 
 From Fig \ref{fig: 13} we can see that the image of the weight and the corresponding image of the average digit is almost the same. The reason is that we classify the images based on the inner product of the pixels with the weights. And the inner product is maximized when the angle between the weight and the image is zero. So we see that the image of the weight and the corresponding image of the average digit is similar.
-
-\subsection{}
 
 \section{Summary}
 In this work, we successfully derived and implemented logistic regression (binary classification) and softmax regression (multi-class classification) for handwritten digit classification problem from scratch and achieved roughly $98\%$ classification accuracy. We also embedded regularization to prevent overfitting so that the model generalized well to the unseen test examples. Through rigorous experiments and analysis, we can systematically tune the hyper-parameters and implement model selection by looking at the error on validation set. 
 
-\subsubsection*{Acknowledgments}
+\section{Code}
+\subsection{Logistic regression}
 
-. 
+\subsection{Softmax regression}
 
-\subsubsection*{References}
 
 \end{document}

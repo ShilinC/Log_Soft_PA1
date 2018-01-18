@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  17 JAN 2018 16:49
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  17 JAN 2018 17:15
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -246,35 +246,58 @@ Package graphics Info: Driver file: xetex.def on input line 94.
 )
 \Gin@req@height=\dimen119
 \Gin@req@width=\dimen120
-) (/usr/local/texlive/2015/texmf-dist/tex/latex/subfig/subfig.sty
+) (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count116
+\lst@gtempboxa=\box31
+\lst@token=\toks20
+\lst@length=\count117
+\lst@currlwidth=\dimen121
+\lst@column=\count118
+\lst@pos=\count119
+\lst@lostspace=\dimen122
+\lst@width=\dimen123
+\lst@newlines=\count120
+\lst@lineno=\count121
+\lst@maxwidth=\dimen124
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+\c@lstnumber=\count122
+\lst@skipnumbers=\count123
+\lst@framebox=\box32
+) (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2014/09/06 1.5e listings configuration
+))
+Package: listings 2014/09/06 1.5e (Carsten Heinz)
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
  (/usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
  (/usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
-\captionmargin=\dimen121
-\captionmargin@=\dimen122
-\captionwidth=\dimen123
-\caption@tempdima=\dimen124
-\caption@indent=\dimen125
-\caption@parindent=\dimen126
-\caption@hangindent=\dimen127
+\captionmargin=\dimen125
+\captionmargin@=\dimen126
+\captionwidth=\dimen127
+\caption@tempdima=\dimen128
+\caption@indent=\dimen129
+\caption@parindent=\dimen130
+\caption@hangindent=\dimen131
 )
-\c@ContinuedFloat=\count116
+\c@ContinuedFloat=\count124
 Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
 )
-\c@KVtest=\count117
+\c@KVtest=\count125
 \sf@farskip=\skip47
-\sf@captopadj=\dimen128
+\sf@captopadj=\dimen132
 \sf@capskip=\skip48
 \sf@nearskip=\skip49
-\c@subfigure=\count118
-\c@subfigure@save=\count119
-\c@lofdepth=\count120
-\c@subtable=\count121
-\c@subtable@save=\count122
-\c@lotdepth=\count123
+\c@subfigure=\count126
+\c@subfigure@save=\count127
+\c@lofdepth=\count128
+\c@subtable=\count129
+\c@subtable@save=\count130
+\c@lotdepth=\count131
 \sf@top=\skip50
 \sf@bottom=\skip51
 ) (./TSWLatexianTemp_document.aux
@@ -284,55 +307,56 @@ LaTeX Warning: Label `fig:P4' multiply defined.
 )
 \openout1 = `TSWLatexianTemp_document.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 39.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 40.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
-\AtBeginShipoutBox=\box31
-Package hyperref Info: Link coloring OFF on input line 39.
+\AtBeginShipoutBox=\box33
+Package hyperref Info: Link coloring OFF on input line 40.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
  (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count124
+\c@section@level=\count132
 )
-LaTeX Info: Redefining \ref on input line 39.
-LaTeX Info: Redefining \pageref on input line 39.
-LaTeX Info: Redefining \nameref on input line 39.
+LaTeX Info: Redefining \ref on input line 40.
+LaTeX Info: Redefining \pageref on input line 40.
+LaTeX Info: Redefining \nameref on input line 40.
  (./TSWLatexianTemp_document.out) (./TSWLatexianTemp_document.out)
 \@outlinefile=\write3
 \openout3 = `TSWLatexianTemp_document.out'.
 
+\c@lstlisting=\count133
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 41.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 41.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 41.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 42.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
  (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
 File: se-ascii-print.def 2011/12/02 v1.10 stringenc: Printable ASCII characters
 ) [1
@@ -347,14 +371,14 @@ File: images/P2_2.png Graphic file (type QTm)
 File: images/P2.png Graphic file (type QTm)
  <use  "images/P2.png" >
 
-LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 113.
+LaTeX Warning: Reference `fig: P1' on page 2 undefined on input line 112.
 
 [2]
 
-LaTeX Warning: Reference `fig: P1' on page 3 undefined on input line 116.
+LaTeX Warning: Reference `fig: P1' on page 3 undefined on input line 115.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--119
+Underfull \hbox (badness 10000) in paragraph at lines 117--118
 
  []
 
@@ -369,12 +393,9 @@ File: images/P4.png Graphic file (type QTm)
 File: images/P5.png Graphic file (type QTm)
  <use  "images/P5.png" >
 
-LaTeX Warning: Reference `fig: P5' on page 3 undefined on input line 143.
+LaTeX Warning: Reference `fig: P5' on page 3 undefined on input line 142.
 
-
-Underfull \vbox (badness 6608) has occurred while \output is active []
-
- [3]
+[3]
 File: images/P7.png Graphic file (type QTm)
  <use  "images/P7.png" >
 File: images/P7_2.png Graphic file (type QTm)
@@ -399,92 +420,101 @@ File: images/P8_5.png Graphic file (type QTm)
  <use  "images/P8_5.png" >
 File: images/P8_7.png Graphic file (type QTm)
  <use  "images/P8_7.png" >
+File: images/P11.png Graphic file (type QTm)
+ <use  "images/P11.png" >
+File: images/P11_2.png Graphic file (type QTm)
+ <use  "images/P11_2.png" >
 File: images/P6.png Graphic file (type QTm)
  <use  "images/P6.png" >
 File: images/P6_2.png Graphic file (type QTm)
- <use  "images/P6_2.png" >
+ <use  "images/P6_2.png" > [4] [5]
 File: images/P9.png Graphic file (type QTm)
  <use  "images/P9.png" >
 File: images/P9_2.png Graphic file (type QTm)
- <use  "images/P9_2.png" > [4] [5]
+ <use  "images/P9_2.png" >
 File: images/P10_7.png Graphic file (type QTm)
  <use  "images/P10_7.png" >
-Underfull \hbox (badness 10000) in paragraph at lines 248--248
+Underfull \hbox (badness 10000) in paragraph at lines 258--258
 []\OT1/ptm/m/n/9 (a) |weights when
  []
 
 File: images/P10.png Graphic file (type QTm)
 <use  "images/P10.png" >
-Underfull \hbox (badness 10000) in paragraph at lines 250--250
+Underfull \hbox (badness 10000) in paragraph at lines 260--260
 []\OT1/ptm/m/n/9 (b) |weights when
  []
 
 File: images/P10_2.png Graphic file (type QTm)
 <use  "images/P10_2.png" >
-Underfull \hbox (badness 10000) in paragraph at lines 252--252
+Underfull \hbox (badness 10000) in paragraph at lines 262--262
 []\OT1/ptm/m/n/9 (c) |weights when
  []
 
 File: images/P10_3.png Graphic file (type QTm)
 <use  "images/P10_3.png" >
-Underfull \hbox (badness 10000) in paragraph at lines 254--254
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
 []\OT1/ptm/m/n/9 (d) |weights when
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--254
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
 \OT1/ptm/m/n/9 lambda = 0.0001
  []
 
 File: images/P10_8.png Graphic file (type QTm)
 <use  "images/P10_8.png" >
-Underfull \hbox (badness 10000) in paragraph at lines 256--256
+Underfull \hbox (badness 10000) in paragraph at lines 266--266
 []\OT1/ptm/m/n/9 (e) |weights when
  []
 
 File: images/P10_4.png Graphic file (type QTm)
 <use  "images/P10_4.png" >
-Underfull \hbox (badness 10000) in paragraph at lines 258--258
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 []\OT1/ptm/m/n/9 (f) |weights when
  []
 
 File: images/P10_5.png Graphic file (type QTm)
 <use  "images/P10_5.png" >
-Underfull \hbox (badness 10000) in paragraph at lines 260--260
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
 []\OT1/ptm/m/n/9 (g) |weights when
  []
 
 File: images/P10_6.png Graphic file (type QTm)
 <use  "images/P10_6.png" >
-Underfull \hbox (badness 10000) in paragraph at lines 262--262
+Underfull \hbox (badness 10000) in paragraph at lines 272--272
 []\OT1/ptm/m/n/9 (h) |weights when
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 262--262
+Underfull \hbox (badness 10000) in paragraph at lines 272--272
 \OT1/ptm/m/n/9 lambda = 0.0001
  []
 
 
-Underfull \vbox (badness 1681) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [6]
-Underfull \hbox (badness 10000) in paragraph at lines 313--315
-
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 351--353
+ [6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 323--325
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 354--356
+Underfull \hbox (badness 10000) in paragraph at lines 361--363
+
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 364--366
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 363--364
+Underfull \hbox (badness 10000) in paragraph at lines 367--370
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 374--375
 
  []
 
@@ -493,13 +523,13 @@ File: ../softmax/figs/loss.png Graphic file (type QTm)
 File: ../softmax/figs/accuracy.png Graphic file (type QTm)
  <use  "../softmax/figs/accuracy.png" >
 File: ../softmax/figs/image_of_weights_and_digits.png Graphic file (type QTm)
- <use  "../softmax/figs/image_of_weights_and_digits.png" > [8] [9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 415.
+ <use  "../softmax/figs/image_of_weights_and_digits.png" > [9]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 419.
  [10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 415.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 419.
  (./TSWLatexianTemp_document.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 415.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 415.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 419.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 419.
 
 
 LaTeX Warning: There were undefined references.
@@ -507,15 +537,15 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 415.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 419.
  ) 
 Here is how much of TeX's memory you used:
- 10505 strings out of 493706
- 149842 string characters out of 6145769
- 234522 words of memory out of 5000000
- 13749 multiletter control sequences out of 15000+600000
- 10368 words of font info for 29 fonts, out of 8000000 for 9000
+ 11677 strings out of 493706
+ 167186 string characters out of 6145769
+ 252654 words of memory out of 5000000
+ 14908 multiletter control sequences out of 15000+600000
+ 9820 words of font info for 28 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
- 44i,17n,47p,1015b,379s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,17n,47p,1015b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on TSWLatexianTemp_document.pdf (10 pages).

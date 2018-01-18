@@ -10,5 +10,7 @@
 \BOOKMARK [2][-]{subsection.3.2}{Methods}{section.3}% 10
 \BOOKMARK [2][-]{subsection.3.3}{Results}{section.3}% 11
 \BOOKMARK [2][-]{subsection.3.4}{Discussion}{section.3}% 12
-\BOOKMARK [2][-]{subsection.3.5}{}{section.3}% 13
-\BOOKMARK [1][-]{section.4}{Summary}{}% 14
+\BOOKMARK [1][-]{section.4}{Summary}{}% 13
+\BOOKMARK [1][-]{section.5}{Code}{}% 14
+\BOOKMARK [2][-]{subsection.5.1}{Logistic\040regression}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.2}{Softmax\040regression}{section.5}% 16
