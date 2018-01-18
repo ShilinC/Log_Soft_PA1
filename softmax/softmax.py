@@ -1,3 +1,5 @@
+#!/usr/bin/python 
+
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -9,7 +11,9 @@ sys.path.append('../python-mnist/')
 from mnist import MNIST
 
 # Find best hyperparameters 
-def hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds, weights, inital_step_size, T, epoch, classes, dimensions):
+def hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, \
+    validation_images, validation_labels, regularization_types, \
+    lambds, weights, inital_step_size, T, epoch, classes, dimensions):
 
     best_validation_weights_L2 = np.random.randn(dimensions, classes).astype(np.float32) 
     best_validation_lamdb_L2 = 0
@@ -103,25 +107,31 @@ def hyper_parameters_tuning(training_images, one_hot_training_labels, test_image
     print "best validation with L2 " + str(best_validation_accuracy_L2)
     print "best validation with L2 when lambd = " + str(best_validation_lamdb_L2)
 
-    a = np.matmul(test_images, best_validation_weights_L1) # 18000, 10
+    # Claculate test accuracy using L1 regularization with the weights achieve highest 
+    # accuracy on the validation set
+    a = np.matmul(test_images, best_validation_weights_L1) 
     a_max = np.max(a,1).reshape(a.shape[0],1)
-    sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) # 18000, 1
-    pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) # 18000, 10
+    sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1)
+    pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
     pred_class = np.argmax(pred_y, axis=1)
     test_accuracy = np.sum(pred_class == test_labels)/(pred_class.shape[0]+0.0)
     print "test accuracy if using L1 " + str(test_accuracy) 
 
-    a = np.matmul(test_images, best_validation_weights_L2) # 18000, 10
+    # Claculate test accuracy using L2 regularization with the weights achieve highest 
+    # accuracy on the validation set
+    a = np.matmul(test_images, best_validation_weights_L2) 
     a_max = np.max(a,1).reshape(a.shape[0],1)
-    sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) # 18000, 1
-    pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) # 18000, 10
+    sum_exp_a = np.sum(np.exp(a - a_max),1).reshape(a.shape[0],1) 
+    pred_y = np.exp(a - a_max) / (sum_exp_a+0.0) 
     pred_class = np.argmax(pred_y, axis=1)
     test_accuracy = np.sum(pred_class == test_labels)/(pred_class.shape[0]+0.0)
 
     print "test accuracy if using L2 " + str(test_accuracy) 
 
 
-def train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights):
+def train(training_images, test_images, validation_images, training_labels, test_labels, \
+    validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, \
+    lambd, epoch, inital_step_size, T, weights):
 
     training_losses = []
     test_losses = []
@@ -241,22 +251,23 @@ if __name__ == '__main__':
     test_images = [[1] + image for image in test_images]
 
     # Normalize data
-    training_images = np.array(training_images_old[2000:]) / 255.0# (18000, 785)
+    training_images = np.array(training_images_old[2000:]) / 255.0
     training_labels = np.array(training_labels_old[2000:]) 
     validation_images = np.array(training_images_old[:2000]) / 255.0
     validation_labels = np.array(training_labels_old[:2000])
     test_images = np.array(test_images) / 255.0
     test_labels = np.array(test_labels)
 
-    epoch_for_tuning_parameters = 1000
+    epoch_for_tuning_parameters = 10
     inital_step_size = 0.0015
     T = 3.0
 
+    # trying different lambdas
     lambds_set_1 = [0.01, 0.001, 0.0001]
     lambds_set_2 = [0.05, 0.005, 0.0005]
     regularization_types = ["L1", "L2"]
 
-    classes = 10
+    classes = 1000
     dimensions = 785
     # Weight initialization
     weights = np.random.randn(dimensions, classes).astype(np.float32)  #
@@ -266,9 +277,14 @@ if __name__ == '__main__':
     one_hot_test_labels = np.eye(classes)[test_labels]  
 
     # Hyperparamter selction
-    hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch_for_tuning_parameters, classes, dimensions)
+    hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, \
+        validation_images, validation_labels, regularization_types, lambds_set_1, weights, \
+        inital_step_size, T, epoch_for_tuning_parameters, classes, dimensions)
 
     epoch = 300
+    # This lambd is used with L2 regularization and achieved the highest accuracy on the validation set 
     lambd = 0.0001
     #Training based on the best hyperparameters and using L2 regularization
-    train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)
+    train(training_images, test_images, validation_images, training_labels, test_labels, \
+        validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, \
+        lambd, epoch, inital_step_size, T, weights)

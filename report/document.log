@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.1)  17 JAN 2018 22:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.1)  17 JAN 2018 23:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -743,51 +743,231 @@ Underfull \vbox (badness 1038) has occurred while \output is active []
 
  [10 <../softmax/figs/loss.png> <../softmax/figs/accuracy.png> <../softmax/figs
 /image_of_weights_and_digits.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 459.
- [11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 459.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 456.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 475.
+
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 475.
+
+Overfull \hbox (126.32034pt too wide) in paragraph at lines 475--476
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[11]
+Overfull \hbox (56.11963pt too wide) in paragraph at lines 479--480
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (56.11963pt too wide) in paragraph at lines 483--484
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (23.7193pt too wide) in paragraph at lines 497--498
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (72.3198pt too wide) in paragraph at lines 513--515
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 515.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/omlptm.fd
+File: omlptm.fd 
+)
+LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 515.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12]
+Overfull \hbox (72.3198pt too wide) in paragraph at lines 551--553
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (18.31924pt too wide) in paragraph at lines 567--568
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (18.31924pt too wide) in paragraph at lines 569--571
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (45.31952pt too wide) in paragraph at lines 571--572
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (7.51913pt too wide) in paragraph at lines 578--579
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (45.31952pt too wide) in paragraph at lines 581--582
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (7.51913pt too wide) in paragraph at lines 588--590
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (88.51996pt too wide) in paragraph at lines 593--594
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (104.72012pt too wide) in paragraph at lines 594--595
+[][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13]
+Overfull \hbox (23.7193pt too wide) in paragraph at lines 609--610
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (50.71957pt too wide) in paragraph at lines 624--625
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 628--629
+[][][][][][][][][][][][][][][][][][][][]
+ []
+
+
+Overfull \hbox (7.51913pt too wide) in paragraph at lines 637--638
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 642--643
+[][][][][][][][][][][][][][][][][][][][][][][][]
+ []
+
+
+Overfull \hbox (72.3198pt too wide) in paragraph at lines 651--652
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 655--656
+[][][][][][][][][][][][][][][][][][][][][][][][]
+ []
+
+
+Overfull \hbox (34.51941pt too wide) in paragraph at lines 663--664
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [14]
+Overfull \hbox (99.32007pt too wide) in paragraph at lines 673--674
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (12.91919pt too wide) in paragraph at lines 697--698
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15]
+Overfull \hbox (104.72012pt too wide) in paragraph at lines 741--742
+[][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (56.11963pt too wide) in paragraph at lines 742--743
+[][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (137.12045pt too wide) in paragraph at lines 746--747
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (66.91974pt too wide) in paragraph at lines 749--750
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (104.72012pt too wide) in paragraph at lines 750--751
+[][][][][][][][][][][][][][][][] 
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 754.
+[16]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 754.
  (./document.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 459.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 459.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 754.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 754.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 69544F128721BCE0CF8555BA454107BD;1135.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 459.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 754.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 446 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 8953 strings out of 493014
- 134219 string characters out of 6133352
- 231248 words of memory out of 5000000
- 12274 multiletter control sequences out of 15000+600000
- 15236 words of font info for 33 fonts, out of 8000000 for 9000
+ 9622 strings out of 493014
+ 143636 string characters out of 6133352
+ 297753 words of memory out of 5000000
+ 12623 multiletter control sequences out of 15000+600000
+ 20821 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,19n,49p,1165b,383s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,19n,49p,1165b,1758s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc
 }</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.p
 fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pf
 b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/201
-6/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/texmf-di
-st/fonts/type1/urw/times/utmr8a.pfb>
-Output written on document.pdf (11 pages, 806156 bytes).
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2016/te
+xmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/texmf-dist/f
+onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
+/urw/times/utmri8a.pfb>
+Output written on document.pdf (16 pages, 790021 bytes).
 PDF statistics:
- 370 PDF objects out of 1000 (max. 8388607)
- 264 compressed objects within 3 object streams
- 101 named destinations out of 1000 (max. 500000)
+ 763 PDF objects out of 1000 (max. 8388607)
+ 645 compressed objects within 7 object streams
+ 401 named destinations out of 1000 (max. 500000)
  327 words of extra memory for PDF output out of 10000 (max. 10000000)
 
