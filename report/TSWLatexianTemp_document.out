@@ -1,9 +1,9 @@
 \BOOKMARK [1][-]{section.1}{Abstract}{}% 1
 \BOOKMARK [1][-]{section.2}{Logistic\040Regression\040via\040Gradient\040Descent}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Problem\040Definition}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{Mathematical\040Derivation\040of\040Gradient}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.2}{Mathematical\040Derivation\040and\040Methods}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Data\040Reading,\040Parsing\040and\040Feature\040Extraction}{section.2}% 5
-\BOOKMARK [2][-]{subsection.2.4}{Experimental\040Results}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.4}{Experimental\040Results\040and\040Discussion}{section.2}% 6
 \BOOKMARK [2][-]{subsection.2.5}{Derive\040the\040gradient\040for\040regularized\040logistic\040regression:}{section.2}% 7
 \BOOKMARK [1][-]{section.3}{Softmax\040Regression\040via\040Gradient\040Descent}{}% 8
 \BOOKMARK [2][-]{subsection.3.1}{Problem\040definition}{section.3}% 9

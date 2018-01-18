@@ -41,14 +41,14 @@ La Jolla, CA \\
 \maketitle
 
 \section{Abstract}
-In this report, we will introduce how to use logistic regression and softmax regression to do handwritten digits classification. We did extensive experiments on the MNIST datasets. For 2-way classification, we can achieve an accuracy of $98\%$ if the targets are digit `2' and digit `3' and we can achieve an accuracy of $97\%$ if the targets are digit `2' and digit `8' by using logistic regression. For 10-way classification, we can achieve an accuracy  of $92.7\%$ by using softmax regression.
+In this report, we will introduce how to use logistic regression and softmax regression to do handwritten digits classification. We did extensive experiments on the MNIST datasets [2]. For 2-way classification, we can achieve an accuracy of $98\%$ if the targets are digit `2' and digit `3' and we can achieve an accuracy of $97\%$ if the targets are digit `2' and digit `8' by using logistic regression. For 10-way classification for all 10 digits, we can achieve an accuracy  of $92.7\%$ by using softmax regression.
 
 \section{Logistic Regression via Gradient Descent}
 
 \subsection{Problem Definition}
 In this work, we realize the handwritten digit classification using MNIST database. Our goal is to accurately and robustly recognize what number is present in a new image. In this section we will first use logistic regression to classify only two digit classes (binary classification), later in the next section we will use softmax regression to generalize logistic regression into $N$ classes.
 
-\subsection{Mathematical Derivation of Gradient}
+\subsection{Mathematical Derivation and Methods}
 \textbf{Derive the gradient for logistic regression:} \\
 The cross-entropy cost function can be expressed as
 
@@ -87,7 +87,7 @@ In this work we use the famous MNIST hand written digits database created by Yan
 
 The following code shows how we can choose the example images corresponding to two specific digit classes. For the rest of the report, we choose two binary classification problems: 2 vs. 3 and 2 vs. 8.
 
-\subsection{Experimental Results}
+\subsection{Experimental Results and Discussion}
 \textbf{Batch gradient descent}\\
 We first apply batch gradient descent rule on logistic regression since the training set is not that huge, thus batch gradient descent can work reasonably fast. 
 
@@ -410,6 +410,13 @@ From Fig \ref{fig: 13} we can see that the image of the weight and the correspon
 
 \section{Summary}
 In this work, we successfully derived and implemented logistic regression (binary classification) and softmax regression (multi-class classification) for handwritten digit classification problem from scratch and achieved roughly $98\%$ classification accuracy. We also embedded regularization to prevent overfitting so that the model generalized well to the unseen test examples. Through rigorous experiments and analysis, we can systematically tune the hyper-parameters and implement model selection by looking at the error on validation set. 
+
+\subsubsection*{References}
+
+\small{
+[1] Bishop, C. M. (1995). Neural networks for pattern recognition. Oxford university press.
+
+[2] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. "Gradient-based learning applied to document recognition." Proceedings of the IEEE, 86(11):2278-2324, November 1998.
 
 \section{Code}
 \subsection{Logistic regression}
