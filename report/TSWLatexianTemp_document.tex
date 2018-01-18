@@ -455,6 +455,224 @@ We would like to thank Prof. Gary Cottrell and all TAs' efforts in preparing and
 %matplotlib inline
 import numpy as np
 import matplotlib.pyplot as plt
+from mnist import MNIST
+mndata = MNIST('./python-mnist/data')
+train_images, train_labels = mndata.load_training()
+test_images, test_labels = mndata.load_testing()
+train_images = np.array(train_images)
+test_images = np.array(test_images)
+train_labels = np.array(train_labels).reshape([60000,1])
+test_labels = np.array(test_labels).reshape([10000,1])
+
+train_size = train_images.shape[0]
+test_size = test_images.shape[0]
+train_images_sub = np.zeros([784,train_size])
+train_labels_sub = np.zeros([1,train_size])
+test_images_sub = np.zeros([784,test_size])
+test_labels_sub = np.zeros([1,test_size])
+counter = 0
+for i in range(0,train_size):
+    if train_labels[i][0] == 2 or train_labels[i][0] == 8:
+        train_images_sub[:,counter] = train_images[i,:]
+        if train_labels[i][0] == 2:
+            train_labels_sub[:,counter] = train_labels[i,:]-2
+        if train_labels[i][0] == 8:
+            train_labels_sub[:,counter] = train_labels[i,:]-7
+        counter = counter + 1
+        if counter == 20000:
+            break
+        
+validation_images_sub = train_images_sub[:,0:int(counter*0.1)]
+validation_labels_sub = train_labels_sub[:,0:int(counter*0.1)]
+train_images_sub = train_images_sub[:,int(counter*0.1)+1:counter-1]
+train_labels_sub = train_labels_sub[:,int(counter*0.1)+1:counter-1]
+
+counter = 0
+for i in range(0,test_size):
+    if test_labels[i][0] == 2 or test_labels[i][0] == 8:
+        test_images_sub[:,counter] = test_images[i,:]
+        if test_labels[i][0] == 2:
+            test_labels_sub[:,counter] = test_labels[i,:]-2
+        if test_labels[i][0] == 8:
+            test_labels_sub[:,counter] = test_labels[i,:]-7
+        counter = counter + 1        
+        if counter == 2000:
+            break;
+        
+test_images_sub = test_images_sub[:,0:counter-1]
+test_labels_sub = test_labels_sub[:,0:counter-1]
+
+validation_set_x = validation_images_sub/255.
+validation_set_y = validation_labels_sub
+train_set_x = train_images_sub/255.
+test_set_x = test_images_sub/255.
+train_set_y = train_labels_sub
+test_set_y = test_labels_sub
+
+def sigmoid(z):
+
+    #Compute the sigmoid of z
+
+    a = 1/(1+np.exp(-z))  
+    return a
+
+def initialize_with_zeros(dim):
+
+    #This function creates a vector of zeros of shape (dim, 1) for w and initializes b to 0.
+
+    w = np.zeros([dim,1])
+    b = 0
+    
+    return w, b
+
+def propagate(w, b, X, Y, lambda_reg, reg_type):
+   
+    #Implement the cost function and its gradient for the propagation
+    
+    m = X.shape[1]
+    A = sigmoid(np.dot(w.T,X)+b)
+    
+    if reg_type == 2:
+        cost = -(1/m)*np.sum(np.multiply(Y,np.log(A))+np.multiply(1-Y,np.log(1-A)),keepdims=True) + (lambda_reg/2) * np.sum(np.power(w,2)) 
+        dw = (1/m)*(np.dot(X,(A-Y).T)) + (lambda_reg) * w
+    if reg_type == 1:
+        cost = -(1/m)*np.sum(np.multiply(Y,np.log(A))+np.multiply(1-Y,np.log(1-A)),keepdims=True) + (lambda_reg) * np.sum(np.abs(w))
+        dw = (1/m)*(np.dot(X,(A-Y).T)) + (lambda_reg) * np.sign(w)
+    
+    db = (1/m)*np.sum(A-Y,keepdims=True)
+
+    cost = np.squeeze(cost)
+    
+    grads = {"dw": dw,
+             "db": db}
+    
+    return grads, cost
+
+def optimize(w, b, X, Y, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, num_iterations, learning_rate, print_cost = False, early_stopping = True):
+
+    #This function optimizes w and b by running a gradient descent algorithm
+    
+    training_costs = []
+    val_costs = []
+    test_costs = []
+    w_prev = w
+    w_prevprev = w
+    b_prev = b
+    b_prevprev = b
+    prediction_accuracy_early_train = []
+    prediction_accuracy_early_val = []
+    prediction_accuracy_early_test = []
+
+    for i in range(num_iterations):
+        if early_stopping == True:
+            Y_prediction_test = predict(w, b, X_test)
+            Y_prediction_train = predict(w, b, X)
+            Y_prediction_val = predict(w, b, X_val)
+            
+            train_temp_accuracy = 100 - np.mean(np.abs(Y_prediction_train - Y)) * 100;
+            val_temp_accuracy = 100 - np.mean(np.abs(Y_prediction_val - Y_val)) * 100;
+            test_temp_accuracy = 100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100;
+            
+            prediction_accuracy_early_train.append(train_temp_accuracy)
+            prediction_accuracy_early_val.append(val_temp_accuracy)
+            prediction_accuracy_early_test.append(test_temp_accuracy)
+            
+            if np.array(prediction_accuracy_early_val).shape[0] > 3:
+                if prediction_accuracy_early_val[i] < prediction_accuracy_early_val[i-1] and prediction_accuracy_early_val[i-1] < prediction_accuracy_early_val[i-2] and prediction_accuracy_early_val[i-2] < prediction_accuracy_early_val[i-3]:
+                    w = w_prevprev
+                    b = b_prevprev
+                    print('stopped!')
+                    break
+    
+        
+        grads, cost = propagate(w, b, X, Y, lambda_reg, reg_type)
+        val_grads, val_cost = propagate(w, b, X_val, Y_val, lambda_reg, reg_type)
+        test_grads, test_cost = propagate(w, b, X_test, Y_test, lambda_reg, reg_type)
+        
+        dw = grads["dw"]
+        db = grads["db"]
+        
+        w_prevprev = w_prev
+        b_prevprev = b_prev
+        w_prev = w
+        b_prev = b
+        w = w-learning_rate*dw
+        b = b-learning_rate*db           
+        
+        
+
+        if i % 200 == 0:
+            training_costs.append(cost)
+            val_costs.append(val_cost)
+            test_costs.append(test_cost)
+        
+        if print_cost and i % 200 == 0:
+            print ("Training cost after iteration %i: %f" %(i, cost))
+            print ("Validation cost after iteration %i: %f" %(i, val_cost))
+            print ("Test cost after iteration %i: %f" %(i, test_cost))
+    
+    params = {"w": w,
+              "b": b}
+    
+    grads = {"dw": dw,
+             "db": db}
+    
+    return params, grads, training_costs, val_costs, test_costs, prediction_accuracy_early_train, prediction_accuracy_early_val, prediction_accuracy_early_test
+
+def predict(w, b, X):
+
+    #Predict whether the label is 0 or 1 using learned logistic regression parameters (w, b)
+    
+    m = X.shape[1]
+    Y_prediction = np.zeros((1,m))
+    w = w.reshape(X.shape[0], 1)
+    
+    A = sigmoid(np.dot(w.T,X)+b)
+    
+    for i in range(A.shape[1]):
+        
+        Y_prediction[0,i] = np.where(A[0,i]>0.5,1,0)
+    
+    return Y_prediction
+
+def model(X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, num_iterations = 5000, learning_rate = 0.5, print_cost = True, early_stopping = True):
+
+    #Builds the logistic regression model by calling the function you've implemented previously
+    
+    w, b = np.zeros((X_train.shape[0],1)), 0.
+    
+    parameters, grads, costs, val_costs, test_costs, prediction_accuracy_early_train, prediction_accuracy_early_val, prediction_accuracy_early_test = optimize(w, b, X_train, Y_train, X_val, Y_val, X_test, Y_test, lambda_reg, reg_type, num_iterations, learning_rate, print_cost = True, early_stopping = True)
+    
+    w = parameters["w"]
+    b = parameters["b"]
+    
+    Y_prediction_test = predict(w, b, X_test)
+    Y_prediction_train = predict(w, b, X_train)
+    Y_prediction_val = predict(w, b, X_val)
+
+    print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
+    print("Hold-out validation set accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_val - Y_val)) * 100))
+    print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
+
+    
+    d = {"costs": costs,
+         "val_costs": val_costs,
+         "test_costs": test_costs,
+         "Y_prediction_test": Y_prediction_test, 
+         "Y_prediction_train" : Y_prediction_train, 
+         "Y_prediction_val": Y_prediction_val,
+         "Y_prediction_train_early": prediction_accuracy_early_train,
+         "Y_prediction_test_early": prediction_accuracy_early_test,
+         "Y_prediction_val_early": prediction_accuracy_early_val,
+         "final_test_accuracy": 100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100,
+         "w" : w, 
+         "b" : b,
+         "learning_rate" : learning_rate,
+         "num_iterations": num_iterations}
+    
+    return d
+
+d = model(train_set_x, train_set_y, validation_set_x, validation_set_y, test_set_x, test_set_y, lambda_reg = 0, reg_type = 2, num_iterations = 5000, learning_rate = 0.01, print_cost = True, early_stopping = False)
 \end{lstlisting}
 
 \subsection{Softmax regression}
