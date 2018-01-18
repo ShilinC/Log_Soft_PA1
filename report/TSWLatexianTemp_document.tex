@@ -21,7 +21,7 @@ Yunhui Guo\\
 Ph.D. student, Computer Science\\
 UCSD\\
 La Jolla, CA \\
-\texttt{email} \\
+\texttt{yug185@eng.ucsd.edu} \\
 }
 
 % The \author macro works with any number of authors. There are two commands
@@ -53,13 +53,13 @@ In this work, we realize the handwritten digit classification using MNIST databa
 The cross-entropy cost function can be expressed as
 
 \begin{equation}
-	E(w) = - \sum_{n=1}^{N}[t^{n}\ln(y^{n})+(1-t^{n})\ln(1-y^{n})]
+	E(w) = - \frac{1}{N}\sum_{n=1}^{N}[t^{n}\ln(y^{n})+(1-t^{n})\ln(1-y^{n})]
 \end{equation}
 
 where $t^{n}$ is the target label for example $n$ and $y^{n}$ is our prediction for this example. To perform gradient descent, we need to first compute the gradient (derivative) of the cost function with respect to the parameters. The gradient of cost function on example $n$ is
 
 \begin{equation}
-	-\frac{\partial E^{n}(w)}{\partial w_{j}} = \frac{\partial [t^{n}\ln(y^{n})+(1-t^{n})\ln(1-y^{n})]}{\partial w_{j}} 
+	-\frac{\partial E^{n}(w)}{\partial w_{j}} = \frac{1}{N}\frac{\partial [t^{n}\ln(y^{n})+(1-t^{n})\ln(1-y^{n})]}{\partial w_{j}} 
 \end{equation}
 
 where $y^{n}$ is the prediction of logistic regression as
@@ -77,7 +77,7 @@ and $g(\cdot)$ is the sigmoid activation function and its derivative is
 where $z ^{n}= \sum_{j=0}^{m}w_{j}x_{j}^{n}$. According to the chain rule in calculus, we can then compute the gradient (derivative) of the cost function on example $n$ with respect to the parameters as
 
 \begin{equation}
-	-\frac{\partial E^{n}(w)}{\partial w_{j}} = -\frac{\partial E^{n}(w)}{\partial y^{n}}\frac{\partial y^{n}}{\partial z^{n}}\frac{\partial z^{n}}{\partial w_{j}} = (\frac{t^{n}}{y^{n}}-\frac{1-t^{n}}{1-y^{n}})\cdot y^{n}(1-y^{n})\cdot x_{j}^{n} = (t^{n}-y^{n})x_{j}^{n}
+	-\frac{\partial E^{n}(w)}{\partial w_{j}} = -\frac{\partial E^{n}(w)}{\partial y^{n}}\frac{\partial y^{n}}{\partial z^{n}}\frac{\partial z^{n}}{\partial w_{j}} = \frac{1}{N}(\frac{t^{n}}{y^{n}}-\frac{1-t^{n}}{1-y^{n}})\cdot y^{n}(1-y^{n})\cdot x_{j}^{n} = \frac{1}{N}(t^{n}-y^{n})x_{j}^{n}
 \end{equation}
 
 Note that we can always add a factor of $1/N$ to scale the cost and gradient to somehow speed up the learning, and this will not change the optimization results (learned parameters).
@@ -148,7 +148,7 @@ In the next part of this section, we are going to add regularization to our mode
 To prevent potential overfitting, regularization is used in logistic regression. The cross-entropy cost function with regularization term can be computed as
 
 \begin{equation}
-	E(w) = - \sum_{n=1}^{N}[t^{n}\ln(y^{n})+(1-t^{n})\ln(1-y^{n})] + \lambda * C(w)
+	E(w) = - \frac{1}{N}\sum_{n=1}^{N}[t^{n}\ln(y^{n})+(1-t^{n})\ln(1-y^{n})] + \lambda * C(w)
 \end{equation}
 
 where $C(w)$ represents the complexity of the model. $L1$ and $L2$ regularizations are two most common functions people use
@@ -166,8 +166,8 @@ Thus the gradient of cost function on example $n$ is
 \[
     -\frac{\partial E^{n}(w)}{\partial w_{j}} = 
 \begin{cases}
-    (t^{n}-y^{n})x_{j}^{n} - 2\lambda w_{j},& \text{if use $L_2$ regularization}\\
-    (t^{n}-y^{n})x_{j}^{n} - \lambda sign(w_{j}), & \text{if use $L_1$ regularization}
+    \frac{1}{N}(t^{n}-y^{n})x_{j}^{n} - 2\lambda w_{j},& \text{if use $L_2$ regularization}\\
+    \frac{1}{N}(t^{n}-y^{n})x_{j}^{n} - \lambda sign(w_{j}), & \text{if use $L_1$ regularization}
 \end{cases}
 \]
 
@@ -226,7 +226,7 @@ If we set lambda very large as shown in Fig. \ref{fig:P11}, we can see that L1 r
 \textbf{Reality Check on the Length of Weight Vector}\\
 Fig. \ref{fig:P4} shows the experimental results using L1 and L2 regularization. From the figures we can see that stronger regularization will result in smaller weights since the regularization penalizes large weights. This is consistent with the mathematics of our cost function since if we use a very large $\lambda$, the optimizer will pay more attention to minimize the regularization term instead of minimizing the loss between the prediction and the ground truth labels. 
 
-\begin{figure}%
+\begin{figure}[h]%
 	\centering
 	\subfloat[Length of weight vector using L1 regularization]{{\includegraphics[width=2.5in]{images/P6.png}  }}%
 	\qquad
@@ -431,10 +431,13 @@ We would like to thank Prof. Gary Cottrell and all TAs' efforts in preparing and
 [2] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. "Gradient-based learning applied to document recognition." Proceedings of the IEEE, 86(11):2278-2324, November 1998.
 
 \section{Code}
+<<<<<<< HEAD
+=======
 \subsection{Logistic regression}
 
 
 \subsection{Softmax regression}
+>>>>>>> 6ad4289f9d390c09662fd2f91d8936ac168d80b8
 
 
 \end{document}
