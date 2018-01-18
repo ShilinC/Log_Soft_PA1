@@ -115,6 +115,7 @@ After trying different values of learning rate, we found $0.005$ is a reasonably
 We can use mini-batch gradient descent to speed up learning process. Since the one-step optimization is done on a smaller mini-batch, the cost function will not monotonically decrease as batch gradient descent. Here we change the weights after a mini-batch of roughly $10\%$ of the entire training set. This set of mini-batch size can result in relatively smooth curve of the cost function. Fig. \ref{fig:P2} plots the loss function over training for consecutive mini-batches. Since the validation set always has very similar errors as the test set, we can conclude the hold-out set work as a good stand-in for the test set and their underlying data distributions are same.
 
 \textbf{Accuracy of Prediction Using Logistic Regression Classifier}\\
+From batch gradient descent and mini-batch gradient descent, we can roughly achieve $97\%$ classification accuracy on the test set for binary case. This means that our model can perform pretty well on the unseen data.
 
 \begin{figure}%
 	\centering
