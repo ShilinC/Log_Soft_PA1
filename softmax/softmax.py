@@ -241,7 +241,7 @@ if __name__ == '__main__':
     test_labels = np.array(test_labels)
 
     epoch = 300
-    inital_step_size = 0.004
+    inital_step_size = 0.003
     T = 2.0
 
     lambds_set_1 = [0.01, 0.001, 0.0001]
@@ -259,7 +259,7 @@ if __name__ == '__main__':
     one_hot_test_labels = np.eye(classes)[test_labels]  
 
     # Hyperparamter selction
-    hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
+    #hyper_parameters_tuning(training_images, one_hot_training_labels, test_images, test_labels, validation_images, validation_labels, regularization_types, lambds_set_2, weights, inital_step_size, T, epoch, classes, dimensions)
 
-    # Training based on the best hyperparameters
+    #Training based on the best hyperparameters
     train(training_images, test_images, validation_images, training_labels, test_labels, validation_labels, one_hot_training_labels, one_hot_test_labels, one_hot_validation_labels, lambd, epoch, inital_step_size, T, weights)
