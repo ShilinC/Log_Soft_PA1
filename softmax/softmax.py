@@ -270,7 +270,7 @@ if __name__ == '__main__':
     classes = 1000
     dimensions = 785
     # Weight initialization
-    weights = np.random.randn(dimensions, classes).astype(np.float32)  #
+    weights = np.random.randn(dimensions, classes).astype(np.float32)  
 
     one_hot_training_labels = np.eye(classes)[training_labels] 
     one_hot_validation_labels = np.eye(classes)[validation_labels]
